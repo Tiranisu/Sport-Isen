@@ -9,13 +9,13 @@ DELETE FROM address_match;
 -- --- Populate users table ------------
 ALTER SEQUENCE users_id_seq RESTART;
 INSERT INTO users (fistname, lastname, age, email, passwd, city, nb_match, fitness_id, notifications, notifications_list) VALUES
-('Mark', 'Couty', 35, 'mark.couty@test.fr', '1234', 'Sainte-Luce-sur-Loire', 3, 2, 2, {0,1}),
-('Robert', 'Pater', 75, 'robert.pater@test.fr', '1234', 'Carquefou', 28, 2, 1, {0});
+('Mark', 'Couty', 35, 'mark.couty@test.fr', '1234', 'Sainte-Luce-sur-Loire', 3, 2, 2, '{0,1}'),
+('Robert', 'Pater', 75, 'robert.pater@test.fr', '1234', 'Carquefou', 28, 2, 1, '{0}');
 
 -- --- Populate match table ------------
 ALTER SEQUENCE match_id_seq RESTART;
 INSERT INTO match (name, organization_id, sport_id, address_id, nb_player_min, nb_player_max, date_time, duration, price) VALUES
-('Football U8', 0, 0, 0, 0, 10, ("2022-09-15", "10:00"), ("", "2:00"), 15);
+('Football U8', 0, 0, 0, 0, 10, ("2022-09-15", "10:00"), ("0-0-0", "2:00"), 15);
 
 
 
