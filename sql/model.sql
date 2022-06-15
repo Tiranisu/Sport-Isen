@@ -32,10 +32,11 @@ CREATE TABLE address_match (
     city VARCHAR(50) NOT NULL,
     postal_code NUMERIC(5,0) NOT NULL
 );
+
  -- Table note_app
 CREATE TABLE note_app(
     id SERIAL PRIMARY KEY,
-    score INTEGER  -- the max score is 5
+    score INTEGER
 );
 
 -- Table users
@@ -61,14 +62,14 @@ CREATE TABLE users (
 -- Table matchs
 CREATE TABLE matchs (
     id SERIAL PRIMARY KEY,
-    name VARCHAR(50) NOT NULL,
-    organization_id INTEGER NOT NULL,
-    sport_id INTEGER NOT NULL,
-    address_id INTEGER NOT NULL,
-    nb_player_min INTEGER NOT NULL,
-    nb_player_max INTEGER NOT NULL,
-    date_time TIMESTAMP NOT NULL,
-    duration TIMESTAMP NOT NULL,
+    name VARCHAR(50),
+    organization_id INTEGER,
+    sport_id INTEGER,
+    address_id INTEGER,
+    nb_player_min INTEGER,
+    nb_player_max INTEGER,
+    date_time TIMESTAMP,
+    duration TIMESTAMP,
     price FLOAT,
     best_player INTEGER,
     list_player_accepted INTEGER[],
