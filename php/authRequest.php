@@ -15,10 +15,25 @@ require_once('../resources/database.php');
   $request = explode('/', $request);
   $requestRessource = array_shift($request);
 
-  // Polls request.
-  if ($requestRessource == 'register')
-  {
-    $data = check_alreadyexist_user($db, $_GET['mail']);
+  if ($requestRessource == "register"){
+
+    $id = array_shift($request);
+    switch($requestMethod){
+      case "GET":
+        if(isset($_GET['mail'])){
+          $data = check_alreadyexist_user($db, $_GET['mail']);
+        }
+        elseif(isset($_GET['passwd']) && isset($_GET['confpass'])){
+          if($_GET['passwd'] == $_GET['confpass']){
+            $data = true;
+          }
+          else{
+            $data = false;
+          }
+        }
+        
+        break;
+    }
   }
 
 

@@ -32,7 +32,7 @@
     <br>
     <div id="form">
       <p id="registertext">Inscription</p>
-      <form action="connexion.php" method="post" >
+      <!-- <form action="connexion.php" method="post" > -->
         <p><input id="text" type="text" name="nom" placeholder= "Nom*" required></p>
         <p><input id="text" type="text" name="prenom" placeholder= "Prénom*" required></p>
         <p><input id="text" type="text" name="city" placeholder= "Ville*" required></p>
@@ -41,14 +41,14 @@
         <p id="validmail" style="display: none; color: #13D802;"><img src="../resources/library/approved mail.png" style="padding-bottom: 5px;" ></img> Adresse mail valide! </p>
         <p id="unvalidmail" style="display: none; color: #FF0000;"><img src="../resources/library/cancel mail.png" style="padding-bottom: 5px;"></img> Vous avez déjà un compte! </p>
        
-        <p><input id="text" type="password" name="passwd" placeholder= "Mot de passe* (6 caractères minimum)" required minlength="6"></p>
-        <p><input id="text" type="password" name="confpasswd" placeholder= "Confirmation mot de passe*" required></p>
+        <p><input id="pass" type="password" name="passwd" placeholder= "Mot de passe* (6 caractères minimum)" required minlength="6"></p>
+        <p><input id="confpass" type="password" name="confpasswd" placeholder= "Confirmation mot de passe*" required></p>
         <p><img src="../resources/library/upload.png" style="padding-bottom: 5px;"></img> Choisir une photo de profil:</p>
         <p><input type="file" id="selectedFile" name="image" accept="image/*"/></p>
         <section style="font-size: small; color: red; font-style: italic; padding-bottom: 5px;">* Champs obligatoires</section>
         <input type="submit" id="register" name="register" value="S'inscrire">
         
-      </form>
+      <!-- </form> -->
       <br>
     </div>
     <script src="../js/auth.js"></script>

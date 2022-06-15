@@ -26,6 +26,24 @@ nav{
     padding-left: 20px;
 }
 
+#pass{
+    width: 377.74px;
+    height: 56.66px;
+    background: #ECECEC;
+    border-radius: 10px;
+    border: none;
+    padding-left: 20px;
+}
+
+#confpass{
+    width: 377.74px;
+    height: 56.66px;
+    background: #ECECEC;
+    border-radius: 10px;
+    border: none;
+    padding-left: 20px;
+}
+
 #connection:active{
     box-shadow: inset 0px 5px 5px rgba(0, 0, 0, 0.12);
 }

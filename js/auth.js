@@ -1,27 +1,31 @@
-function ajaxRequest(type, url, callback)
+function ajaxRequest(type, url, callback, data = null)
 {
-    let xhr = new XMLHttpRequest();
-    xhr.open(type, url);
+  let xhr;
 
+  // Create XML HTTP request.
+  xhr = new XMLHttpRequest();
+  if (type == 'GET' && data != null)
+    url += '?' + data;
+  xhr.open(type, url);
+  xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 
-    xhr.onload = () => {
-        switch (xhr.status){
-            case 200:
-            case 201: 
-                console.log(xhr.responseText);
-                var data = JSON.parse(xhr.responseText);
-                console.log(data);
-                callback(data);
-                break;
-            default:
-                console.log('HTTP error: ' + xhr.status);
-                httpErrors(xhr.status);
-                break;
-        }
-    };
+  // Add the onload function.
+  xhr.onload = () =>
+  {
+    switch (xhr.status)
+    {
+      case 200:
+      case 201:
+        console.log(xhr.responseText);
+        callback(JSON.parse(xhr.responseText));
+        break;
+      default:
+        // httpErrors(xhr.status);
+    }
+  };
 
-    
-    xhr.send();
+  // Send XML HTTP request.
+  xhr.send(data);
 }
 
 function displayInfo(infos){
@@ -49,3 +53,4 @@ $( "#mail" ).change(function()
     console.log(mail);
     ajaxRequest('GET', `../php/authRequest.php/register?mail=${mail}`, displayInfo);
 });
+
