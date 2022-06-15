@@ -27,8 +27,8 @@ CREATE TABLE sports (
 -- Table address
 CREATE TABLE address_match (
     id SERIAL PRIMARY KEY,
-    name VARCHAR(50),
-    street VARCHAR(50),
+    name VARCHAR(50), -- name of the place
+    num_street VARCHAR(50),
     city VARCHAR(50) NOT NULL,
     postal_code NUMERIC(5,0) NOT NULL
 );
@@ -47,7 +47,7 @@ CREATE TABLE users (
     age INTEGER NOT NULL,
     email VARCHAR(50) NOT NULL,
     passwd VARCHAR(50) NOT NULL,
-    city VARCHAR(50) NOT NULL,
+    address_id INTEGER NOT NULL,
     link_image VARCHAR(50),
     nb_match INTEGER NOT NULL,
     fitness_id INTEGER NOT NULL,
