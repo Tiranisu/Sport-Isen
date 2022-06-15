@@ -3,7 +3,7 @@ DROP TABLE IF EXISTS matchs CASCADE;
 DROP TABLE IF EXISTS fitness CASCADE;
 DROP TABLE IF EXISTS notifications CASCADE;
 DROP TABLE IF EXISTS sports CASCADE;
-DROP TABLE IF EXISTS address_match CASCADE;
+DROP TABLE IF EXISTS address CASCADE;
 DROP TABLE IF EXISTS note_app CASCADE;
 
 -- Table fitness
@@ -25,10 +25,10 @@ CREATE TABLE sports (
 );
 
 -- Table address
-CREATE TABLE address_match (
+CREATE TABLE address (
     id SERIAL PRIMARY KEY,
     name VARCHAR(50), -- name of the place
-    num_street VARCHAR(50),
+    street VARCHAR(50),
     city VARCHAR(50) NOT NULL,
     postal_code NUMERIC(5,0) NOT NULL
 );
@@ -51,7 +51,6 @@ CREATE TABLE users (
     link_image VARCHAR(50),
     nb_match INTEGER NOT NULL,
     fitness_id INTEGER NOT NULL,
-    notifications INTEGER NOT NULL,
     notifications_list INTEGER[],
     access_token VARCHAR(50),
 
@@ -79,6 +78,6 @@ CREATE TABLE matchs (
         ON UPDATE CASCADE ON DELETE CASCADE,
     FOREIGN KEY(sport_id) REFERENCES sports(id)
         ON UPDATE CASCADE ON DELETE CASCADE,
-    FOREIGN KEY(address_id) REFERENCES address_match(id)
+    FOREIGN KEY(address_id) REFERENCES address(id)
         ON UPDATE CASCADE ON DELETE CASCADE
 );

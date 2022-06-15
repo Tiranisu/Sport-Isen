@@ -3,7 +3,7 @@ DELETE FROM matchs;
 DELETE FROM fitness;
 DELETE FROM notifications;
 DELETE FROM sports;
-DELETE FROM address_match;
+DELETE FROM address;
 
 -- --- Populate fitness table ------------
 ALTER SEQUENCE fitness_id_seq RESTART;
@@ -24,12 +24,19 @@ INSERT INTO sports (name) VALUES
 ('football'),
 ('golf');
 
--- --- Populate address_match table ------------
-ALTER SEQUENCE address_match_id_seq RESTART;
-INSERT INTO address_match (name, street, city, postal_code) VALUES
+-- --- Populate address table for match ------------
+ALTER SEQUENCE address_id_seq RESTART;
+INSERT INTO address (name, street, city, postal_code) VALUES
 ('Stade du Moulin Boisseau', 'Rue du Moulin Boisseau','Carquefou' , 44470),
 ('Stade de la Beaujoire', 'Route de Saint-Joseph','Nantes' , 44300),
 ('Stade municipal', '31bis Rue du Stade','Sainte-Luce-sur-Loire' , 44980);
+
+
+-- --- Populate address table for users ------------
+INSERT INTO address (city, postal_code) VALUES
+('Sainte-Luce-sur-Loire', 44980),
+('Carquefou', 44470);
+
 
 -- --- Populate note_app table ------------
 -- ALTER SEQUENCE note_app_id_seq RESTART;
@@ -40,9 +47,9 @@ INSERT INTO note_app (score) VALUES
 
 -- --- Populate users table ------------
 ALTER SEQUENCE users_id_seq RESTART;
-INSERT INTO users (fistname, lastname, age, email, passwd, city, nb_match, fitness_id, notifications, notifications_list) VALUES
-('Mark', 'Couty', 35, 'mark.couty@test.fr', '1234', 'Sainte-Luce-sur-Loire', 3, 2, 2, '{0,1}'),
-('Robert', 'Pater', 75, 'robert.pater@test.fr', '1234', 'Carquefou', 28, 2, 1, '{0}');
+INSERT INTO users (fistname, lastname, age, email, passwd, address_id, nb_match, fitness_id, notifications_list) VALUES
+('Mark', 'Couty', 35, 'mark.couty@test.fr', '1234', 4, 3, 2, '{0,1}'),
+('Robert', 'Pater', 75, 'robert.pater@test.fr', '1234', 5, 28, 2, '{0}');
 
 --- Populate match table ------------
 ALTER SEQUENCE matchs_id_seq RESTART;
