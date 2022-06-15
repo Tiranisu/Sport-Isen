@@ -26,7 +26,9 @@ function ajaxRequest(type, url, callback)
 
 function displayInfo(infos){
 
-    if(infos == false){
+    
+
+    if(infos == true){
         document.getElementById('validmail').style.display = 'none';
         document.getElementById('unvalidmail').style.display = 'block';
     }
@@ -35,17 +37,15 @@ function displayInfo(infos){
         document.getElementById('unvalidmail').style.display = 'none';
     }
 
-}
+    if(document.getElementById('mail').value == ""){
+        document.getElementById('validmail').style.display = 'none';
+        document.getElementById('unvalidmail').style.display = 'none';
+    }
 
-function main(){
-    let mail = document.getElementById('mail').value;
+}
+$( "#mail" ).change(function()
+{
+    mail = document.getElementById('mail').value;
     console.log(mail);
-    ajaxRequest('GET', "../php/authRequest.php/register?mail="+mail, displayInfo);
-}
-
-main();
-
-
-
-
-
+    ajaxRequest('GET', `../php/authRequest.php/register?mail=${mail}`, displayInfo);
+});
