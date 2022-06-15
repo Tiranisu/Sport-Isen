@@ -1,0 +1,1 @@
+SELECT passwd FROM users WHERE email = 'mc@test.fr'; 
