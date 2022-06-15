@@ -12,7 +12,7 @@ function dbConnect(){
 }
 
 
-function return_password($email){
+function return_password($conn, $email){
     $request = 'SELECT passwd FROM users WHERE email = :email; ';
     $statement = $conn->prepare($request);
     $statement->bindParam(':email', $email);
@@ -21,21 +21,27 @@ function return_password($email){
     return $phrase_out['passwd'];
 }
 
-function check_alreadyexist_user($email){
-    $request = 'SELECT * FROM users WHERE email = :email';
-    $statement = $this->PDO->prepare($request);
-    $statement->bindParam(':email', $email);
-    $statement->execute();
-    $result = $statement->fetch(PDO::FETCH_ASSOC);
-
-    if($result){
-        return true;
+function check_alreadyexist_user($conn, $email){
+    try{
+        $request = 'SELECT * FROM users WHERE email = :email';
+        $statement = $conn->prepare($request);
+        $statement->bindParam(':email', $email);
+        $statement->execute();
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+        if($result){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
-    return false;
+    catch(PDOException $e){
+        return false;
+    }
 }
 
-function create_user($firstname, $lastname, $city, $email, $password){
-    if(!check_alreadyexist_user($email)){
+function create_user($conn, $firstname, $lastname, $city, $email, $password){
+    if(!check_alreadyexist_user($conn, $email)){
         $request = 'INSERT INTO users (firstname, lastname, email, passwd)
         VALUES (:firstname, :lastname, :email, :password)';
 

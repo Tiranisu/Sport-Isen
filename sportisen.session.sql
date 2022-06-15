@@ -1,1 +1,1 @@
-SELECT passwd FROM users WHERE email = 'mc@test.fr'; 
+SELECT * FROM users WHERE email = 'aaa@aaaa.fr'; 
