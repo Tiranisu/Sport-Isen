@@ -31,7 +31,6 @@ require_once('../resources/database.php');
             $data = false;
           }
         }
-        
         break;
     }
   }

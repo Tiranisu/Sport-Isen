@@ -47,6 +47,19 @@ function displayInfo(infos){
     }
 
 }
+
+function passCheck(infos){
+    if(infos == false){
+        document.getElementById("passcheck").style.display = "block";
+        document.getElementById("passcheck").style.color = "red";
+        document.getElementById("passcheck").innerHTML = "Les mots de passe ne correspondent pas."
+    }
+    else{
+        document.getElementById("passcheck").style.display = "none";
+    }
+}
+
+//check if mails already exists
 $( "#mail" ).change(function()
 {
     mail = document.getElementById('mail').value;
@@ -54,3 +67,9 @@ $( "#mail" ).change(function()
     ajaxRequest('GET', `../php/authRequest.php/register?mail=${mail}`, displayInfo);
 });
 
+//check if passwds are the same
+$("#confpass").change(function(){
+    pass = document.getElementById("pass").value;
+    confpass = document.getElementById("confpass").value;
+    ajaxRequest('GET', `../php/authRequest.php/register?passwd=${pass}&confpass=${confpass}`, passCheck);
+})

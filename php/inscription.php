@@ -43,6 +43,7 @@
        
         <p><input id="pass" type="password" name="passwd" placeholder= "Mot de passe* (6 caractères minimum)" required minlength="6"></p>
         <p><input id="confpass" type="password" name="confpasswd" placeholder= "Confirmation mot de passe*" required></p>
+        <p id="passcheck" style="display:none;"></p>
         <p><img src="../resources/library/upload.png" style="padding-bottom: 5px;"></img> Choisir une photo de profil:</p>
         <p><input type="file" id="selectedFile" name="image" accept="image/*"/></p>
         <section style="font-size: small; color: red; font-style: italic; padding-bottom: 5px;">* Champs obligatoires</section>
