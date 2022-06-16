@@ -62,18 +62,36 @@ function returnCityId($conn, $city){
     
 }
 
-function create_user($conn, $firstname, $lastname, $city, $email, $password){
+function create_user($conn, $firstname, $lastname, $city, $email, $password, $img=""){
     if(!check_alreadyexist_user($conn, $email)){
-        $request = 'INSERT INTO users (firstname, lastname, age, email, passwd, address_id, link_image, nb_match, fitness_id, notifications_list, access_token)
-        VALUES (:firstname, :lastname, NULL, :email, :passwd, :address_id,  NULL, NULL, NULL, NULL, NULL)';
 
-        $statement = $conn->prepare($request);
-        $statement->bindParam(':address_id', $city);
-        $statement->bindParam(':firstname', $firstname);
-        $statement->bindParam(':lastname', $lastname);
-        $statement->bindParam(':email', $email);
-        $statement->bindParam(':passwd', $password);
-        $statement->execute();
+        if($img == ""){
+            $request = 'INSERT INTO users (firstname, lastname, age, email, passwd, address_id, link_image, nb_match, fitness_id, notifications_list, access_token)
+            VALUES (:firstname, :lastname, NULL, :email, :passwd, :address_id,  NULL, NULL, NULL, NULL, NULL)';
+
+            $statement = $conn->prepare($request);
+            $statement->bindParam(':address_id', $city);
+            $statement->bindParam(':firstname', $firstname);
+            $statement->bindParam(':lastname', $lastname);
+            $statement->bindParam(':email', $email);
+            $statement->bindParam(':passwd', $password);
+            $statement->execute();
+        }
+        else{
+            $request = 'INSERT INTO users (firstname, lastname, age, email, passwd, address_id, link_image, nb_match, fitness_id, notifications_list, access_token)
+            VALUES (:firstname, :lastname, NULL, :email, :passwd, :address_id, :img, NULL, NULL, NULL, NULL)';
+
+            $statement = $conn->prepare($request);
+            $statement->bindParam(':address_id', $city);
+            $statement->bindParam(':firstname', $firstname);
+            $statement->bindParam(':lastname', $lastname);
+            $statement->bindParam(':email', $email);
+            $statement->bindParam(':passwd', $password);
+            $statement->bindParam(':img', $img);
+            $statement->execute();
+        }
+
+        
     }
     
     

@@ -37,6 +37,8 @@ require_once('../resources/database.php');
           }
         }
         break;
+
+
       case 'POST':
         $checkCities = checkCity($db, $_POST['city']);
         foreach($checkCities as $checkCity){
@@ -48,9 +50,15 @@ require_once('../resources/database.php');
         $addressIds = returnCityId($db, $_POST['city']);
 
         foreach($addressIds as $addressId){
-          create_user($db, $_POST['fname'], $_POST['lname'], intval($addressId['id']), $_POST['mail'], $_POST['passwd']);
+          
+          if(isset($_POST['img'])){
+            create_user($db, $_POST['fname'], $_POST['lname'], intval($addressId['id']), $_POST['mail'], $_POST['passwd'], $_POST['img']);
+          }
+          else{
+            create_user($db, $_POST['fname'], $_POST['lname'], intval($addressId['id']), $_POST['mail'], $_POST['passwd']);
+          }
         }
-             
+ 
         break;
     }
   }
