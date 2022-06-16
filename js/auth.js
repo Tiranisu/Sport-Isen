@@ -82,40 +82,44 @@ $("#confpass").change(function(){
     ajaxRequest('GET', `../php/authRequest.php/register?passwd=${pass}&confpass=${confpass}`, passCheck);
 });
 
-
-// $('#register').on('click', () =>
-//   {
-    
-
-//     ajaxRequest('POST', '../php/authRequest.php/register/fname=' + fname + '&lname=' + lname + '&city=' + city + '&mail=' + mail + '&passwd=' + passwd, registerCheck);
-//   }
-// );
-
 $('#form').on('submit', (event) =>
  {
    event.preventDefault();
 
    if(passValid){
-    $.ajax('../php/authRequest.php/register', {
-      method: 'POST', data:{
-        fname : $('#fname').val(),
-        lname : $('#lname').val(),
-        city : $('#city').val(),
-        mail : $('#mail').val(),
-        passwd : $('#pass').val()
-      }
-    })
 
-    $('#fname').val('');
-    $('#lname').val('');
-    $('#city').val('');
-    $('#mail').val('');
-    $('#pass').val('');
-    $('#confpass').val('');
+    if(($('#selectedFile')).length > 0){
+      $.ajax('../php/authRequest.php/register', {
+        method: 'POST', data:{
+          fname : $('#fname').val(),
+          lname : $('#lname').val(),
+          city : $('#city').val(),
+          mail : $('#mail').val(),
+          passwd : $('#pass').val(),
+          img : $('#selectedFile').val()
+        }
+      })
+    }
+    else{
+      $.ajax('../php/authRequest.php/register', {
+        method: 'POST', data:{
+          fname : $('#fname').val(),
+          lname : $('#lname').val(),
+          city : $('#city').val(),
+          mail : $('#mail').val(),
+          passwd : $('#pass').val()
+        }
+      })
+    }
+    // $('#fname').val('');
+    // $('#lname').val('');
+    // $('#city').val('');
+    // $('#mail').val('');
+    // $('#pass').val('');
+    // $('#confpass').val('');
+    // $('#selectedFile').val('');
 
     document.location.href="connexion.html";
-   }
-    
-
-  
+    }
   });
+
