@@ -17,9 +17,14 @@ require_once('../resources/database.php');
 
   if ($requestRessource == "register"){
 
+    $data = false;
     $id = array_shift($request);
+    if ($id == ''){
+      $id = NULL;
+    }
+
     switch($requestMethod){
-      case "GET":
+      case 'GET':
         if(isset($_GET['mail'])){
           $data = check_alreadyexist_user($db, $_GET['mail']);
         }
@@ -32,9 +37,19 @@ require_once('../resources/database.php');
           }
         }
         break;
-      case "PUT":
-        parse_str(file_get_contents('php://input'), $_PUT);
-        $data = create_user($db, $_PUT['fname'], $_PUT['lname'], $_PUT['city'], $_PUT['mail'], $_PUT['passwd']);
+      case 'POST':
+        $addressIds = returnCityId($db, $_POST['city']);
+        if(!$addressIds){
+          
+        }
+        else{
+          foreach($addressIds as $addressId){
+           create_user($db, $_POST['fname'], $_POST['lname'], intval($_POST['city']), $_POST['mail'], $_POST['passwd']);
+          }
+        }
+        
+        
+        break;
     }
   }
 
@@ -42,5 +57,9 @@ require_once('../resources/database.php');
   header('Content-Type: application/json; charset=utf-8');
   header('Cache-control: no-store, no-cache, must-revalidate');
   header('Pragma: no-cache');
-  header('HTTP/1.1 200 OK');
+  if($requestMethod == 'POST'){
+    header('HTTP/1.1 200 Created');
+  }else{
+    header('HTTP/1.1 200 OK');
+  }
   echo json_encode($data);

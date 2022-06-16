@@ -42,15 +42,15 @@ CREATE TABLE note_app(
 -- Table users
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
-    fistname VARCHAR(50) NOT NULL,
+    firstname VARCHAR(50) NOT NULL,
     lastname VARCHAR(50) NOT NULL,
-    age INTEGER NOT NULL,
+    age INTEGER,
     email VARCHAR(50) NOT NULL,
     passwd VARCHAR(50) NOT NULL,
     address_id INTEGER NOT NULL,
     link_image VARCHAR(50),
-    nb_match INTEGER NOT NULL,
-    fitness_id INTEGER NOT NULL,
+    nb_match INTEGER,
+    fitness_id INTEGER,
     notifications_list INTEGER[],
     access_token VARCHAR(50),
 
