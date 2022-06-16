@@ -32,6 +32,9 @@ require_once('../resources/database.php');
           }
         }
         break;
+      case "PUT":
+        parse_str(file_get_contents('php://input'), $_PUT);
+        $data = create_user($db, $_PUT['fname'], $_PUT['lname'], $_PUT['city'], $_PUT['mail'], $_PUT['passwd']);
     }
   }
 
