@@ -108,6 +108,29 @@ function addCity($conn, $city){
     
 }
 
+function checkConnect($db, $email, $password){
+    try{
+        $request = 'SELECT * FROM users WHERE email=:email AND password=:password';
+        $statement = $conn->prepare($request);
+        $statement->bindParam(':email', $email);
+        $statement->bindParam(':password', $password);
+        $statement->execute();
+        $statement->fetchAll(PDO::FETCH_ASSOC);
+        if($result == NULL){
+            return false;
+        }
+        else{
+           return true; 
+        }
+    }
+    catch(PDOException $e){
+        return false;
+    }
+}
+
+
+
+
 function update_user(){
 
 }

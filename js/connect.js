@@ -44,9 +44,22 @@ function checkMail(infos){
   }
 }
 
-$("#mail").change(function()
-{
+function canConnect(infos){
+  if(infos == false){
+    document.getElementById('errorConnect').style.display = 'block';
+  } else{
+    document.getElementById('errorConnect').style.display = 'none';
+  }
+}
+
+$("#mail").change(function(){
   mail = document.getElementById('mail').value;
   console.log(mail);
   ajaxRequest('GET', `../php/connectRequest.php/register?mail=${mail}`, checkMail);
 })
+
+$("#errorConnect").on('submit', (event) => {
+  email = document.getElementById("mail").value;
+  password = document.getElementById("pass").value;
+  ajaxRequest('GET', `../php/authRequest.php/register?email=${email}&password=${password}`, canConnect)
+});
