@@ -33,20 +33,20 @@
         <p id="registertext">Connexion</p>
         <br>
         <section style="font-size: normal; color: black; font-weight: bolder; padding-bottom: 5px;">Vos informations de connexion sont incorrectes.</section>
-        <p id="validmail" style="display: none; color: #FF0000;"><img src="../resources/library/approved mail.png" style="padding-bottom: 5px;" ></img> Adresse valide ! </p>
+        <p id="t" style="display: none; color: #FF0000;"><img src="../resources/library/approved mail.png" style="padding-bottom: 5px;" ></img> Adresse valide ! </p>
 
         <p><input id="mail" type="text" name="email" placeholder= "E-mail" required></p>
 
         <p id="validmail" style="display: none; color: #13D802;"><img src="../resources/library/approved mail.png" style="padding-bottom: 5px;" ></img> Adresse valide ! </p>
         <p id="unvalidmail" style="display: none; color: #FF0000;"><img src="../resources/library/cancel mail.png" style="padding-bottom: 5px;"></img> Aucun compte a cette adresse ! </p>
         
-        <p><input id="text" type="password" name="password" placeholder= "Mot de passe" required></p>
+        <p><input id="pass" type="password" name="password" placeholder= "Mot de passe" required></p>
         <input type="submit" id="connect" name="connect" value="Se connecter">
         <br>
         <br>
         <br>
         <section style="font-size: normal; color: black; font-weight: bolder; padding-bottom: 5px;">Pas de compte ?</section>
-        <input type="submit" id="register_redirect" name="register" value="S'inscrire">x
+        <input type="submit" id="register_redirect" name="register" value="S'inscrire">
         <br>
     </div>
     <script src="../js/connect.js"></script>
