@@ -1,85 +1,124 @@
-DROP TABLE IF EXISTS users CASCADE;
-DROP TABLE IF EXISTS matchs CASCADE;
 DROP TABLE IF EXISTS fitness CASCADE;
-DROP TABLE IF EXISTS notifications CASCADE;
 DROP TABLE IF EXISTS sports CASCADE;
 DROP TABLE IF EXISTS address CASCADE;
-DROP TABLE IF EXISTS note_app CASCADE;
+DROP TABLE IF EXISTS users CASCADE;
+DROP TABLE IF EXISTS notifications CASCADE;
+DROP TABLE IF EXISTS score_app CASCADE;
+DROP TABLE IF EXISTS matchs CASCADE;
+DROP TABLE IF EXISTS participant CASCADE;
 
--- Table fitness
+------------------------------------------------------------
+-- Table: fitness
+------------------------------------------------------------
 CREATE TABLE fitness (
-    id SERIAL PRIMARY KEY,
-    type VARCHAR(50) NOT NULL
+    id    SERIAL PRIMARY KEY,
+    type  VARCHAR(50) NOT NULL
 );
 
--- Table notifications
-CREATE TABLE notifications (
-    id SERIAL PRIMARY KEY,
-    text_notification VARCHAR(50) NOT NULL
-);
 
--- Table sports
+------------------------------------------------------------
+-- Table: sports
+------------------------------------------------------------
 CREATE TABLE sports (
-    id SERIAL PRIMARY KEY,
-    name VARCHAR(50) NOT NULL
+    id    SERIAL PRIMARY KEY,
+    name  VARCHAR(50) NOT NULL
 );
 
--- Table address
+------------------------------------------------------------
+-- Table: address
+------------------------------------------------------------
 CREATE TABLE address (
-    id SERIAL PRIMARY KEY,
-    name VARCHAR(50), -- name of the place
-    street VARCHAR(50),
-    city VARCHAR(50) NOT NULL,
-    postal_code NUMERIC(5,0) NOT NULL
+    id           SERIAL PRIMARY KEY,
+    name         VARCHAR(50), -- name of the place
+    street       VARCHAR(50),
+    city         VARCHAR(50) NOT NULL,
+    postal_code  NUMERIC(5,0) NOT NULL
 );
 
- -- Table note_app
-CREATE TABLE note_app(
-    id SERIAL PRIMARY KEY,
-    score INTEGER
-);
-
--- Table users
+------------------------------------------------------------
+-- Table: users
+------------------------------------------------------------
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
-    fistname VARCHAR(50) NOT NULL,
-    lastname VARCHAR(50) NOT NULL,
-    age INTEGER NOT NULL,
-    email VARCHAR(50) NOT NULL,
-    passwd VARCHAR(50) NOT NULL,
-    address_id INTEGER NOT NULL,
-    link_image VARCHAR(50),
-    nb_match INTEGER NOT NULL,
-    fitness_id INTEGER NOT NULL,
-    notifications_list INTEGER[],
-    access_token VARCHAR(50),
+    firstname    VARCHAR (50) NOT NULL,
+	lastname     VARCHAR (50) NOT NULL,
+	age          INTEGER NOT NULL,
+	email        VARCHAR (50) NOT NULL,
+	password       VARCHAR (50) NOT NULL,
+	link_image   VARCHAR (50),
+	nb_match     INTEGER NOT NULL,
+	fitness_id   INTEGER NOT NULL,
+	address_id   INTEGER NOT NULL,
+    -- access_token VARCHAR(50),
 
     FOREIGN KEY (fitness_id) REFERENCES fitness(id)
+        ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY (address_id) REFERENCES address(id)
         ON UPDATE CASCADE ON DELETE CASCADE
 );
 
--- Table matchs
+------------------------------------------------------------
+-- Table: notifications
+------------------------------------------------------------
+CREATE TABLE notifications (
+    id            SERIAL PRIMARY KEY,
+    description   VARCHAR (50) NOT NULL,
+	status        BOOL NOT NULL,
+	user_id       INTEGER  NOT NULL,
+
+    FOREIGN KEY (user_id) REFERENCES users(id)
+        ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+------------------------------------------------------------
+-- Table: score_app
+------------------------------------------------------------
+CREATE TABLE score_app(
+    user_id  SERIAL PRIMARY KEY,
+    score    INTEGER NOT NULL,
+
+    FOREIGN KEY (user_id) REFERENCES users(id)
+        ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+------------------------------------------------------------
+-- Table: matchs
+------------------------------------------------------------
 CREATE TABLE matchs (
-    id SERIAL PRIMARY KEY,
-    name VARCHAR(50),
-    organization_id INTEGER,
-    sport_id INTEGER,
-    address_id INTEGER,
-    nb_player_min INTEGER,
-    nb_player_max INTEGER,
-    date_time TIMESTAMP,
-    duration TIMESTAMP,
-    price FLOAT,
-    best_player INTEGER,
-    list_player_accepted INTEGER[],
-    list_player_waiting INTEGER[],
+    id               SERIAL PRIMARY KEY,
+    name             VARCHAR(50) NOT NULL,
+    score            VARCHAR(50) NOT NULL,
+    organization_id  INTEGER NOT NULL,
+    sport_id         INTEGER NOT NULL,
+    address_id       INTEGER NOT NULL,
+    nb_player_min    INTEGER NOT NULL,
+    nb_player_max    INTEGER NOT NULL,
+    date_time        TIMESTAMP NOT NULL,
+    duration         TIMESTAMP NOT NULL,
+    price            FLOAT NOT NULL,
+    best_player_id   INTEGER NOT NULL,
 
     FOREIGN KEY(organization_id) REFERENCES users(id)
         ON UPDATE CASCADE ON DELETE CASCADE,
     FOREIGN KEY(sport_id) REFERENCES sports(id)
         ON UPDATE CASCADE ON DELETE CASCADE,
     FOREIGN KEY(address_id) REFERENCES address(id)
+        ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY (best_player_id) REFERENCES users(id)
         ON UPDATE CASCADE ON DELETE CASCADE
 );
 
--- Table 
+------------------------------------------------------------
+-- Table: Participant
+------------------------------------------------------------
+CREATE TABLE participant (
+    match_id  INTEGER NOT NULL,
+    user_id   INTEGER NOT NULL,
+	status    INTEGER  NOT NULL,
+    CONSTRAINT Participer_PK PRIMARY KEY (match_id, user_id),
+
+    FOREIGN KEY(match_id) REFERENCES matchs(id)
+        ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY(user_id) REFERENCES users(id)
+        ON UPDATE CASCADE ON DELETE CASCADE
+);
