@@ -38,17 +38,19 @@ require_once('../resources/database.php');
         }
         break;
       case 'POST':
-        $addressIds = returnCityId($db, $_POST['city']);
-        if(!$addressIds){
-          
-        }
-        else{
-          foreach($addressIds as $addressId){
-           create_user($db, $_POST['fname'], $_POST['lname'], intval($_POST['city']), $_POST['mail'], $_POST['passwd']);
+        $checkCities = checkCity($db, $_POST['city']);
+        foreach($checkCities as $checkCity){
+          if(!$checkCity['city_exist']){
+            addCity($db, $_POST['city']);
           }
         }
-        
-        
+
+        $addressIds = returnCityId($db, $_POST['city']);
+
+        foreach($addressIds as $addressId){
+          create_user($db, $_POST['fname'], $_POST['lname'], intval($addressId['id']), $_POST['mail'], $_POST['passwd']);
+        }
+             
         break;
     }
   }

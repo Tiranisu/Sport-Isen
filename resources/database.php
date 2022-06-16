@@ -46,7 +46,15 @@ function returnCityId($conn, $city){
         $statement = $conn->prepare($request);
         $statement->bindParam(':city', $city);
         $statement->execute();
-        return $statement;
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+        if($result == NULL){
+            return false;
+        }
+        else{
+           return $result; 
+        }
+        
+        
     }
     catch(PDOException $e){
         return false;
@@ -68,6 +76,35 @@ function create_user($conn, $firstname, $lastname, $city, $email, $password){
         $statement->execute();
     }
     
+    
+}
+
+function checkCity($conn, $city){
+    try{
+        $request = 'SELECT EXISTS(SELECT * FROM address WHERE city=:city) AS city_exist';
+
+        $statement = $conn->prepare($request);
+        $statement->bindParam(':city', $city);
+        $statement->execute();
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+
+    }
+    catch(PDOException $e){
+        return false;
+    }
+}
+
+function addCity($conn, $city){
+    try{
+        $request = 'INSERT INTO address (name, street, city, postal_code) VALUES (NULL, NULL, :city, NULL)';
+
+        $statement = $conn->prepare($request);
+        $statement->bindParam(':city', $city);
+        $statement->execute();
+    }
+    catch(PDOException $e){
+        return false;
+    }
     
 }
 

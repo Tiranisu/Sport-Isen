@@ -1,5 +1,4 @@
-let checkpasswd = null;
-let checkmail = null;
+var passValid = false;
 
 function ajaxRequest(type, url, callback, data = null)
 {
@@ -38,18 +37,15 @@ function mailCheck(infos){
     if(infos == true){
         document.getElementById('validmail').style.display = 'none';
         document.getElementById('unvalidmail').style.display = 'block';
-        checkmail = false;
     }
     else{
         document.getElementById('validmail').style.display = 'block';
         document.getElementById('unvalidmail').style.display = 'none';
-        checkmail = true;
     }
 
     if(document.getElementById('mail').value == ""){
         document.getElementById('validmail').style.display = 'none';
         document.getElementById('unvalidmail').style.display = 'none';
-        checkmail = null;
     }
 
 }
@@ -59,14 +55,11 @@ function passCheck(infos){
         document.getElementById("passcheck").style.display = "block";
         document.getElementById("passcheck").style.color = "red";
         document.getElementById("passcheck").innerHTML = "Les mots de passe ne correspondent pas."
-        checkpasswd = false;
+        passValid = false;
     }
     else{
         document.getElementById("passcheck").style.display = "none";
-        checkpasswd = true;
-    }
-    if(document.getElementById('pass').value == "" && document.getElementById('passcheck').value == ""){
-      checkpasswd = null;
+        passValid = true;
     }
 }
 
@@ -102,7 +95,7 @@ $('#form').on('submit', (event) =>
  {
    event.preventDefault();
 
-   if(checkmail && checkpasswd){
+   if(passValid){
     $.ajax('../php/authRequest.php/register', {
       method: 'POST', data:{
         fname : $('#fname').val(),
@@ -112,13 +105,17 @@ $('#form').on('submit', (event) =>
         passwd : $('#pass').val()
       }
     })
+
+    $('#fname').val('');
+    $('#lname').val('');
+    $('#city').val('');
+    $('#mail').val('');
+    $('#pass').val('');
+    $('#confpass').val('');
+
+    document.location.href="connexion.html";
    }
-  
     
-   $('#fname').val('');
-   $('#lname').val('');
-   $('#city').val('');
-   $('#mail').val('');
-   $('#pass').val('');
-   $('#confpass').val('');
+
+  
   });

@@ -47,7 +47,7 @@ INSERT INTO note_app (score) VALUES
 
 -- --- Populate users table ------------
 ALTER SEQUENCE users_id_seq RESTART;
-INSERT INTO users (fistname, lastname, age, email, passwd, address_id, nb_match, fitness_id, notifications_list) VALUES
+INSERT INTO users (firstname, lastname, age, email, passwd, address_id, nb_match, fitness_id, notifications_list) VALUES
 ('Mark', 'Couty', 35, 'mc@test.fr', '1234', 4, 3, 2, '{0,1}'),
 ('Robert', 'Pater', 75, 'rp@test.fr', '1234', 5, 28, 2, '{0}');
 
