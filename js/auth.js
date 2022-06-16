@@ -1,3 +1,5 @@
+var passValid = false;
+
 function ajaxRequest(type, url, callback, data = null)
 {
   let xhr;
@@ -28,7 +30,7 @@ function ajaxRequest(type, url, callback, data = null)
   xhr.send(data);
 }
 
-function displayInfo(infos){
+function mailCheck(infos){
 
     
 
@@ -53,10 +55,16 @@ function passCheck(infos){
         document.getElementById("passcheck").style.display = "block";
         document.getElementById("passcheck").style.color = "red";
         document.getElementById("passcheck").innerHTML = "Les mots de passe ne correspondent pas."
+        passValid = false;
     }
     else{
         document.getElementById("passcheck").style.display = "none";
+        passValid = true;
     }
+}
+
+function registerCheck(infos){
+  console.log(infos);
 }
 
 //check if mails already exists
@@ -64,7 +72,7 @@ $( "#mail" ).change(function()
 {
     mail = document.getElementById('mail').value;
     console.log(mail);
-    ajaxRequest('GET', `../php/authRequest.php/register?mail=${mail}`, displayInfo);
+    ajaxRequest('GET', `../php/authRequest.php/register?mail=${mail}`, mailCheck);
 });
 
 //check if passwds are the same
@@ -72,4 +80,42 @@ $("#confpass").change(function(){
     pass = document.getElementById("pass").value;
     confpass = document.getElementById("confpass").value;
     ajaxRequest('GET', `../php/authRequest.php/register?passwd=${pass}&confpass=${confpass}`, passCheck);
-})
+});
+
+
+// $('#register').on('click', () =>
+//   {
+    
+
+//     ajaxRequest('POST', '../php/authRequest.php/register/fname=' + fname + '&lname=' + lname + '&city=' + city + '&mail=' + mail + '&passwd=' + passwd, registerCheck);
+//   }
+// );
+
+$('#form').on('submit', (event) =>
+ {
+   event.preventDefault();
+
+   if(passValid){
+    $.ajax('../php/authRequest.php/register', {
+      method: 'POST', data:{
+        fname : $('#fname').val(),
+        lname : $('#lname').val(),
+        city : $('#city').val(),
+        mail : $('#mail').val(),
+        passwd : $('#pass').val()
+      }
+    })
+
+    $('#fname').val('');
+    $('#lname').val('');
+    $('#city').val('');
+    $('#mail').val('');
+    $('#pass').val('');
+    $('#confpass').val('');
+
+    document.location.href="connexion.html";
+   }
+    
+
+  
+  });

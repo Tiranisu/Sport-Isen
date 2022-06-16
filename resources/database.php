@@ -40,13 +40,35 @@ function check_alreadyexist_user($conn, $email){
     }
 }
 
+function returnCityId($conn, $city){
+    try{
+        $request = 'SELECT id FROM address WHERE city=:city';
+        $statement = $conn->prepare($request);
+        $statement->bindParam(':city', $city);
+        $statement->execute();
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+        if($result == NULL){
+            return false;
+        }
+        else{
+           return $result; 
+        }
+        
+        
+    }
+    catch(PDOException $e){
+        return false;
+    }
+    
+}
+
 function create_user($conn, $firstname, $lastname, $city, $email, $password){
     if(!check_alreadyexist_user($conn, $email)){
-        $request = 'INSERT INTO users (firstname, lastname, email, passwd)
-        VALUES (:firstname, :lastname, :email, :password)';
+        $request = 'INSERT INTO users (firstname, lastname, age, email, passwd, address_id, link_image, nb_match, fitness_id, notifications_list, access_token)
+        VALUES (:firstname, :lastname, NULL, :email, :passwd, :address_id,  NULL, NULL, NULL, NULL, NULL)';
 
-        $statement = $this->PDO->prepare($request);
-
+        $statement = $conn->prepare($request);
+        $statement->bindParam(':address_id', $city);
         $statement->bindParam(':firstname', $firstname);
         $statement->bindParam(':lastname', $lastname);
         $statement->bindParam(':email', $email);
@@ -54,6 +76,35 @@ function create_user($conn, $firstname, $lastname, $city, $email, $password){
         $statement->execute();
     }
     
+    
+}
+
+function checkCity($conn, $city){
+    try{
+        $request = 'SELECT EXISTS(SELECT * FROM address WHERE city=:city) AS city_exist';
+
+        $statement = $conn->prepare($request);
+        $statement->bindParam(':city', $city);
+        $statement->execute();
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+
+    }
+    catch(PDOException $e){
+        return false;
+    }
+}
+
+function addCity($conn, $city){
+    try{
+        $request = 'INSERT INTO address (name, street, city, postal_code) VALUES (NULL, NULL, :city, NULL)';
+
+        $statement = $conn->prepare($request);
+        $statement->bindParam(':city', $city);
+        $statement->execute();
+    }
+    catch(PDOException $e){
+        return false;
+    }
     
 }
 
