@@ -123,7 +123,6 @@ function addCity($conn, $city){
     catch(PDOException $e){
         return false;
     }
-    
 }
 
 function checkConnect($db, $email, $password){

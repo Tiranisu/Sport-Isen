@@ -19,6 +19,9 @@ if ($requestRessource == "register"){
     if(isset($_GET['mail'])){
         $data = check_alreadyexist_user($db, $_GET['mail']);
     }
+    elseif(isset($_GET['mail']) && isset($_GET['pass'])){
+        $data = checkConnect($db, $_GET['mail'], $_GET['pass']);
+    }
     
 }
 
