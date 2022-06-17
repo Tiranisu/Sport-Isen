@@ -74,7 +74,7 @@ body {
     display: block;
   }
 
-  .container{
+  #container{
     text-align: center;
     margin-top: 10px;
     background-color: #EBEBEB;
@@ -82,13 +82,19 @@ body {
     padding:2px;
   }
 
-  .container p{
+  #container p{
     margin-top: 0.5em;
     font-weight: 600;
     
   }
   
-  .container select,.input-group-prepend{
+  #container select,.input-group-prepend{
     margin-bottom: 10px; 
     align-items: center;
+  }
+
+  #matchCard{
+    text-align: initial;
+    background-color: #EBEBEB;
+    border-radius: 10px;
   }

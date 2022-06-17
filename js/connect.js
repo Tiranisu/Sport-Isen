@@ -44,23 +44,37 @@ function checkMail(infos){
   }
 }
 
+function moveToSearch(){
+  let url = window.location.href.replace(/connexion\.html.*/i, 'search.html');
+	window.location.href = url;
+}
+
 function canConnect(infos){
-  if(infos == false){
+  if(infos[0]["user_exist"] == false){
     document.getElementById('errorConnect').style.display = 'block';
   } else{
     document.getElementById('errorConnect').style.display = 'none';
+    createCookie();
+    moveToSearch();
   }
+}
+
+function createCookie(){
+  document.cookie = "sport'isen=a; path=/; max-age=100;";
 }
 
 // check if the email is in the database
 $("#mail").change(function(){
   mail = document.getElementById('mail').value;
-  ajaxRequest('GET', `../php/connectRequest.php/register?email=${mail}`, checkMail);
+  ajaxRequest('GET', `../php/connectRequest.php/register?mail=${mail}`, checkMail);
 })
 
-$("#form").on('submit', (event) => {
+// check if the the 
+$("#rform").on('submit', (event) => {
   email = document.getElementById("mail").value;
   password = document.getElementById("pass").value;
+  console.log(email);
+  console.log(password);
   ajaxRequest('GET', `../php/connectRequest.php/register?email=${email}&password=${password}`, canConnect);
   return false; // use to not reload the page when the form is submit
 });

@@ -34,10 +34,8 @@ require_once('../resources/database.php');
 
     switch($requestMethod){
         case "GET":
-            if(isset($_GET['cities'])){
-                $data = getCities($db);
-            }
-            break;
+          $data = getCities($db);
+          break;
     }
   }
 
@@ -46,10 +44,18 @@ require_once('../resources/database.php');
 
     switch($requestMethod){
         case "GET":
-            if(isset($_GET['sports'])){
-                $data = getSports($db);
-            }
-            break;
+          $data = getSports($db);
+          break;
+    }
+  }
+
+  if($requestRessource == 'matchs'){
+    $data = false;
+
+    switch($requestMethod){
+      case 'GET':
+        $data = getMatchs($db);
+        break;
     }
   }
 

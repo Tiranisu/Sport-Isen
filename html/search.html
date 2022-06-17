@@ -35,7 +35,8 @@
           </div>
   </nav>
 
-  <div class="container">
+  <!-- Filters form -->
+  <div class="container" id="container">
     <form class="form-row">
         <div class="row">
             <div class="col-lg-3 gy-2">
@@ -47,7 +48,7 @@
                         <div class="input-group-text" style="height: 40px"><i class="fa-solid fa-location-dot" style="color:#007B0C;"></i></div>
                     </div>
                     <select type="text" class="form-select" id="city">
-                        <option selected>Ville</option>
+                        <option value="default" selected>Ville</option>
                     </select>
                 </div>
             </div>
@@ -57,7 +58,7 @@
                         <div class="input-group-text" style="height: 40px"><i class="fa-solid fa-football" style="color:#007B0C;"></i></div>
                     </div>
                     <select type="text" class="form-select" id="sport">
-                        <option selected>Sport</option>
+                        <option value="default" selected>Sport</option>
                     </select>
                 </div>
             </div>
@@ -67,10 +68,10 @@
                         <div class="input-group-text" style="height: 40px"><i class="fa-solid fa-calendar-days" style="color:#007B0C;"></i></div>
                     </div>
                     <select type="text" class="form-select" id="period">
-                        <option selected>Période</option>
-                        <option>+7 jours</option>
-                        <option>+15 jours</option>
-                        <option>+30 jours</option>
+                        <option value="default" selected>Période</option>
+                        <option value="7days">+7 jours</option>
+                        <option value="15days">+15 jours</option>
+                        <option value="30days">+30 jours</option>
                     </select>
                 </div>
             </div>
@@ -80,9 +81,9 @@
                         <div class="input-group-text" style="height: 40px"><i class="fa-solid fa-gauge-high" style="color:#007B0C;"></i></div>
                     </div>
                     <select type="text" class="form-select" id="period">
-                        <option selected>Capacité</option>
-                        <option>Complets</option>
-                        <option>Incomplets</option>
+                        <option value="default" selected>Capacité</option>
+                        <option value="full">Complets</option>
+                        <option value="notfull">Incomplets</option>
                     </select>
                 </div>
             </div>
@@ -90,7 +91,78 @@
     </form> 
 </div>
 
+<hr>
 
+<!-- matchs area -->
+<div class="container">
+    <div id="matchCard">
+        <div class="card" style="border-radius: 10px; background: rgba(235, 235, 235, 0.5)">
+          <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12"  style="background-color: #c9c9c9; height: auto; border-radius: 10px;">
+                    <h3 id="matchTitle0"></h3>
+                    <h6 id="matchSport0"></h6>
+                </div>
+            </div>
+          </div>
+          <br>
+          <div class="row" style="margin-left: 7em;" >
+            <div class="col-lg-3 gy-2">
+                <ul>
+                    <li class="align-items-center" id="hour0" style="padding: 10px">Heure: </li>
+                    <li class="align-items-center" id="matchcity0" style="padding: 10px">Ville: </li>
+                    <li class="align-items-center" id="address0" style="padding: 10px">Adresse: </li>
+                  </ul>
+            </div>
+            <div class="col-lg-3 gy-2" style="margin-left: 10em;">
+                <ul>
+                    <li class="align-items-center" id="maxplayers0" style="padding: 10px">Joueurs max: </li>
+                    <li class="align-items-center" id="matchplayers0" style="padding: 10px">Joueurs inscrits: </li>
+                </ul>
+            </div>
+            <div class="col-lg-3 gy-2" style="margin-left: 7em; margin-top: 6.5em;">
+                <button class="btn" id="detailBut0" style="background: rgba(0, 123, 12, 0.65);" onclick="//redirect function">Voir détail</button>
+            </div>
+            
+          
+        </div>
+    </div>
+</div>
+<br>
+<div class="container">
+        <div id="matchCard">
+        <div class="card" style="border-radius: 10px; background: rgba(235, 235, 235, 0.5)">
+            <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12"  style="background-color: #c9c9c9; height: auto; border-radius: 10px;">
+                    <h3 id="matchTitle"></h3>
+                    <h6 id="matchSport"></h6>
+                </div>
+            </div>
+            </div>
+            <br>
+            <div class="row" style="margin-left: 7em;" >
+            <div class="col-lg-3 gy-2">
+                <ul>
+                    <li class="align-items-center" id="hour" style="padding: 10px">Heure: </li>
+                    <li class="align-items-center" id="matchcity" style="padding: 10px">Ville: </li>
+                    <li class="align-items-center" id="address" style="padding: 10px">Adresse: </li>
+                    </ul>
+            </div>
+            <div class="col-lg-3 gy-2" style="margin-left: 10em;">
+                <ul>
+                    <li class="align-items-center" id="maxplayers" style="padding: 10px">Joueurs max: </li>
+                    <li class="align-items-center" id="matchplayers" style="padding: 10px">Joueurs inscrits: </li>
+                </ul>
+            </div>
+            <div class="col-lg-3 gy-2" style="margin-left: 7em; margin-top: 6.5em;">
+                <button class="btn" id="detailBut" style="background: rgba(0, 123, 12, 0.65);" onclick="//redirect function">Voir détail</button>
+            </div>
+            
+            
+        </div>
+    </div>
+</div>
 
 
     <script src="../js/search.js"></script>

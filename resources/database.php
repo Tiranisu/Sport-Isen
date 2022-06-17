@@ -11,7 +11,6 @@ function dbConnect(){
     return $conn;
 }
 
-
 function return_password($conn, $email){
     $request = 'SELECT passwd FROM users WHERE email = :email; ';
     $statement = $conn->prepare($request);
@@ -125,20 +124,14 @@ function addCity($conn, $city){
     }
 }
 
-function checkConnect($db, $email, $password){
+function checkConnect($conn, $email, $password){
     try{
-        $request = 'SELECT * FROM users WHERE email=:email AND password=:password';
+        $request = 'SELECT EXISTS(SELECT * FROM users WHERE email=:email AND password=:password) AS user_exist';
         $statement = $conn->prepare($request);
         $statement->bindParam(':email', $email);
         $statement->bindParam(':password', $password);
         $statement->execute();
-        $statement->fetchAll(PDO::FETCH_ASSOC);
-        if($statement == NULL){
-            return false;
-        }
-        else{
-           return true; 
-        }
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
     catch(PDOException $e){
         return false;
@@ -159,6 +152,46 @@ function getImage($conn, $id){
         return false;
     }
 }
+
+function getSports($conn){
+    try{
+
+        $request = 'SELECT * FROM sports';
+        $statement = $conn->prepare($request);
+        $statement->execute();
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+
+    }
+    catch(PDOException $e){
+        return false;
+    }
+}
+
+function getCities($conn){
+    try{
+        $request = 'SELECT a.id, a.city FROM address a, matchs m WHERE m.address_id = a.id';
+        $statement = $conn->prepare($request);
+        $statement->execute();
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
+    catch(PDOException $e){
+        return false;
+    }
+}
+
+
+function getMatchs($conn){
+    try{
+        $request = 'SELECT m.name, s.name as sport_name, a.name as stade_name, a.street, a.city, m.nb_player_min, m.nb_player_max, m.date_time, m.duration, m.price, (SELECT count(*) as nb_participants FROM participant WHERE status=1 ) FROM matchs m, sports s, address a WHERE m.sport_id=s.id AND m.address_id=a.id';
+        $statement = $conn->prepare($request);
+        $statement->execute();
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
+    catch(PDOException $e){
+        return false;
+    }
+}
+
 
 
 
