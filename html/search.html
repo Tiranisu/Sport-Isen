@@ -13,48 +13,86 @@
 </head>
   <body>
     <!-- menu bootstrap -->
-    <div class="navbar">
-        <a href="#home">Home</a>
-        <a href="#news">News</a>
-        <div class="dropdown">
-          <button class="dropbtn">Dropdown 
-            <i class="fa fa-caret-down"></i>
-          </button>
-          <div class="dropdown-content">
-            <a href="#">Link 1</a>
-            <a href="#">Link 2</a>
-            <a href="#">Link 3</a>
+    <nav class="navbar navbar-expand-md navbar-dark">
+      <div class="container-fluid">
+        <div class="d-flex flex-grow-1">
+            <section class="navbar-brand h1">Sport'Isen</section>
+        </div>
+        <div class="nav">
+            <a href="eventcreate.html">Créer un événement</a>
+            <a href="notifs.html" title="Notifications"><img src="../resources/library/Notifsbell.png" style="height:30px; width:30px;"></a>
+            <div class="drop">
+              <button class="dropbtn">Mon compte 
+                <i class="fa fa-caret-down"></i>
+              </button>
+              <img id="profilePicture" src="" style="height:40px; width:40px;">
+              <div class="dropcontent">
+                <a href="profile.html">Mon profil</a>
+                <a href="matchs.html">Mes matchs</a>
+                <a href="#" onclick="//disconnect function"><i class="fa-solid fa-right-from-bracket"></i>Déconnexion</a>
+              </div>
+            </div> 
           </div>
+  </nav>
+
+  <div class="container">
+    <form class="form-row">
+        <div class="row">
+            <div class="col-lg-3 gy-2">
+                <p>Appliquer des filtres: </p>
+            </div>
+            <div class="col-lg-2 gy-2">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text" style="height: 40px"><i class="fa-solid fa-location-dot" style="color:#007B0C;"></i></div>
+                    </div>
+                    <select type="text" class="form-select" id="city">
+                        <option selected>Ville</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-lg-2 gy-2">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text" style="height: 40px"><i class="fa-solid fa-football" style="color:#007B0C;"></i></div>
+                    </div>
+                    <select type="text" class="form-select" id="sport">
+                        <option selected>Sport</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-lg-2 gy-2">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text" style="height: 40px"><i class="fa-solid fa-calendar-days" style="color:#007B0C;"></i></div>
+                    </div>
+                    <select type="text" class="form-select" id="period">
+                        <option selected>Période</option>
+                        <option>+7 jours</option>
+                        <option>+15 jours</option>
+                        <option>+30 jours</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-lg-2 gy-2">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text" style="height: 40px"><i class="fa-solid fa-gauge-high" style="color:#007B0C;"></i></div>
+                    </div>
+                    <select type="text" class="form-select" id="period">
+                        <option selected>Capacité</option>
+                        <option>Complets</option>
+                        <option>Incomplets</option>
+                    </select>
+                </div>
+            </div>
         </div> 
-      </div>
-  <!-- <nav class="navbar navbar-expand-md navbar-dark">
-        <a class="navbar-brand mb-0 h1" href="#">
-            <p>Sport'Isen</p>
-        </a>
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Dropdown
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">Something else here</a>
-            </div>
-        </li> -->
-        <!-- <div class="container-fluid">
-            <li class="nav-item">
-                <a>Créer un évenement</a>
-            </li>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <li class="nav-item dropdown">
+    </form> 
+</div>
 
-                </li>
-            </div>
-        </div> -->
-    
-    <!-- </nav> -->
 
-    <script src="../js/auth.js"></script>
+
+
+    <script src="../js/search.js"></script>
 </body> 
 </html>

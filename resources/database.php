@@ -133,12 +133,27 @@ function checkConnect($db, $email, $password){
         $statement->bindParam(':password', $password);
         $statement->execute();
         $statement->fetchAll(PDO::FETCH_ASSOC);
-        if($result == NULL){
+        if($statement == NULL){
             return false;
         }
         else{
            return true; 
         }
+    }
+    catch(PDOException $e){
+        return false;
+    }
+}
+
+
+function getImage($conn, $id){
+    try{
+        $request = 'SELECT link_image FROM users WHERE id=:id';
+
+        $statement = $conn->prepare($request);
+        $statement->bindParam(':id', $id);
+        $statement->execute();
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
     catch(PDOException $e){
         return false;
