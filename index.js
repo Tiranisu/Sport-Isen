@@ -14,3 +14,10 @@ function saveComment() {
     return false;
     //return true;
 }
+
+$(document).ready(function() {
+    $(document).on('submit', '#my-form', function() {
+      console.log("wow");
+      return false;
+     });
+});

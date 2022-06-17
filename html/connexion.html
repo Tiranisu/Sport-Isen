@@ -16,7 +16,7 @@
           <div class="d-flex flex-grow-1">
             <section class="navbar-brand h1">Sport'Isen</section>
           </div>
-          <a class="nav-link m-2 menu-item text-white" href="../index.html">
+          <a class="nav-link m-2 menu-item text-white" href="../index.html" title="Retour à l'accueil">
             <i class="fa-solid fa-house"></i>
           </a>
         </div>
@@ -26,10 +26,10 @@
     <div id="form">
         <p id="registertext">Connexion</p>
         <br>
-        <form>
+        <form action="" id="rform">
             <section style="font-size: normal; color: black; font-weight: bolder; padding-bottom: 5px;">J'ai déja un compte</section>
 
-            <p id="errorConnect" style="display: none; color: #FF0000;"><img src="../resources/library/approved mail.png" style="padding-bottom: 5px;" ></img> Vos informations de connexion sont incorrectes ! </p>
+            <p id="errorConnect" style="display: none; color: #FF0000;"><img src="../resources/library/cancel mail.png" style="padding-bottom: 5px;" ></img> Vos informations de connexion sont incorrectes ! </p>
 
             <p><input id="mail" type="text" name="email" placeholder= "E-mail" required></p>
 
@@ -38,7 +38,6 @@
             
             <p><input id="pass" type="password" name="password" placeholder= "Mot de passe" required></p>
             <button type="submit" id="connect" name="connect">Se connecter</button>
-            <!-- <input type="submit" id="connect" name="connect" value="Se connecter"> -->
         </form>
         <br>
         <br>
@@ -46,6 +45,7 @@
         <section style="font-size: normal; color: black; font-weight: bolder; padding-bottom: 5px;">Pas de compte ?</section>
         <input type="submit" id="register_redirect" name="register" value="S'inscrire" onclick="document.location.href='inscription.html';">
         <br>
+        
     </div>
     <script src="../js/connect.js"></script>
 </body> 

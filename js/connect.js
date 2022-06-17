@@ -55,8 +55,8 @@ function canConnect(infos){
 // check if the email is in the database
 $("#mail").change(function(){
   mail = document.getElementById('mail').value;
-  console.log(mail);
-  ajaxRequest('GET', `../php/connectRequest.php/register?mail=${mail}`, checkMail);
+  // console.log(mail);
+  ajaxRequest('GET', `../php/connectRequest.php/register?email=${mail}`, checkMail);
 })
 
 $("#form").on('submit', (event) => {
@@ -64,14 +64,6 @@ $("#form").on('submit', (event) => {
   password = document.getElementById("pass").value;
   console.log(email);
   console.log(password);
-  ajaxRequest('GET', `../php/authRequest.php/register?email=${email}&password=${password}`, canConnect)
+  ajaxRequest('GET', `../php/connectRequest.php/register?email=${email}&password=${password}`, canConnect);
+  return false;
 });
-
-// $("#errorConnect").click(function(){
-//   email = document.getElementById("mail").value;
-//   password = document.getElementById("pass").value;
-//   console.log(email);
-//   console.log(passwd);
-//   ajaxRequest('GET', `../php/authRequest.php/register?email=${email}&password=${password}`, canConnect)
-// });
-

@@ -16,15 +16,14 @@ $requestRessource = array_shift($request);
 
 if ($requestRessource == "register"){
     $id = array_shift($request);
-    if(isset($_GET['mail'])){
-        $data = check_alreadyexist_user($db, $_GET['mail']);
+    if(isset($_GET['email'])){
+        $data = check_alreadyexist_user($db, $_GET['email']);
     }
-    elseif(isset($_GET['mail']) && isset($_GET['pass'])){
-        $data = checkConnect($db, $_GET['mail'], $_GET['pass']);
+    elseif(isset($_GET['email']) && isset($_GET['password'])){
+        $data = checkConnect($db, $_GET['email'], $_GET['password']);
+        $data = true;
     }
-    
 }
-
 
 header('Content-Type: application/json; charset=utf-8');
 header('Cache-control: no-store, no-cache, must-revalidate');
