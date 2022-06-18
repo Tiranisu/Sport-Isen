@@ -16,7 +16,7 @@ function ajaxRequest(type, url, callback, data = null)
     {
       case 200:
       case 201:
-        console.log(JSON.parse(xhr.responseText))
+        console.log(xhr.responseText)
         callback(JSON.parse(xhr.responseText))
         break
       default:
@@ -92,8 +92,9 @@ function displaySports(infos){
 
   for(let i=0; i<infos.length; i++){
     const date = new Date(infos[i]['date_time'])
-    
 
+    cardCreate(i)
+    
     console.log(date)
     console.log(currentDate)
 
@@ -162,7 +163,161 @@ let days = Array({
 //--------------------------- Card Creation ------------------------------------
 //------------------------------------------------------------------------------
 
+function cardCreate(numCard){
 
-function cardCreate(){
-  //https://www.pierre-giraud.com/javascript-apprendre-coder-cours/dom-ajout-modification-suppression/#:~:text=Pour%20cr%C3%A9er%20un%20nouvel%20%C3%A9l%C3%A9ment,que%20l'on%20souhaite%20cr%C3%A9er.
+  let b = document.body
+
+  //creation container of card bloc
+  let cont = document.createElement('div')
+  cont.className = 'container'
+
+  b.append(cont)
+
+
+  // creation card bloc + append to container
+  let matchCard = document.createElement('div')
+  matchCard.id = 'matchCard'
+
+  cont.append(matchCard)
+
+  // creation card elements bloc
+  let card = document.createElement('div')
+  card.className = 'card'
+  card.style = 'border-radius: 10px; background: rgba(235, 235, 235, 0.5)'
+
+  matchCard.append(card)
+
+  //creation title bloc
+  let cardTitleBloc = document.createElement('div')
+  cardTitleBloc.className = 'container-fluid'
+
+  card.append(cardTitleBloc)
+
+  //first row property (title)
+  let row1 = document.createElement('div')
+  row1.className = 'row'
+
+  cardTitleBloc.append(row1)
+
+  //title properties
+  let titleGroup = document.createElement('div')
+  titleGroup.className = 'col-md-12'
+  titleGroup.style = 'background-color: #c9c9c9; height: auto; border-radius: 10px;'
+
+  row1.append(titleGroup)
+
+  //create match title row
+  let matchTitle = document.createElement('h3')
+  matchTitle.id = 'matchTitle' + numCard
+
+  //create match sport row
+  let matchSport = document.createElement('h6')
+  matchSport.id = 'matchSport' + numCard
+
+  titleGroup.append(matchTitle)
+  titleGroup.append(matchSport)
+
+
+  let br = document.createElement('br')
+  card.append(br)
+
+  //row 2 properties (description)
+  let row2 = document.createElement('div')
+  row2.className = 'row'
+  row2.style = 'margin-left: 7em;'
+
+  card.append(row2)
+
+
+  //first col of description
+  let col1 = document.createElement('div')
+  col1.className = 'col-lg-3 gy-2'
+  
+  row2.append(col1)
+
+
+  //first list of description
+  let list1 = document.createElement('ul')
+  col1.append(list1)
+
+  //create list1 elems
+
+  //hour item
+  let hourItem = document.createElement('li')
+  hourItem.className = 'align-items-center'
+  hourItem.id = 'hour' + numCard
+  hourItem.style = 'padding: 10px'
+  hourItem.textContent = 'Heure: '
+
+  //city item
+  let cityItem = document.createElement('li')
+  cityItem.className = 'align-items-center'
+  cityItem.id = 'matchcity' + numCard
+  cityItem.style = 'padding: 10px'
+  cityItem.textContent = 'Ville: '
+
+  //address item
+  let addressItem = document.createElement('li')
+  addressItem.className = 'align-items-center'
+  addressItem.id = 'address' + numCard
+  addressItem.style = 'padding: 10px'
+  addressItem.textContent = 'Adresse: '
+
+  list1.append(hourItem)
+  list1.append(cityItem)
+  list1.append(addressItem)
+
+
+  //second col of description
+  let col2 = document.createElement('div')
+  col2.className = 'col-lg-3 gy-2'
+  col2.style = 'margin-left: 10em;'
+
+  row2.append(col2)
+
+
+  //second list of description
+  let list2 = document.createElement('ul')
+  
+  col2.append(list2)
+
+  //create list2 elems
+
+  //maxplayers item
+  let maxPlayersItem = document.createElement('li')
+  maxPlayersItem.className = 'align-items-center'
+  maxPlayersItem.id = 'maxplayers' + numCard
+  maxPlayersItem.style = 'padding: 10px'
+  maxPlayersItem.textContent = 'Joueurs max: '
+
+  //matchplayers item
+  let matchPlayers = document.createElement('li')
+  matchPlayers.className = 'align-items-center'
+  matchPlayers.id = 'matchplayers' + numCard
+  matchPlayers.style = 'padding: 10px'
+  matchPlayers.textContent = 'Joueurs inscrits: '
+
+  list2.append(maxPlayersItem)
+  list2.append(matchPlayers)
+
+
+  //create button bloc
+  let blocBut = document.createElement('div')
+  blocBut.className = 'col-lg-3'
+  blocBut.style = 'margin-left: 7em; margin-top: 6.5em;'
+
+  row2.append(blocBut)
+
+  //create details button
+  let but = document.createElement('button')
+  but.className = 'btn'
+  but.id = 'detailBut' + numCard
+  but.style = 'background: rgba(0, 123, 12, 0.65);'
+  but.onclick = ''
+  but.textContent = 'Voir détail'
+
+  blocBut.append(but)
+
+  let jumpCard = document.createElement('br')
+  b.append(jumpCard)
 }
