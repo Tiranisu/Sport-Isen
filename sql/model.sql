@@ -49,7 +49,7 @@ CREATE TABLE users (
 	nb_match     INTEGER,
 	fitness_id   INTEGER,
 	address_id   INTEGER NOT NULL,
-    -- access_token VARCHAR(50),
+    access_token VARCHAR(64),
 
     FOREIGN KEY (fitness_id) REFERENCES fitness(id)
         ON UPDATE CASCADE ON DELETE CASCADE,

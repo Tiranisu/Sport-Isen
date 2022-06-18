@@ -49,18 +49,19 @@ function moveToSearch(){
 	window.location.href = url;
 }
 
+function createCookie(value){
+  document.cookie = "sportisen = " + value + "; path =/;";
+}
+
 function canConnect(infos){
-  if(infos[0]["user_exist"] == false){
+  console.log(infos);
+  if(infos['checkUser'][0]['user_exist'] == false){
     document.getElementById('errorConnect').style.display = 'block';
   } else{
     document.getElementById('errorConnect').style.display = 'none';
-    createCookie();
-    moveToSearch();
+    createCookie(infos['accessToken']);
+    // moveToSearch();
   }
-}
-
-function createCookie(){
-  document.cookie = "sport'isen=a; path=/; max-age=100;";
 }
 
 // check if the email is in the database

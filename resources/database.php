@@ -124,6 +124,17 @@ function addCity($conn, $city){
     }
 }
 
+function getAccessToken($conn, $email){
+    $access_token = hash('sha256', $email . time());
+    $request = 'UPDATE users SET access_token = :access_token WHERE email = :email';
+    $statement = $conn->prepare($request);
+    $statement->bindParam(':email', $email);
+    $statement->bindParam(':access_token', $access_token);
+    $statement->execute();
+
+    return $access_token;
+}
+
 function checkConnect($conn, $email, $password){
     try{
         $request = 'SELECT EXISTS(SELECT * FROM users WHERE email=:email AND password=:password) AS user_exist';

@@ -19,7 +19,12 @@ if ($requestRessource == "register"){
         $data = check_alreadyexist_user($db, $_GET['mail']);
     }
     elseif(isset($_GET['email']) && isset($_GET['password'])){
-        $data = checkConnect($db, $_GET['email'], $_GET['password']);
+        $checkUser = checkConnect($db, $_GET['email'], $_GET['password']);
+        $accessToken = getAccessToken($db, $_GET['email']);
+        $data = array(
+            'checkUser' => $checkUser,
+            'accessToken' => $accessToken
+        );
     }
 }
 
