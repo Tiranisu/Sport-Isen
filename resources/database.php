@@ -12,12 +12,12 @@ function dbConnect(){
 }
 
 function return_password($conn, $email){
-    $request = 'SELECT passwd FROM users WHERE email = :email; ';
+    $request = 'SELECT password FROM users WHERE email = :email; ';
     $statement = $conn->prepare($request);
     $statement->bindParam(':email', $email);
     $statement->execute();
     $phrase_out = $statement->fetch(PDO::FETCH_ASSOC);
-    return $phrase_out['passwd'];
+    return $phrase_out['password'];
 }
 
 function check_alreadyexist_user($conn, $email){
@@ -61,12 +61,12 @@ function returnCityId($conn, $city){
     
 }
 
-function create_user($conn, $firstname, $lastname, $city, $email, $password, $img=""){
+function create_user($conn, $firstname, $lastname, $city, $email, $password, $img = NULL){
     if(!check_alreadyexist_user($conn, $email)){
 
-        if($img == ""){
-            $request = 'INSERT INTO users (firstname, lastname, age, email, passwd, address_id, link_image, nb_match, fitness_id, notifications_list, access_token)
-            VALUES (:firstname, :lastname, NULL, :email, :passwd, :address_id,  NULL, NULL, NULL, NULL, NULL)';
+        if($img == NULL){
+            $request = 'INSERT INTO users (firstname, lastname, age, email, password, address_id, link_image, nb_match, fitness_id, access_token)
+            VALUES (:firstname, :lastname, NULL, :email, :passwd, :address_id,  NULL, NULL, NULL, NULL)';
 
             $statement = $conn->prepare($request);
             $statement->bindParam(':address_id', $city);
@@ -77,8 +77,8 @@ function create_user($conn, $firstname, $lastname, $city, $email, $password, $im
             $statement->execute();
         }
         else{
-            $request = 'INSERT INTO users (firstname, lastname, age, email, passwd, address_id, link_image, nb_match, fitness_id, notifications_list, access_token)
-            VALUES (:firstname, :lastname, NULL, :email, :passwd, :address_id, :img, NULL, NULL, NULL, NULL)';
+            $request = 'INSERT INTO users (firstname, lastname, age, email, password, address_id, link_image, nb_match, fitness_id, access_token)
+            VALUES (:firstname, :lastname, NULL, :email, :passwd, :address_id, :img, NULL, NULL, NULL)';
 
             $statement = $conn->prepare($request);
             $statement->bindParam(':address_id', $city);
