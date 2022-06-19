@@ -13,6 +13,7 @@ $requestMethod = $_SERVER['REQUEST_METHOD'];
 $request = substr($_SERVER['PATH_INFO'], 1);
 $request = explode('/', $request);
 $requestRessource = array_shift($request);
+
 if ($requestRessource == "register"){
     $id = array_shift($request);
     if(isset($_GET['mail'])){

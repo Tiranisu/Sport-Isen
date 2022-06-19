@@ -15,6 +15,19 @@ require_once('../resources/database.php');
   $request = explode('/', $request);
   $requestRessource = array_shift($request);
 
+  if ($requestRessource == "user"){
+    switch($requestMethod){
+      case 'GET':
+        if(isset($_GET['accessToken'])){
+          $data = getUser($db, $_GET['accessToken']);
+          // $data = array(
+          //   'data' => $user
+          // );
+        }
+        break;
+    }
+  }
+
   if ($requestRessource == "picture"){
 
     $data = false;

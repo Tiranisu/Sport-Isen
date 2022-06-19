@@ -149,6 +149,19 @@ function checkConnect($conn, $email, $password){
     }
 }
 
+function getUser($conn, $accessToken){
+    try{
+        $request = 'SELECT * FROM users WHERE access_token=:accessToken';
+        $statement = $conn->prepare($request);
+        $statement->bindParam(':accessToken', $accessToken);
+        $statement->execute();
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
+    catch(PDOException $e){
+        return false;
+    }
+}
+
 
 function getImage($conn, $id){
     try{

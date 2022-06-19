@@ -54,13 +54,13 @@ function createCookie(value){
 }
 
 function canConnect(infos){
-  console.log(infos);
+  console.log(infos)
   if(infos['checkUser'][0]['user_exist'] == false){
-    document.getElementById('errorConnect').style.display = 'block';
+    document.getElementById('errorConnect').style.display = 'block'
   } else{
-    document.getElementById('errorConnect').style.display = 'none';
-    createCookie(infos['accessToken']);
-    // moveToSearch();
+    document.getElementById('errorConnect').style.display = 'none'
+    createCookie(infos['accessToken'])
+    moveToSearch()
   }
 }
 

@@ -1,1 +1,1 @@
-SELECT * FROM users WHERE email='rp@test.fr' AND password='1234';
+SELECT * FROM users WHERE access_token='59a920215799e3a8db0edc5fa6cc012adb1fc504179abd6010615b5194ba83dc'

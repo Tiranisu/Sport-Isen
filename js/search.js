@@ -1,3 +1,5 @@
+import {getCookie, deleteCookie} from './tool.js';
+
 function ajaxRequest(type, url, callback, data = null)
 {
   let xhr
@@ -15,7 +17,7 @@ function ajaxRequest(type, url, callback, data = null)
     switch (xhr.status)
     {
       case 200:
-      case 201:
+      case 201: 
         console.log(xhr.responseText)
         callback(JSON.parse(xhr.responseText))
         break
@@ -27,6 +29,47 @@ function ajaxRequest(type, url, callback, data = null)
   // Send XML HTTP request.
   xhr.send(data)
 }
+
+$(() => {
+  console.log(getCookie('sportisen'))
+  let accessToken = getCookie('sportisen')
+  if(accessToken.length == 0){
+    let url = window.location.href.replace(/search\.html.*/i, 'connexion.html')
+    window.location.href = url
+  }
+  ajaxRequest('GET', `../php/searchRequest.php/user?accessToken=${accessToken}`, dynPage)
+})
+
+
+/**
+ * taken from https://stackoverflow.com/questions/260857/changing-website-favicon-dynamically
+ * @param {*} infos 
+ */
+function dynPage(infos){
+  console.log(infos)
+
+  var link = document.querySelector("link[rel~='icon']");
+  if (!link) {
+      link = document.createElement('link');
+      link.rel = 'icon';
+      document.getElementsByTagName('head')[0].appendChild(link);
+  }
+
+  document.title = infos[0]['firstname'] + " " + infos[0]['lastname']
+  if(infos[0]['link_image'] == null){
+    link.href = "../resources/img_profil/default_user.png"
+  }
+  else{
+      link.href = "infos[0]['link_image']"
+  }
+}
+
+$("#disconnect").click(function(){
+  deleteCookie('sportisen')
+  let url = window.location.href.replace(/search\.html.*/i, 'connexion.html')
+  window.location.href = url
+})
+
 
 //------------------------------------------------------------------------------
 //---------------------------Ajax Search Requests ------------------------------
