@@ -11,17 +11,75 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script type="module" src="../js/search.js"></script>
+    
+    <!-- script for onclick functions -->
     <script>
+
+        function ajaxRequest(type, url, callback, data = null){
+            let xhr;
+
+            // Create XML HTTP request.
+            xhr = new XMLHttpRequest();
+            if (type == 'GET' && data != null)
+                url += '?' + data;
+            xhr.open(type, url);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+            // Add the onload function.
+            xhr.onload = () =>
+            {
+                switch (xhr.status)
+                {
+                case 200:
+                case 201:
+                    // console.log(xhr.responseText);
+                    callback(JSON.parse(xhr.responseText));
+                    break;
+                default:
+                    httpErrors(xhr.status);
+                }
+            };
+
+            // Send XML HTTP request.
+            xhr.send(data);
+        }
+
+        function getCookie(c_name) {
+            let c_start
+            let c_end
+            if (document.cookie.length > 0) {
+                c_start = document.cookie.indexOf(c_name + "=");
+                if (c_start != -1) {
+                    c_start = c_start + c_name.length + 1;
+                    c_end = document.cookie.indexOf(";", c_start);
+                    if (c_end == -1) {
+                        c_end = document.cookie.length;
+                    }
+                    return unescape(document.cookie.substring(c_start, c_end));
+                }
+            }
+            return "";
+        }
+
         function register(elem){
             var butid = elem.id
             var matches = butid.match(/(\d+)/)
             var matchId = matches[0]
 
-            $.ajax('../php/searchRequest.php/register', {
-                method: 'GET', data:{
-                    matchid: matchId
+            let token = getCookie('sportisen')
+            ajaxRequest('GET', `../php/searchRequest.php/user?accessToken=${token}`, function(infos){
+
+                let userId = infos[0]['id']
+                $.ajax('../php/searchRequest.php/register', {
+                method: "POST", data: {
+                    matchid: matchId,
+                    userid: userId
                 }
+                })
+
             })
+
+            
         }
 
         function details(elem){
@@ -51,7 +109,7 @@
               <div class="dropcontent">
                 <a href="profile.html">Mon profil</a>
                 <a href="matchs.html">Mes matchs</a>
-                <a id="disconnect" href="#" onclick="//disconnect function"><i class="fa-solid fa-right-from-bracket"></i>Déconnexion</a>
+                <a id="disconnect" href="#"><i class="fa-solid fa-right-from-bracket"></i>Déconnexion</a>
               </div>
             </div> 
           </div>
@@ -70,7 +128,7 @@
                         <div class="input-group-text" style="height: 40px"><i class="fa-solid fa-location-dot" style="color:#007B0C;"></i></div>
                     </div>
                     <select type="text" class="form-select" id="city">
-                        <option value="default" selected>Ville</option>
+                        <option value="default" selected disabled>Ville</option>
                     </select>
                 </div>
             </div>
@@ -80,7 +138,7 @@
                         <div class="input-group-text" style="height: 40px"><i class="fa-solid fa-football" style="color:#007B0C;"></i></div>
                     </div>
                     <select type="text" class="form-select" id="sport">
-                        <option value="default" selected>Sport</option>
+                        <option value="default" selected disabled>Sport</option>
                     </select>
                 </div>
             </div>
@@ -90,7 +148,7 @@
                         <div class="input-group-text" style="height: 40px"><i class="fa-solid fa-calendar-days" style="color:#007B0C;"></i></div>
                     </div>
                     <select type="text" class="form-select" id="period">
-                        <option value="default" selected>Période</option>
+                        <option value="default" selected disabled>Période</option>
                         <option value="7days">+7 jours</option>
                         <option value="15days">+15 jours</option>
                         <option value="30days">+30 jours</option>
@@ -103,7 +161,7 @@
                         <div class="input-group-text" style="height: 40px"><i class="fa-solid fa-gauge-high" style="color:#007B0C;"></i></div>
                     </div>
                     <select type="text" class="form-select" id="capacity">
-                        <option value="default" selected>Capacité</option>
+                        <option value="default" selected disabled>Capacité</option>
                         <option value="full">Complets</option>
                         <option value="notfull">Incomplets</option>
                     </select>

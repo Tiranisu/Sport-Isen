@@ -352,8 +352,38 @@ function getOrganizator($conn, $orgId){
 }
 
 
-function registerMatch($conn, $matchId){
+function registerMatch($conn, $matchId, $userId){
+    try{
+        if(!checkRegister($conn, $matchId, $userId)){
+            $request = 'INSERT INTO participant(match_id, user_id, status) VALUES (:matchid, :userid, 2)';
+            $statement = $conn->prepare($request);
+            $statement->bindParam(':matchid', $matchId);
+            $statement->bindParam(':userid', $userId);
+            $statement->execute();
+            return true;
+        }
+        
+    }
+    catch(PDOException $e){
+        return false;
+    }
+    
+}
 
+function checkRegister($conn, $matchId, $userId){
+    $request = 'SELECT * FROM participant WHERE match_id=:matchid AND user_id=:userid';
+
+    $statement = $conn->prepare($request);
+    $statement->bindParam(':matchid', $matchId);
+    $statement->bindParam(':userid', $userId);
+    $statement->execute();
+    $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+    if($result){
+        return true;
+    }
+    else{
+        return false;   
+    }
 }
 
 

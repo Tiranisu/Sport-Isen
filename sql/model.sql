@@ -115,7 +115,7 @@ CREATE TABLE participant (
     match_id  INTEGER NOT NULL,
     user_id   INTEGER NOT NULL,
 	status    INTEGER  NOT NULL,
-    CONSTRAINT Participer_PK PRIMARY KEY (match_id, user_id),
+    -- CONSTRAINT Participer_PK PRIMARY KEY (match_id, user_id),
 
     FOREIGN KEY(match_id) REFERENCES matchs(id)
         ON UPDATE CASCADE ON DELETE CASCADE,

@@ -30,14 +30,20 @@
               <div class="dropcontent">
                 <a href="profile.html">Mon profil</a>
                 <a href="matchs.html">Mes matchs</a>
-                <a id="disconnect" href="#" onclick="//disconnect function"><i class="fa-solid fa-right-from-bracket"></i>Déconnexion</a>
+                <a id="disconnect" href="#"><i class="fa-solid fa-right-from-bracket"></i>Déconnexion</a>
               </div>
             </div> 
           </div>
   </nav>
 
-  
-  <h2 id="matchname" style="padding-top: 1em; padding-left:1em;"></h2>
+  <div class="row" style="padding-top: 1em">
+    <div class="col-lg-1 gy-2">
+      <button class="btn" style="background: rgba(245, 147, 0, 0.65); margin-left: 0.5em;" onclick="document.location.href='search.html'"><i class="fa-solid fa-circle-chevron-left"></i> Retour</button>
+    </div>
+    <div class="col-lg-10 gy-2">
+      <h2 id="matchname"></h2>
+    </div>
+  </div>
   <hr>
 
   <div class="row">
@@ -59,6 +65,10 @@
         </ul>
     </div>
   </div>
+
+  
+
+  
   
   <br><br>
   <table class="table">
@@ -75,3 +85,12 @@
       
     </tbody>
   </table>
+
+  <section id="errors" class="container alert alert-danger" style="display: none"><i class="fa-solid fa-circle-exclamation"></i> Vous êtes déjà inscrit!</section>
+  <section id="success" class="container alert alert-success" style="display: none"><i class="fa-solid fa-circle-check"></i> Vous avez bien été inscrit!</section>
+
+  <div class="d-md-flex justify-content-md-end">
+    <button class="btn float-right" id="register" style="background: rgba(245, 147, 0, 0.65); margin-right: 2em">S'inscrire</button>
+  </div>
+
+ 

@@ -38,7 +38,7 @@ var matchId = infos[1]
 ajaxRequest('GET', `../php/searchRequest.php/matchs?matchid=${matchId}`, displayInfos)
 
 function displayInfos(infos){
-    console.log(infos)
+    // console.log(infos)
     const date = new Date(infos[0]['date_time'])
     document.getElementById('matchname').innerHTML = infos[0]['name'] + " | " + days[0][date.getDay()] + ' ' + date.getDate() + ' ' + months[0][date.getMonth()] + ' ' + date.getFullYear()
     document.getElementById('hour').innerHTML += date.getHours() + ':'
@@ -72,24 +72,66 @@ function displayInfos(infos){
 
 }
 
+
 ajaxRequest('GET', `../php/searchRequest.php/players?matchid=${matchId}`, displayPlayers)
 
-function displayPlayers(data){
 
-    for(let i=0; i<data.length; i++){
+function displayPlayers(infos){
+
+    console.log(infos)
+    for(let i=0; i<infos.length; i++){
         createTable();
 
-        if(data[0]['link_image'] != 'NULL'){
-            document.getElementById('picture').src = data[0]['link_image']
+        if(infos[0]['link_image'] != null){
+            document.getElementById('picture').src = infos[0]['link_image']
+            
         }
         else{
             document.getElementById('picture').src = '../resources/img_profil/default_user.png'
         }
+
+        document.getElementById('col0').innerHTML = infos[0]['firstname']
+        document.getElementById('col1').innerHTML = infos[0]['lastname']
+        document.getElementById('col2').innerHTML = infos[0]['age']
+        document.getElementById('col3').innerHTML = infos[0]['type']
         
     }
 
 
 }
+
+
+//register
+$('#register').on('click', () => {
+
+  let accessToken = getCookie('sportisen')
+  ajaxRequest('GET', `../php/searchRequest.php/user?accessToken=${accessToken}`, function(infos){
+
+    let userId = infos[0]['id']
+    $.ajax('../php/searchRequest.php/register', {
+      method: "POST", data: {
+        matchid: matchId,
+        userid: userId
+      },
+      success: function(data){
+        if(!data){
+          document.getElementById('success').style.display = 'none'
+          document.getElementById('errors').style.display = 'block'
+        }
+        else{
+          document.getElementById('errors').style.display = 'none'
+          document.getElementById('success').style.display = 'block'
+        }
+        
+      }
+    })
+
+  })
+
+})
+
+
+
 
 //------------------------------------------------------------------------------
 //--------------------------- Create tab ---------------------------------------
@@ -106,10 +148,12 @@ function createTable(){
 
     let picture = document.createElement('img')
     picture.id = 'picture'
+    picture.style = 'heigth: 100px; width: 100px'
     picCol.append(picture)
 
-    for(let i =0; i<3; i++){
+    for(let i =0; i<4; i++){
         let col = document.createElement('td')
+        col.style = 'padding-top: 2em'
         col.id = 'col' + i
         tabBody.append(col)
     }

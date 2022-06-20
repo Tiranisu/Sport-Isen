@@ -10,9 +10,9 @@ DELETE FROM participant;
 -- --- Populate fitness table ------------
 ALTER SEQUENCE fitness_id_seq RESTART;
 INSERT INTO fitness (type) VALUES
-('Begenner'),
+('Beginner'),
 ('Intermediate'),
-('Advenced');
+('Advanced');
 
 -- --- Populate sports table ------------
 ALTER SEQUENCE sports_id_seq RESTART;

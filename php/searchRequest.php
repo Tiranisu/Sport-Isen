@@ -116,8 +116,11 @@ require_once('../resources/database.php');
     $data = false;
 
     switch($requestMethod){
-      case 'PUT':
-        echo $_GET['matchid'];
+      case 'POST':
+        $result = registerMatch($db, $_POST['matchid'], $_POST['userid']);
+        if($result){
+          $data = true;
+        }
     }
   }
 
