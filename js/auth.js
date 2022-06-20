@@ -88,7 +88,7 @@ $('#form').on('submit', (event) =>
 
    if(passValid){
 
-    if(($('#selectedFile')).length > 0){
+    if(($('#selectedFile')).val() != ''){
       $.ajax('../php/authRequest.php/register', {
         method: 'POST', data:{
           fname : $('#fname').val(),

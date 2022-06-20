@@ -67,7 +67,13 @@ require_once('../resources/database.php');
 
     switch($requestMethod){
       case 'GET':
-        $data = getMatchs($db);
+        if(isset($_GET['cityid'])){
+          $data = cityFilter($db, $_GET['cityid']);
+        }
+        else{
+          $data = getMatchs($db);
+        }
+       
         break;
     }
   }
