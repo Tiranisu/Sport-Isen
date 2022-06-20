@@ -74,6 +74,17 @@
                 method: "POST", data: {
                     matchid: matchId,
                     userid: userId
+                },
+                success: function(data){
+                    if(!data){
+                    document.getElementById('success').style.display = 'none'
+                    document.getElementById('errors').style.display = 'block'
+                    }
+                    else{
+                    document.getElementById('errors').style.display = 'none'
+                    document.getElementById('success').style.display = 'block'
+                    }
+                    
                 }
                 })
 
@@ -177,6 +188,9 @@
 </div>
 
 <hr>
+
+<section id="errors" class="container alert alert-danger" style="display: none"><i class="fa-solid fa-circle-exclamation"></i> Vous êtes déjà inscrit!</section>
+<section id="success" class="container alert alert-success" style="display: none"><i class="fa-solid fa-circle-check"></i> Vous avez bien été inscrit!</section>
 
 <!-- matchs area -->
 <div id="matchsArea"></div>
