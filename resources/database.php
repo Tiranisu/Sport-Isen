@@ -216,6 +216,25 @@ function getMatchs($conn){
     }
 }
 
+function cityFilter($conn, $cityId){
+    try{
+        $request = 'SELECT * FROM matchs WHERE address_id = :id';
+
+        $statement = $conn->prepare($request);
+        $statement->bindParam(':id', $cityId);
+        $statement->execute();
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+        if($result){
+            return $result;
+        }
+        else{
+            return false;
+        }
+    }
+    catch(PDOException $e){
+        return false;
+    }
+}
 
 
 
