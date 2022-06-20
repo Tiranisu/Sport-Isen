@@ -70,11 +70,54 @@ require_once('../resources/database.php');
         if(isset($_GET['cityid'])){
           $data = cityFilter($db, $_GET['cityid']);
         }
+        elseif(isset($_GET['sportid'])){
+          $data = sportFilter($db,$_GET['sportid']);
+        }
+        elseif(isset($_GET['time'])){
+          $data = timeFilter($db,$_GET['time']);
+        }
+        elseif(isset($_GET['capacity'])){
+          $data = capacityFilter($db, $_GET['capacity']);
+        }
+        elseif(isset($_GET['matchid'])){
+          $data = getMatchsFromId($db, $_GET['matchid']);
+        }
         else{
           $data = getMatchs($db);
         }
        
         break;
+    }
+  }
+
+  if($requestRessource == 'orga'){
+    $data = false;
+    switch($requestMethod){
+      case "GET":
+        if(isset($_GET['orgid'])){
+          $data = getOrganizator($db, $_GET['orgid']);
+        }
+        
+    }
+  }
+
+  if($requestRessource == 'players'){
+    $data = false;
+    switch($requestMethod){
+      case "GET":
+        if(isset($_GET['matchid'])){
+          $data = getPlayers($db, $_GET['matchid']);
+        }
+        
+    }
+  }
+
+  if($requestRessource == 'register'){
+    $data = false;
+
+    switch($requestMethod){
+      case 'PUT':
+        echo $_GET['matchid'];
     }
   }
 

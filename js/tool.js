@@ -15,7 +15,7 @@ export function ajaxRequest(type, url, callback, data = null){
     {
       case 200:
       case 201:
-        console.log(xhr.responseText);
+        // console.log(xhr.responseText);
         callback(JSON.parse(xhr.responseText));
         break;
       default:
@@ -63,7 +63,7 @@ export function disconnect(){
  * @param {*} infos 
  */
 export function dynPage(infos){
-    console.log(infos)
+    // console.log(infos)
   
     var link = document.querySelector("link[rel~='icon']");
     if (!link) {
@@ -83,7 +83,7 @@ export function dynPage(infos){
 
 
 export function displayImage(infos){
-    console.log(infos[0]['link_image'])
+    // console.log(infos[0]['link_image'])
     if(infos[0]['link_image'] == null){
         document.getElementById("profilePicture").src="../resources/img_profil/default_user.png"
     }

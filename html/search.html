@@ -11,6 +11,27 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script type="module" src="../js/search.js"></script>
+    <script>
+        function register(elem){
+            var butid = elem.id
+            var matches = butid.match(/(\d+)/)
+            var matchId = matches[0]
+
+            $.ajax('../php/searchRequest.php/register', {
+                method: 'GET', data:{
+                    matchid: matchId
+                }
+            })
+        }
+
+        function details(elem){
+            var butid = elem.id
+            var matches = butid.match(/(\d+)/)
+            var matchId = matches[0]
+
+            document.location.href="details.html?matchid=" + matchId
+        }
+    </script>
 </head>
   <body>
     <!-- menu bootstrap -->
@@ -40,7 +61,7 @@
   <div class="container" id="container">
     <form class="form-row">
         <div class="row">
-            <div class="col-lg-3 gy-2">
+            <div class="col-lg-2 gy-2">
                 <p>Appliquer des filtres: </p>
             </div>
             <div class="col-lg-2 gy-2">
@@ -81,11 +102,16 @@
                     <div class="input-group-prepend">
                         <div class="input-group-text" style="height: 40px"><i class="fa-solid fa-gauge-high" style="color:#007B0C;"></i></div>
                     </div>
-                    <select type="text" class="form-select" id="period">
+                    <select type="text" class="form-select" id="capacity">
                         <option value="default" selected>Capacité</option>
                         <option value="full">Complets</option>
                         <option value="notfull">Incomplets</option>
                     </select>
+                </div>
+            </div>
+            <div class="col-lg-2 gy-2">
+                <div class="input-group">
+                    <button class="btn" style="background: rgba(0, 123, 12, 0.65);" id="reset">Supprimer filtres</button>
                 </div>
             </div>
         </div> 
@@ -95,8 +121,11 @@
 <hr>
 
 <!-- matchs area -->
+<div id="matchsArea"></div>
 
 
-    
+
+
+
 </body> 
 </html>

@@ -206,7 +206,7 @@ function getCities($conn){
 
 function getMatchs($conn){
     try{
-        $request = 'SELECT m.name, s.name as sport_name, a.name as stade_name, a.street, a.city, m.nb_player_min, m.nb_player_max, m.date_time, m.duration, m.price, (SELECT count(*) as nb_participants FROM participant WHERE status=1 ) FROM matchs m, sports s, address a WHERE m.sport_id=s.id AND m.address_id=a.id';
+        $request = 'SELECT m.id, m.name, s.name as sport_name, a.name as stade_name, a.street, a.city, m.nb_player_min, m.nb_player_max, m.date_time, m.duration, m.price, (SELECT count(*) as nb_participants FROM participant WHERE status=1 ) FROM matchs m, sports s, address a WHERE m.sport_id=s.id AND m.address_id=a.id';
         $statement = $conn->prepare($request);
         $statement->execute();
         return $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -216,9 +216,37 @@ function getMatchs($conn){
     }
 }
 
+function getMatchsFromId($conn, $matchid){
+    try{
+        $request = 'SELECT m.id, m.name, m.organization_id, s.name as sport_name, a.name as stade_name, a.street, a.city, m.nb_player_min, m.nb_player_max, m.date_time, m.duration, m.price, (SELECT count(*) as nb_participants FROM participant WHERE status=1 ) FROM matchs m, sports s, address a WHERE m.sport_id=s.id AND m.address_id=a.id AND m.id = :matchid';
+        $statement = $conn->prepare($request);
+        $statement->bindParam(':matchid', $matchid);
+        $statement->execute();
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
+    catch(PDOException $e){
+        return false;
+    }
+}
+
+function getPlayers($conn, $matchId){
+    try{
+        $request = 'SELECT u.link_image, u.firstname, u.lastname, u.age, f.type FROM users u, fitness f, participant p WHERE p.user_id = u.id AND f.id = u.fitness_id AND p.status = 1 AND p.match_id = :matchid';
+        $statement = $conn->prepare($request);
+        $statement->bindParam(':matchid', $matchId);
+        $statement->execute();
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
+    catch(PDOException $e){
+        return false;
+    }
+    
+}
+ 
+
 function cityFilter($conn, $cityId){
     try{
-        $request = 'SELECT * FROM matchs WHERE address_id = :id';
+        $request = 'SELECT m.id, m.name, s.name as sport_name, a.name as stade_name, a.street, a.city, m.nb_player_min, m.nb_player_max, m.date_time, m.duration, m.price, (SELECT count(*) as nb_participants FROM participant WHERE status=1 ) FROM matchs m, sports s, address a WHERE m.sport_id=s.id AND m.address_id=a.id AND address_id = :id';
 
         $statement = $conn->prepare($request);
         $statement->bindParam(':id', $cityId);
@@ -236,7 +264,97 @@ function cityFilter($conn, $cityId){
     }
 }
 
+function sportFilter($conn, $sportId){
+    try{
+        $request = 'SELECT m.id, m.name, s.name as sport_name, a.name as stade_name, a.street, a.city, m.nb_player_min, m.nb_player_max, m.date_time, m.duration, m.price, (SELECT count(*) as nb_participants FROM participant WHERE status=1 ) FROM matchs m, sports s, address a WHERE m.sport_id=s.id AND m.address_id=a.id AND sport_id = :id';
 
+        $statement = $conn->prepare($request);
+        $statement->bindParam(':id', $sportId);
+        $statement->execute();
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+        if($result){
+            return $result;
+        }
+        else{
+            return false;
+        }
+    }
+    catch(PDOException $e){
+        return false;
+    }
+}
+
+function timeFilter($conn, $time){
+
+    $actualDate = date('Y-m-d H:i');
+    $timeDiff = date('Y-m-d H:i', strtotime('+' . $time . ' day', strtotime($actualDate)));
+
+    try{
+        $request = 'SELECT m.id, m.name, s.name as sport_name, a.name as stade_name, a.street, a.city, m.nb_player_min, m.nb_player_max, m.date_time, m.duration, m.price, (SELECT count(*) as nb_participants FROM participant WHERE status=1 ) FROM matchs m, sports s, address a WHERE m.sport_id=s.id AND m.address_id=a.id AND date_time <= :time';
+
+        $statement = $conn->prepare($request);
+        $statement->bindParam(':time', $timeDiff);
+        $statement->execute();
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+        if($result){
+            return $result;
+        }
+        else{
+            return false;
+        }
+    }
+    catch(PDOException $e){
+        return false;
+    }
+}
+
+function capacityFilter($conn, $capacity){
+
+    try{
+        $request = 'SELECT m.id, m.name, s.name as sport_name, a.name as stade_name, a.street, a.city, m.nb_player_min, m.nb_player_max, m.date_time, m.duration, m.price, (SELECT count(*) as nb_participants FROM participant WHERE status=1 ) FROM matchs m, sports s, address a WHERE m.sport_id=s.id AND m.address_id=a.id AND nb_player_max-(SELECT count(*) as nb_participants FROM participant WHERE status=1) ';
+
+        if($capacity == 'full'){
+            $request .= '= 0';
+        }
+        else{
+            $request .= '> 0';
+        }
+        $statement = $conn->prepare($request);
+        $statement->execute();
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+        if($result){
+            return $result;
+        }
+        else{
+            return false;
+        }
+    }
+    catch(PDOException $e){
+        return false;
+    }
+}
+
+function getOrganizator($conn, $orgId){
+    try{
+        $request = 'SELECT firstname, lastname FROM users WHERE id = :orgid';
+
+        $statement = $conn->prepare($request);
+        $statement->bindParam(':orgid', $orgId);
+        $statement->execute();
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
+    catch(PDOException $e){
+        return false;
+    }
+
+    
+
+}
+
+
+function registerMatch($conn, $matchId){
+
+}
 
 
 function update_user(){
