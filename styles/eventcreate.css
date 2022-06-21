@@ -95,13 +95,104 @@ body {
     align-items: center;
   }
 
-  #matchCard{
-    text-align: initial;
-    background-color: #EBEBEB;
-    border-radius: 10px;
+  #createevent{
+    font-style: normal;
+    font-weight: 200;
+    font-size: 50px;
+    line-height: 60px;
+    text-align: center;
+
+    color: #000000;
   }
 
 
+  #name{
+    width: 91%;
+    height: 56.66px;
+    background: #ECECEC;
+    border-radius: 10px;
+    border: none;
+    padding-left: 20px;
+}
+
+#sport{
+    width: 377.74px;
+    height: 56.66px;
+    background: #ECECEC;
+    border-radius: 10px;
+    border: none;
+    padding-left: 20px;
+}
+
+#date{
+    width: 285px;
+    height: 56.66px;
+    background: #ECECEC;
+    border-radius: 10px;
+    border: none;
+    padding-left: 20px;
+}
+
+#hour{
+  width: 285px;
+  height: 56.66px;
+  background: #ECECEC;
+  border-radius: 10px;
+  border: none;
+  padding-left: 20px;
+}
+
+#price{
+  width: 377.74px;
+  height: 56.66px;
+  background: #ECECEC;
+  border-radius: 10px;
+  border: none;
+  padding-left: 20px;
+  margin-top: 0.5em;
+}
+
+#city{
+  width: 377.74px;
+  height: 56.66px;
+  background: #ECECEC;
+  border-radius: 10px;
+  border: none;
+  padding-left: 20px;
+  margin-top: 0.5em;
+}
+
+#address{
+  width: 377.74px;
+  height: 56.66px;
+  background: #ECECEC;
+  border-radius: 10px;
+  border: none;
+  padding-left: 20px;
+  margin-top: 0.5em;
+}
+
+#postalcode{
+  width: 377.74px;
+  height: 56.66px;
+  background: #ECECEC;
+  border-radius: 10px;
+  border: none;
+  padding-left: 20px;
+  margin-top: 0.5em;
+}
+
+
+#create{
+  background-color: #F59300;
+  width: 377.74px;
+  height: 56.66px;
+  border-radius: 10px;
+  border: none;
+  color: white;
+  font-weight:bold;
+}
+  
   /* Source rating: https://codepen.io/hesguru/pen/BaybqXv */
 
   .rate {
@@ -139,4 +230,3 @@ body {
 .rate > label:hover ~ input:checked ~ label {
     color: #c59b08;
 }
-  

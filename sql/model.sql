@@ -87,7 +87,7 @@ CREATE TABLE score_app(
 CREATE TABLE matchs (
     id               SERIAL PRIMARY KEY,
     name             VARCHAR(50) NOT NULL,
-    score            VARCHAR(50) NOT NULL,
+    score            VARCHAR(50),
     organization_id  INTEGER NOT NULL,
     sport_id         INTEGER NOT NULL,
     address_id       INTEGER NOT NULL,
@@ -96,7 +96,7 @@ CREATE TABLE matchs (
     date_time        TIMESTAMP NOT NULL,
     duration         TIMESTAMP NOT NULL,
     price            FLOAT NOT NULL,
-    best_player_id   INTEGER NOT NULL,
+    best_player_id   INTEGER,
 
     FOREIGN KEY(organization_id) REFERENCES users(id)
         ON UPDATE CASCADE ON DELETE CASCADE,
@@ -115,7 +115,7 @@ CREATE TABLE participant (
     match_id  INTEGER NOT NULL,
     user_id   INTEGER NOT NULL,
 	status    INTEGER  NOT NULL,
-    CONSTRAINT Participer_PK PRIMARY KEY (match_id, user_id),
+    -- CONSTRAINT Participer_PK PRIMARY KEY (match_id, user_id),
 
     FOREIGN KEY(match_id) REFERENCES matchs(id)
         ON UPDATE CASCADE ON DELETE CASCADE,

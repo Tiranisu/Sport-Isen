@@ -1,7 +1,7 @@
 import {ajaxRequest, getCookie, disconnect, dynPage, displayImage} from './tool.js';
 
 $(() => {
-  console.log(getCookie('sportisen'))
+  // console.log(getCookie('sportisen'))
   let accessToken = getCookie('sportisen')
   if(accessToken.length == 0){
     let url = window.location.href.replace(/search\.html.*/i, 'connexion.html')
@@ -35,12 +35,12 @@ function distribution(infos){
 
 ajaxRequest('GET', `../php/searchRequest.php/cities`, addCities)
 
-function addCities(infos){
+function addCities(infos){  
     var selCities = document.getElementById('city')
     for(let i = 0; i < infos.length; i++){
       var option = document.createElement("option")
       option.value = infos[i]['id']
-      option.text = infos[i]['city']
+      option.text = infos[i]['city'] + ' - ' + infos[i]['postal_code']
       selCities.add(option)
     }
 }
@@ -65,49 +65,215 @@ function addSports(infos){
 
 //display Sports
 
-ajaxRequest('GET', '../php/searchRequest.php/matchs', displaySports)
+let noFilters = true
 
+let area = document.getElementById('matchsArea')
 
+//no filters active
+if(noFilters){
+  area.innerHTML = ""
+  ajaxRequest('GET', '../php/searchRequest.php/matchs', displaySports)
+}
 
+//city filter active
+$("#city").change(function(){
+  
+  if(($("#city")).val() != 'default'){
+    noFilters = false;
+    area.innerHTML = ""
+    ajaxRequest('GET',  `../php/searchRequest.php/matchs?cityid=${($("#city")).val()}`, displaySports)
+    document.getElementById('sport').value = 'default'
+    document.getElementById('period').value = 'default'
+    document.getElementById('capacity').value = 'default'
+  }
+  else{
+    noFilters = true;
+  }
+})
+
+//sport filter active
+$("#sport").change(function(){
+  
+  if(($("#sport")).val() != 'default'){
+    noFilters = false;
+    area.innerHTML = ""
+    ajaxRequest('GET',  `../php/searchRequest.php/matchs?sportid=${($("#sport")).val()}`, displaySports)
+    document.getElementById('city').value = 'default'
+    document.getElementById('period').value = 'default'
+    document.getElementById('capacity').value = 'default'
+  }
+  else{
+    noFilters = true;
+  }
+})
+
+//time filter active
+$("#period").change(function(){
+  
+  if(($("#period")).val() != 'default'){
+    noFilters = false;
+    area.innerHTML = ""
+    ajaxRequest('GET',  `../php/searchRequest.php/matchs?time=${($("#period")).val()}`, displaySports)
+    document.getElementById('city').value = 'default'
+    document.getElementById('sport').value = 'default'
+    document.getElementById('capacity').value = 'default'
+  }
+  else{
+    noFilters = true;
+  }
+})
+
+//capacity filter active
+$("#capacity").change(function(){
+  
+  if(($("#capacity")).val() != 'default'){
+    noFilters = false;
+    area.innerHTML = ""
+    ajaxRequest('GET',  `../php/searchRequest.php/matchs?capacity=${($("#capacity")).val()}`, displaySports)
+    document.getElementById('city').value = 'default'
+    document.getElementById('sport').value = 'default'
+    document.getElementById('period').value = 'default'
+  }
+  else{
+    noFilters = true;
+  }
+})
+
+//delete filters
+$('reset').on('click', () => {
+  noFilters = true
+  document.getElementById('city').value = 'default'
+  document.getElementById('sport').value = 'default'
+  document.getElementById('period').value = 'default'
+  document.getElementById('capacity').value = 'default'
+})
+
+//display matchs card
 function displaySports(infos){
 
-  const currentDate = new Date(Date.now())
+  if(!infos){
+    document.getElementById('noresult').style.display = 'block'
+  }
+  else{
+    document.getElementById('noresult').style.display = 'none'
+    const currentDate = new Date(Date.now())
 
-  for(let i=0; i<infos.length; i++){
-    const date = new Date(infos[i]['date_time'])
+    for(let i=0; i<infos.length; i++){
+      const date = new Date(infos[i]['date_time'])
 
-    cardCreate(i)
-    
-    console.log(date)
-    console.log(currentDate)
+      // console.log(infos[i])
+      const matchId = infos[i]['id']
+      // console.log(infos[i]['id'])
 
-    if(date > Date.now()){
-      document.getElementById('matchTitle'+i).innerHTML = infos[i]['name'] + " | " + days[0][date.getDay()] + ' ' + date.getDate() + ' ' + months[0][date.getMonth()] + ' ' + date.getFullYear()
-      document.getElementById('matchSport'+i).innerHTML = infos[i]['sport_name']
-      document.getElementById('hour'+i).innerHTML += date.getHours() + ':'
+      cardCreate(matchId)
+      
+      // console.log(date)
+      // console.log(currentDate)
 
-      //display minutes format :mm
-      if(date.getMinutes()<10){
-        document.getElementById('hour'+i).innerHTML += '0' + date.getMinutes()
+      if(date > Date.now()){
+        document.getElementById('matchTitle'+matchId).innerHTML = infos[i]['name'] + " | " + days[0][date.getDay()] + ' ' + date.getDate() + ' ' + months[0][date.getMonth()] + ' ' + date.getFullYear()
+        document.getElementById('matchSport'+matchId).innerHTML = infos[i]['sport_name']
+        document.getElementById('hour'+matchId).innerHTML += date.getHours() + ':'
+
+        //display minutes format :mm
+        if(date.getMinutes()<10){
+          document.getElementById('hour'+matchId).innerHTML += '0' + date.getMinutes()
+        }
+        else{
+          document.getElementById('hour'+matchId).innerHTML += date.getMinutes()
+        }
+
+
+
+        document.getElementById('matchcity'+matchId).innerHTML += infos[i]['city']
+        document.getElementById('address'+matchId).innerHTML += infos[i]['stade_name'] + ',<br> ' + infos[i]['street']
+        document.getElementById('maxplayers'+matchId).innerHTML += infos[i]['nb_player_max']
+        document.getElementById('matchplayers'+matchId).innerHTML += infos[i]['nb_participants']
       }
-      else{
-        document.getElementById('hour'+i).innerHTML += date.getMinutes()
-      }
-
-
-
-      document.getElementById('matchcity'+i).innerHTML += infos[i]['city']
-      document.getElementById('address'+i).innerHTML += infos[i]['stade_name'] + ',<br> ' + infos[i]['street']
-      document.getElementById('maxplayers'+i).innerHTML += infos[i]['nb_player_max']
-      document.getElementById('matchplayers'+i).innerHTML += infos[i]['nb_participants']
     }
   }
 
   
 
-  
-
 }
+
+//------------------------------------------------------------------------------
+//--------------------------- Rate ---------------------------------------------
+//------------------------------------------------------------------------------
+
+  let star1 = document.getElementById('star1')
+  let star2 = document.getElementById('star2')
+  let star3 = document.getElementById('star3')
+  let star4 = document.getElementById('star4')
+  let star5 = document.getElementById('star5')
+
+  let token = getCookie('sportisen')
+  ajaxRequest('GET', `../php/searchRequest.php/user?accessToken=${token}`, function(infos){
+
+    let userId = infos[0]['id']
+
+    star1.onclick = function(){
+      // console.log(1)
+      $.ajax('../php/searchRequest.php/rate', {
+        method: 'PUT', data : {
+          rate: 1,
+          userid: userId
+        }
+      })
+    }
+    star2.onclick = function(){
+      // console.log(2)
+      $.ajax('../php/searchRequest.php/rate', {
+        method: 'PUT', data : {
+          rate: 2,
+          userid: userId
+        }
+      })
+    }
+    star3.onclick = function(){
+      // console.log(3)
+      $.ajax('../php/searchRequest.php/rate', {
+        method: 'PUT', data : {
+          rate: 3,
+          userid: userId
+        }
+      })
+    }
+    star4.onclick = function(){
+      // console.log(4)
+      $.ajax('../php/searchRequest.php/rate', {
+        method: 'PUT', data : {
+          rate: 4,
+          userid: userId
+        }
+      })
+    }
+    star5.onclick = function(){
+      // console.log(5)
+      $.ajax('../php/searchRequest.php/rate', {
+        method: 'PUT', data : {
+          rate: 5,
+          userid: userId
+        }
+      })
+    }
+
+    ajaxRequest('GET', `../php/searchRequest.php/rate?userid=${userId}`, function(infos){
+      // console.log(infos);
+      if(!infos){
+        // console.log('no rate')
+      }
+      else{
+        let rate = infos[0]['score']
+        let star = document.getElementById('star'+rate)
+        star.checked = true
+      }
+      
+    })
+
+  })
+
+  
 
 
 //------------------------------------------------------------------------------
@@ -131,13 +297,13 @@ let months = Array({
 })
 
 let days = Array({
-  '0' : 'Lundi',
-  '1' : 'Mardi',
-  '2' : 'Mercredi',
-  '3' : 'Jeudi',
-  '4' : 'Vendredi',
-  '5' : 'Samedi',
-  '6' : 'Dimanche'
+  '1' : 'Lundi',
+  '2' : 'Mardi',
+  '3' : 'Mercredi',
+  '4' : 'Jeudi',
+  '5' : 'Vendredi',
+  '6' : 'Samedi',
+  '0' : 'Dimanche'
 })
 
 
@@ -146,15 +312,15 @@ let days = Array({
 //--------------------------- Card Creation ------------------------------------
 //------------------------------------------------------------------------------
 
-function cardCreate(numCard){
+function cardCreate(idMatch){
 
-  let b = document.body
+  let area = document.getElementById('matchsArea');
 
   //creation container of card bloc
   let cont = document.createElement('div')
   cont.className = 'container'
 
-  b.append(cont)
+  area.append(cont)
 
 
   // creation card bloc + append to container
@@ -191,11 +357,11 @@ function cardCreate(numCard){
 
   //create match title row
   let matchTitle = document.createElement('h3')
-  matchTitle.id = 'matchTitle' + numCard
+  matchTitle.id = 'matchTitle' + idMatch
 
   //create match sport row
   let matchSport = document.createElement('h6')
-  matchSport.id = 'matchSport' + numCard
+  matchSport.id = 'matchSport' + idMatch
 
   titleGroup.append(matchTitle)
   titleGroup.append(matchSport)
@@ -228,21 +394,21 @@ function cardCreate(numCard){
   //hour item
   let hourItem = document.createElement('li')
   hourItem.className = 'align-items-center'
-  hourItem.id = 'hour' + numCard
+  hourItem.id = 'hour' + idMatch
   hourItem.style = 'padding: 10px'
   hourItem.textContent = 'Heure: '
 
   //city item
   let cityItem = document.createElement('li')
   cityItem.className = 'align-items-center'
-  cityItem.id = 'matchcity' + numCard
+  cityItem.id = 'matchcity' + idMatch
   cityItem.style = 'padding: 10px'
   cityItem.textContent = 'Ville: '
 
   //address item
   let addressItem = document.createElement('li')
   addressItem.className = 'align-items-center'
-  addressItem.id = 'address' + numCard
+  addressItem.id = 'address' + idMatch
   addressItem.style = 'padding: 10px'
   addressItem.textContent = 'Adresse: '
 
@@ -269,14 +435,14 @@ function cardCreate(numCard){
   //maxplayers item
   let maxPlayersItem = document.createElement('li')
   maxPlayersItem.className = 'align-items-center'
-  maxPlayersItem.id = 'maxplayers' + numCard
+  maxPlayersItem.id = 'maxplayers' + idMatch
   maxPlayersItem.style = 'padding: 10px'
   maxPlayersItem.textContent = 'Joueurs max: '
 
   //matchplayers item
   let matchPlayers = document.createElement('li')
   matchPlayers.className = 'align-items-center'
-  matchPlayers.id = 'matchplayers' + numCard
+  matchPlayers.id = 'matchplayers' + idMatch
   matchPlayers.style = 'padding: 10px'
   matchPlayers.textContent = 'Joueurs inscrits: '
 
@@ -292,15 +458,25 @@ function cardCreate(numCard){
   row2.append(blocBut)
 
   //create details button
-  let but = document.createElement('button')
-  but.className = 'btn'
-  but.id = 'detailBut' + numCard
-  but.style = 'background: rgba(0, 123, 12, 0.65);'
-  but.onclick = ''
-  but.textContent = 'Voir détail'
+  let detailsbut = document.createElement('button')
+  detailsbut.className = 'btn'
+  detailsbut.id = 'detailBut' + idMatch
+  detailsbut.style = 'background: rgba(0, 123, 12, 0.65);'
+  detailsbut.textContent = 'Voir détail'
+  detailsbut.setAttribute('onclick', 'details(this)')
 
-  blocBut.append(but)
+  blocBut.append(detailsbut)
+
+  //create register button
+  let registerbut = document.createElement('button')
+  registerbut.className = 'btn'
+  registerbut.id = 'registerBut' + idMatch
+  registerbut.style = 'background: rgba(245, 147, 0, 0.65); margin-left: 2em'
+  registerbut.textContent = 'S\'inscrire'
+  registerbut.setAttribute('onclick', 'register(this)')
+
+  blocBut.append(registerbut)
 
   let jumpCard = document.createElement('br')
-  b.append(jumpCard)
+  area.append(jumpCard)
 }

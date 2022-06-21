@@ -10,6 +10,96 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script type="module" src="../js/search.js"></script>
+    
+    <!-- script for onclick functions -->
+    <script>
+
+        function ajaxRequest(type, url, callback, data = null){
+            let xhr;
+
+            // Create XML HTTP request.
+            xhr = new XMLHttpRequest();
+            if (type == 'GET' && data != null)
+                url += '?' + data;
+            xhr.open(type, url);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+            // Add the onload function.
+            xhr.onload = () =>
+            {
+                switch (xhr.status)
+                {
+                case 200:
+                case 201:
+                    // console.log(xhr.responseText);
+                    callback(JSON.parse(xhr.responseText));
+                    break;
+                default:
+                    httpErrors(xhr.status);
+                }
+            };
+
+            // Send XML HTTP request.
+            xhr.send(data);
+        }
+
+        function getCookie(c_name) {
+            let c_start
+            let c_end
+            if (document.cookie.length > 0) {
+                c_start = document.cookie.indexOf(c_name + "=");
+                if (c_start != -1) {
+                    c_start = c_start + c_name.length + 1;
+                    c_end = document.cookie.indexOf(";", c_start);
+                    if (c_end == -1) {
+                        c_end = document.cookie.length;
+                    }
+                    return unescape(document.cookie.substring(c_start, c_end));
+                }
+            }
+            return "";
+        }
+
+        function register(elem){
+            var butid = elem.id
+            var matches = butid.match(/(\d+)/)
+            var matchId = matches[0]
+
+            let token = getCookie('sportisen')
+            ajaxRequest('GET', `../php/searchRequest.php/user?accessToken=${token}`, function(infos){
+
+                let userId = infos[0]['id']
+                $.ajax('../php/searchRequest.php/register', {
+                method: "POST", data: {
+                    matchid: matchId,
+                    userid: userId
+                },
+                success: function(data){
+                    if(!data){
+                    document.getElementById('success').style.display = 'none'
+                    document.getElementById('errors').style.display = 'block'
+                    }
+                    else{
+                    document.getElementById('errors').style.display = 'none'
+                    document.getElementById('success').style.display = 'block'
+                    }
+                    
+                }
+                })
+
+            })
+
+            
+        }
+
+        function details(elem){
+            var butid = elem.id
+            var matches = butid.match(/(\d+)/)
+            var matchId = matches[0]
+
+            document.location.href="details.html?matchid=" + matchId
+        }
+    </script>
 </head>
   <body>
     <!-- menu bootstrap -->
@@ -29,7 +119,7 @@
               <div class="dropcontent">
                 <a href="profile.html">Mon profil</a>
                 <a href="matchs.html">Mes matchs</a>
-                <a id="disconnect" href="#" onclick="//disconnect function"><i class="fa-solid fa-right-from-bracket"></i>Déconnexion</a>
+                <a id="disconnect" href="#"><i class="fa-solid fa-right-from-bracket"></i>Déconnexion</a>
               </div>
             </div> 
           </div>
@@ -39,7 +129,7 @@
   <div class="container" id="container">
     <form class="form-row">
         <div class="row">
-            <div class="col-lg-3 gy-2">
+            <div class="col-lg-2 gy-2">
                 <p>Appliquer des filtres: </p>
             </div>
             <div class="col-lg-2 gy-2">
@@ -48,7 +138,7 @@
                         <div class="input-group-text" style="height: 40px"><i class="fa-solid fa-location-dot" style="color:#007B0C;"></i></div>
                     </div>
                     <select type="text" class="form-select" id="city">
-                        <option value="default" selected>Ville</option>
+                        <option value="default" selected disabled>Ville</option>
                     </select>
                 </div>
             </div>
@@ -58,7 +148,7 @@
                         <div class="input-group-text" style="height: 40px"><i class="fa-solid fa-football" style="color:#007B0C;"></i></div>
                     </div>
                     <select type="text" class="form-select" id="sport">
-                        <option value="default" selected>Sport</option>
+                        <option value="default" selected disabled>Sport</option>
                     </select>
                 </div>
             </div>
@@ -68,10 +158,10 @@
                         <div class="input-group-text" style="height: 40px"><i class="fa-solid fa-calendar-days" style="color:#007B0C;"></i></div>
                     </div>
                     <select type="text" class="form-select" id="period">
-                        <option value="default" selected>Période</option>
-                        <option value="7days">+7 jours</option>
-                        <option value="15days">+15 jours</option>
-                        <option value="30days">+30 jours</option>
+                        <option value="default" selected disabled>Période</option>
+                        <option value="+7 day">+7 jours</option>
+                        <option value="+15 day">+15 jours</option>
+                        <option value="+30 day">+30 jours</option>
                     </select>
                 </div>
             </div>
@@ -80,11 +170,16 @@
                     <div class="input-group-prepend">
                         <div class="input-group-text" style="height: 40px"><i class="fa-solid fa-gauge-high" style="color:#007B0C;"></i></div>
                     </div>
-                    <select type="text" class="form-select" id="period">
-                        <option value="default" selected>Capacité</option>
+                    <select type="text" class="form-select" id="capacity">
+                        <option value="default" selected disabled>Capacité</option>
                         <option value="full">Complets</option>
                         <option value="notfull">Incomplets</option>
                     </select>
+                </div>
+            </div>
+            <div class="col-lg-2 gy-2">
+                <div class="input-group">
+                    <button class="btn" style="background: rgba(0, 123, 12, 0.65);" id="reset">Supprimer filtres</button>
                 </div>
             </div>
         </div> 
@@ -93,9 +188,53 @@
 
 <hr>
 
+<section id="errors" class="container alert alert-danger" style="display: none"><i class="fa-solid fa-circle-exclamation"></i> Vous êtes déjà inscrit!</section>
+<section id="success" class="container alert alert-success" style="display: none"><i class="fa-solid fa-circle-check"></i> Vous avez bien été inscrit!</section>
+
+
 <!-- matchs area -->
+<div id="matchsArea"></div>
+<section id="noresult" class="container alert alert-danger" style="display: none; text-align: center;"><i class="fa-solid fa-circle-exclamation"></i>Aucun résultat</section>
 
 
+
+<br><br><br><br><br><br><br><br><br><br><br>
+<footer>
+    <div class="row row-cols-5 py-5 my-5 border-top" style="background: rgba(0, 123, 12, 0.65);padding-bottom: -5px;">
+        
+        <div class="col" style="margin-left: 5em; margin-top:2em">
+            <h3>Sport'Isen</h3>
+            <div>2022</div>
+        </div>
     
+        <div class="col" style="margin-left: 10em; margin-right: 10em;">
+            <h5>Navigation</h5>
+            <ul class="flex-column">
+            <li class="nav-item mb-2"><a href="eventcreate.html" class="nav-link p-0 text-muted">Organiser événement</a></li>
+            <li class="nav-item mb-2"><a href="search.html" class="nav-link p-0 text-muted">Rechercher</a></li>
+            <li class="nav-item mb-2"><a href="profile.html" class="nav-link p-0 text-muted">Profil</a></li>
+            <li class="nav-item mb-2"><a href="match.html" class="nav-link p-0 text-muted">Mes matchs</a></li>
+            <li class="nav-item mb-2"><a href="notifs.html" class="nav-link p-0 text-muted">Notifications</a></li>
+            </ul>
+        </div>
+    
+        <div class="col">
+            <h5>Noter l'application</h5>
+            <!-- Source rating: https://codepen.io/hesguru/pen/BaybqXv -->
+            <div class="rate">
+                <input type="radio" id="star5" name="rate" value="5" />
+                <label for="star5" title="text">5 stars</label>
+                <input type="radio" id="star4" name="rate" value="4" />
+                <label for="star4" title="text">4 stars</label>
+                <input type="radio" id="star3" name="rate" value="3" />
+                <label for="star3" title="text">3 stars</label>
+                <input type="radio" id="star2" name="rate" value="2" />
+                <label for="star2" title="text">2 stars</label>
+                <input type="radio" id="star1" name="rate" value="1" />
+                <label for="star1" title="text">1 star</label>
+              </div>
+        </div>
+    </div>
+</footer>
 </body> 
 </html>
