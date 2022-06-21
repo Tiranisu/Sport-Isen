@@ -193,7 +193,7 @@ function getSports($conn){
 
 function getCities($conn){
     try{
-        $request = 'SELECT a.id, a.city FROM address a, matchs m WHERE m.address_id = a.id';
+        $request = 'SELECT a.id, a.postal_code, a.city FROM address a, matchs m WHERE m.address_id = a.id';
         $statement = $conn->prepare($request);
         $statement->execute();
         return $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -218,7 +218,7 @@ function getMatchs($conn){
 
 function getMatchsFromId($conn, $matchid){
     try{
-        $request = 'SELECT m.id, m.name, m.organization_id, s.name as sport_name, a.name as stade_name, a.street, a.city, m.nb_player_min, m.nb_player_max, m.date_time, m.duration, m.price, (SELECT count(*) as nb_participants FROM participant WHERE status=1 ) FROM matchs m, sports s, address a WHERE m.sport_id=s.id AND m.address_id=a.id AND m.id = :matchid';
+        $request = 'SELECT m.id, m.name, m.organization_id, s.name as sport_name, a.name as stade_name, a.street, a.city, m.nb_player_min, m.nb_player_max, m.date_time, m.duration, m.price, (SELECT count(*) as nb_participants FROM participant WHERE status=1 AND match_id=:matchid ) FROM matchs m, sports s, address a WHERE m.sport_id=s.id AND m.address_id=a.id AND m.id = :matchid';
         $statement = $conn->prepare($request);
         $statement->bindParam(':matchid', $matchid);
         $statement->execute();
@@ -287,7 +287,7 @@ function sportFilter($conn, $sportId){
 function timeFilter($conn, $time){
 
     $actualDate = date('Y-m-d H:i');
-    $timeDiff = date('Y-m-d H:i', strtotime('+' . $time . ' day', strtotime($actualDate)));
+    $timeDiff = date('Y-m-d H:i', strtotime($time, strtotime($actualDate)));
 
     try{
         $request = 'SELECT m.id, m.name, s.name as sport_name, a.name as stade_name, a.street, a.city, m.nb_player_min, m.nb_player_max, m.date_time, m.duration, m.price, (SELECT count(*) as nb_participants FROM participant WHERE status=1 ) FROM matchs m, sports s, address a WHERE m.sport_id=s.id AND m.address_id=a.id AND date_time <= :time';
@@ -523,13 +523,13 @@ function returnAddressId($conn, $address, $city, $postalcode){
 }
 
 
-function createMatch($conn, $userId, $name, $sportId, $addressId, $minplayers, $maxplayers, $date, $duration, $price){
+function createMatch($conn, $orgId, $name, $sportId, $addressId, $minplayers, $maxplayers, $date, $duration, $price){
 
     try{
-        $request = 'INSERT INTO matchs(name, score, organization_id, sport_id, address_id, nb_player_min, nb_player_max, date_time, duration, price, best_player_id) VALUES(:name, NULL, :orgid, :sportid, :addressid, :minplayers, :maxplayers, :eventdate, :duration, :price, NULL)';
+        $request = 'INSERT INTO matchs(name, score, organization_id, sport_id, address_id, nb_player_min, nb_player_max, date_time, duration, price, best_player_id) VALUES(:matchname, NULL, :orgid, :sportid, :addressid, :minplayers, :maxplayers, :eventdate, :duration, :price, NULL)';
 
         $statement = $conn->prepare($request);
-        $statement->bindParam(':name', $name);
+        $statement->bindParam(':matchname', $name);
         $statement->bindParam(':orgid', $orgId);
         $statement->bindParam(':sportid', $sportId);
         $statement->bindParam(':addressid', $addressId);
@@ -540,6 +540,7 @@ function createMatch($conn, $userId, $name, $sportId, $addressId, $minplayers, $
         $statement->bindParam(':price', $price);
         $statement->execute();
         return true;
+        
     }
     catch(PDOException $e){
         return false;

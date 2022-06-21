@@ -35,9 +35,10 @@ require_once('../resources/database.php');
 
 
         $sportId = returnSportId($db, $_POST['event_sport']);
-        $addressId = returnAddressId($db, $_POST['event_address'], $_POST['event_city'], intval($_POST['event_postalcode']));
+        $addressId = returnAddressId($db, $_POST['event_address'], $_POST['event_city'], $_POST['event_postalcode']);
         
-        $data = createMatch($db, intval($_POST['event_orga']), $_POST['event_name'], $sportId, $addressId, intval($_POST['event_minplayers']), intval($_POST['event_maxplayers']), $_POST['event_date'], $_POST['event_duration'], intval($_POST['event_price']));
+        createMatch($db, $_POST['event_orga'], $_POST['event_name'], $sportId['id'], $addressId['id'], $_POST['event_minplayers'], $_POST['event_maxplayers'], $_POST['event_date'], $_POST['event_duration'], $_POST['event_price']);
+        
         
         break;
     }

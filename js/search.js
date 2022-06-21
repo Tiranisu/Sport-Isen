@@ -35,12 +35,12 @@ function distribution(infos){
 
 ajaxRequest('GET', `../php/searchRequest.php/cities`, addCities)
 
-function addCities(infos){
+function addCities(infos){  
     var selCities = document.getElementById('city')
     for(let i = 0; i < infos.length; i++){
       var option = document.createElement("option")
       option.value = infos[i]['id']
-      option.text = infos[i]['city']
+      option.text = infos[i]['city'] + ' - ' + infos[i]['postal_code']
       selCities.add(option)
     }
 }
@@ -161,14 +161,14 @@ function displaySports(infos){
     for(let i=0; i<infos.length; i++){
       const date = new Date(infos[i]['date_time'])
 
-      console.log(infos[i])
+      // console.log(infos[i])
       const matchId = infos[i]['id']
       // console.log(infos[i]['id'])
 
       cardCreate(matchId)
       
-      console.log(date)
-      console.log(currentDate)
+      // console.log(date)
+      // console.log(currentDate)
 
       if(date > Date.now()){
         document.getElementById('matchTitle'+matchId).innerHTML = infos[i]['name'] + " | " + days[0][date.getDay()] + ' ' + date.getDate() + ' ' + months[0][date.getMonth()] + ' ' + date.getFullYear()
@@ -213,7 +213,7 @@ function displaySports(infos){
     let userId = infos[0]['id']
 
     star1.onclick = function(){
-      console.log(1)
+      // console.log(1)
       $.ajax('../php/searchRequest.php/rate', {
         method: 'PUT', data : {
           rate: 1,
@@ -222,7 +222,7 @@ function displaySports(infos){
       })
     }
     star2.onclick = function(){
-      console.log(2)
+      // console.log(2)
       $.ajax('../php/searchRequest.php/rate', {
         method: 'PUT', data : {
           rate: 2,
@@ -231,7 +231,7 @@ function displaySports(infos){
       })
     }
     star3.onclick = function(){
-      console.log(3)
+      // console.log(3)
       $.ajax('../php/searchRequest.php/rate', {
         method: 'PUT', data : {
           rate: 3,
@@ -240,7 +240,7 @@ function displaySports(infos){
       })
     }
     star4.onclick = function(){
-      console.log(4)
+      // console.log(4)
       $.ajax('../php/searchRequest.php/rate', {
         method: 'PUT', data : {
           rate: 4,
@@ -249,7 +249,7 @@ function displaySports(infos){
       })
     }
     star5.onclick = function(){
-      console.log(5)
+      // console.log(5)
       $.ajax('../php/searchRequest.php/rate', {
         method: 'PUT', data : {
           rate: 5,
@@ -259,9 +259,9 @@ function displaySports(infos){
     }
 
     ajaxRequest('GET', `../php/searchRequest.php/rate?userid=${userId}`, function(infos){
-      console.log(infos);
+      // console.log(infos);
       if(!infos){
-        console.log('no rate')
+        // console.log('no rate')
       }
       else{
         let rate = infos[0]['score']
@@ -297,13 +297,13 @@ let months = Array({
 })
 
 let days = Array({
-  '0' : 'Lundi',
-  '1' : 'Mardi',
-  '2' : 'Mercredi',
-  '3' : 'Jeudi',
-  '4' : 'Vendredi',
-  '5' : 'Samedi',
-  '6' : 'Dimanche'
+  '1' : 'Lundi',
+  '2' : 'Mardi',
+  '3' : 'Mercredi',
+  '4' : 'Jeudi',
+  '5' : 'Vendredi',
+  '6' : 'Samedi',
+  '0' : 'Dimanche'
 })
 
 
