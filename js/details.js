@@ -278,4 +278,3 @@ ajaxRequest('GET', `../php/searchRequest.php/user?accessToken=${token}`, functio
 function printMap(street){
   $("#map").append('<iframe width="100%" height="450" style="border:0" loading="lazy" allowfullscreen src="https://www.google.com/maps/embed/v1/place?q='+ street +'&key=AIzaSyCf4jTFkGlmjrGWUeDfARv7KUnoZvDGJyQ"></iframe>');
 }
-$('map').iframeAutoHeight({debug: true});
