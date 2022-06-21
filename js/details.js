@@ -70,6 +70,8 @@ function displayInfos(infos){
         document.getElementById('orga').innerHTML += data[0]['firstname'] + ' ' + data[0]['lastname']
     })
 
+    printMap(infos[0]['stade_name'] + ', ' + infos[0]['street'])
+    
 }
 
 
@@ -269,3 +271,11 @@ ajaxRequest('GET', `../php/searchRequest.php/user?accessToken=${token}`, functio
   })
 
 })
+
+/**
+ * Print Map
+ */
+function printMap(street){
+  $("#map").append('<iframe width="100%" height="450" style="border:0" loading="lazy" allowfullscreen src="https://www.google.com/maps/embed/v1/place?q='+ street +'&key=AIzaSyCf4jTFkGlmjrGWUeDfARv7KUnoZvDGJyQ"></iframe>');
+}
+$('map').iframeAutoHeight({debug: true});
