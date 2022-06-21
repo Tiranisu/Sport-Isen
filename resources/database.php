@@ -386,6 +386,46 @@ function checkRegister($conn, $matchId, $userId){
     }
 }
 
+function getRateOfUser($conn, $userId){
+    try{
+        $request = 'SELECT * FROM score_app WHERE user_id=:userid';
+
+        $statement = $conn->prepare($request);
+        $statement->bindParam(':userid', $userId);
+        $statement->execute();
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+        if($result){
+            return $result;
+        }
+        else{
+            return false;
+        }
+    }
+    catch(PDOException $e){
+        return false;
+    }
+}
+
+
+function rateApp($conn, $userId, $rate){
+    try{
+        if(!getRateOfUser($conn, $userId)){
+            $request = 'INSERT INTO score_app(user_id, score) VALUES (:userid, :rate)';
+        }
+        else{
+            $request = 'UPDATE score_app SET score=:rate WHERE user_id=:userid';
+        }
+        $statement = $conn->prepare($request);
+        $statement->bindParam(':rate', $rate);
+        $statement->bindParam(':userid', $userId);
+        $statement->execute();
+        return true;
+    }
+    catch(PDOException $e){
+        return false;
+    }
+}
+
 
 function update_user(){
 

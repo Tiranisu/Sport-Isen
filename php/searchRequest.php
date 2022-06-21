@@ -97,6 +97,7 @@ require_once('../resources/database.php');
         if(isset($_GET['orgid'])){
           $data = getOrganizator($db, $_GET['orgid']);
         }
+        break;
         
     }
   }
@@ -108,6 +109,7 @@ require_once('../resources/database.php');
         if(isset($_GET['matchid'])){
           $data = getPlayers($db, $_GET['matchid']);
         }
+        break;
         
     }
   }
@@ -121,6 +123,32 @@ require_once('../resources/database.php');
         if($result){
           $data = true;
         }
+        break;
+    }
+  }
+
+  if($requestRessource == 'rate'){
+    $data = false;
+    
+    switch($requestMethod){
+      case 'GET':
+        if(isset($_GET['userid'])){
+          $data = getRateOfUser($db, $_GET['userid']);
+        }
+        break;
+
+
+      case 'PUT':
+        
+        parse_str(file_get_contents('php://input'), $_PUT);
+        if(isset($_PUT['userid']) && isset($_PUT['rate'])){
+          echo 'test';
+          $result = rateApp($db, $_PUT['userid'], $_PUT['rate']);
+          if($result){
+            $data = true;
+          }
+        }
+        break;        
     }
   }
 

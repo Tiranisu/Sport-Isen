@@ -151,44 +151,129 @@ $('reset').on('click', () => {
 //display matchs card
 function displaySports(infos){
 
-  const currentDate = new Date(Date.now())
+  if(!infos){
+    document.getElementById('noresult').style.display = 'block'
+  }
+  else{
+    document.getElementById('noresult').style.display = 'none'
+    const currentDate = new Date(Date.now())
 
-  for(let i=0; i<infos.length; i++){
-    const date = new Date(infos[i]['date_time'])
+    for(let i=0; i<infos.length; i++){
+      const date = new Date(infos[i]['date_time'])
 
-    console.log(infos[i])
-    const matchId = infos[i]['id']
-    // console.log(infos[i]['id'])
+      console.log(infos[i])
+      const matchId = infos[i]['id']
+      // console.log(infos[i]['id'])
 
-    cardCreate(matchId)
-    
-    console.log(date)
-    console.log(currentDate)
+      cardCreate(matchId)
+      
+      console.log(date)
+      console.log(currentDate)
 
-    if(date > Date.now()){
-      document.getElementById('matchTitle'+matchId).innerHTML = infos[i]['name'] + " | " + days[0][date.getDay()] + ' ' + date.getDate() + ' ' + months[0][date.getMonth()] + ' ' + date.getFullYear()
-      document.getElementById('matchSport'+matchId).innerHTML = infos[i]['sport_name']
-      document.getElementById('hour'+matchId).innerHTML += date.getHours() + ':'
+      if(date > Date.now()){
+        document.getElementById('matchTitle'+matchId).innerHTML = infos[i]['name'] + " | " + days[0][date.getDay()] + ' ' + date.getDate() + ' ' + months[0][date.getMonth()] + ' ' + date.getFullYear()
+        document.getElementById('matchSport'+matchId).innerHTML = infos[i]['sport_name']
+        document.getElementById('hour'+matchId).innerHTML += date.getHours() + ':'
 
-      //display minutes format :mm
-      if(date.getMinutes()<10){
-        document.getElementById('hour'+matchId).innerHTML += '0' + date.getMinutes()
+        //display minutes format :mm
+        if(date.getMinutes()<10){
+          document.getElementById('hour'+matchId).innerHTML += '0' + date.getMinutes()
+        }
+        else{
+          document.getElementById('hour'+matchId).innerHTML += date.getMinutes()
+        }
+
+
+
+        document.getElementById('matchcity'+matchId).innerHTML += infos[i]['city']
+        document.getElementById('address'+matchId).innerHTML += infos[i]['stade_name'] + ',<br> ' + infos[i]['street']
+        document.getElementById('maxplayers'+matchId).innerHTML += infos[i]['nb_player_max']
+        document.getElementById('matchplayers'+matchId).innerHTML += infos[i]['nb_participants']
       }
-      else{
-        document.getElementById('hour'+matchId).innerHTML += date.getMinutes()
-      }
-
-
-
-      document.getElementById('matchcity'+matchId).innerHTML += infos[i]['city']
-      document.getElementById('address'+matchId).innerHTML += infos[i]['stade_name'] + ',<br> ' + infos[i]['street']
-      document.getElementById('maxplayers'+matchId).innerHTML += infos[i]['nb_player_max']
-      document.getElementById('matchplayers'+matchId).innerHTML += infos[i]['nb_participants']
     }
   }
 
+  
+
 }
 
+//------------------------------------------------------------------------------
+//--------------------------- Rate ---------------------------------------------
+//------------------------------------------------------------------------------
+
+  let star1 = document.getElementById('star1')
+  let star2 = document.getElementById('star2')
+  let star3 = document.getElementById('star3')
+  let star4 = document.getElementById('star4')
+  let star5 = document.getElementById('star5')
+
+  let token = getCookie('sportisen')
+  ajaxRequest('GET', `../php/searchRequest.php/user?accessToken=${token}`, function(infos){
+
+    let userId = infos[0]['id']
+
+    star1.onclick = function(){
+      console.log(1)
+      $.ajax('../php/searchRequest.php/rate', {
+        method: 'PUT', data : {
+          rate: 1,
+          userid: userId
+        }
+      })
+    }
+    star2.onclick = function(){
+      console.log(2)
+      $.ajax('../php/searchRequest.php/rate', {
+        method: 'PUT', data : {
+          rate: 2,
+          userid: userId
+        }
+      })
+    }
+    star3.onclick = function(){
+      console.log(3)
+      $.ajax('../php/searchRequest.php/rate', {
+        method: 'PUT', data : {
+          rate: 3,
+          userid: userId
+        }
+      })
+    }
+    star4.onclick = function(){
+      console.log(4)
+      $.ajax('../php/searchRequest.php/rate', {
+        method: 'PUT', data : {
+          rate: 4,
+          userid: userId
+        }
+      })
+    }
+    star5.onclick = function(){
+      console.log(5)
+      $.ajax('../php/searchRequest.php/rate', {
+        method: 'PUT', data : {
+          rate: 5,
+          userid: userId
+        }
+      })
+    }
+
+    ajaxRequest('GET', `../php/searchRequest.php/rate?userid=${userId}`, function(infos){
+      console.log(infos);
+      if(!infos){
+        console.log('no rate')
+      }
+      else{
+        let rate = infos[0]['score']
+        let star = document.getElementById('star'+rate)
+        star.checked = true
+      }
+      
+    })
+
+  })
+
+  
 
 
 //------------------------------------------------------------------------------
