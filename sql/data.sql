@@ -30,15 +30,15 @@ INSERT INTO address (name, street, city, postal_code) VALUES
 
 
 -- --- Populate address table for users ------------
-INSERT INTO address (city, postal_code) VALUES
-('Sainte-Luce-sur-Loire', 44980),
-('Carquefou', 44470);
+-- INSERT INTO address (city, postal_code) VALUES
+-- ('Sainte-Luce-sur-Loire', 44980),
+-- ('Carquefou', 44470);
 
 -- --- Populate users table ------------
 ALTER SEQUENCE users_id_seq RESTART;
 INSERT INTO users (firstname, lastname, age, email, password, nb_match, fitness_id, address_id) VALUES
-('Mark', 'Couty', 35, 'mc@test.fr', '1234', 4, 3, 5),
-('Robert', 'Pater', 75, 'rp@test.fr', '1234', 5, 2, 4);
+('Mark', 'Couty', 35, 'mc@test.fr', '1234', 4, 3, 1),
+('Robert', 'Pater', 75, 'rp@test.fr', '1234', 5, 2, 2);
 
 -- --- Populate notifications table ------------
 ALTER SEQUENCE notifications_id_seq RESTART;

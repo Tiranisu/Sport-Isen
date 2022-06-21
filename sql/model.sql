@@ -32,7 +32,7 @@ CREATE TABLE address (
     name         VARCHAR(50), -- name of the place
     street       VARCHAR(50),
     city         VARCHAR(50) NOT NULL,
-    postal_code  NUMERIC(5,0) NOT NULL
+    postal_code  NUMERIC(5,0)
 );
 
 ------------------------------------------------------------
