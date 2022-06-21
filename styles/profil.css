@@ -1,0 +1,37 @@
+#modificationBt{
+    background-color: #F59300;
+    width: 120px;
+    height: 30px;
+    border-radius: 5px;
+    border: none;
+    color: white;
+    font-weight:bold;
+}
+
+#saveBt{
+    background-color: #29f500;
+    width: 120px;
+    height: 30px;
+    border-radius: 5px;
+    border: none;
+    color: white;
+    font-weight:bold;
+}
+
+#cancelBt{
+    background-color: #f51d00;
+    width: 120px;
+    height: 30px;
+    border-radius: 5px;
+    border: none;
+    color: white;
+    font-weight:bold;
+}
+
+#modificationBt:hover, #saveBt:hover, #cancelBt:hover{
+    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.349);
+}
+
+#modificationBt:active, #saveBt:active, #cancelBt:active{
+    box-shadow: inset 0px 5px 5px rgba(0, 0, 0, 0.12);
+}

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>' Nom user'</title>
     <link href="../styles/search.css" rel="stylesheet">
+    <link href="../styles/profil.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
@@ -41,36 +42,59 @@
         <!-- Profil user -->
         
         <div id="matchCard">
-            <div class="card" style="border-radius: 10px; background: rgba(235, 235, 235, 0.5);">
+            <div class="card" style="border-radius: 10px; background: #ffff;">
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-12" style="background-color: rgb(201, 201, 201); height: auto; border-radius: 10px;">
-                            <h3 id="userName"></h3>
+                            <p><i class="fa-solid fa-user"></i><h3 id="userName"></h3></p>
                         </div>
                     </div>
                 </div>
                 <br>
-                <div class="row" style="margin-left: 7em;">
-                    <div class="col-lg-3 gy-2">
-                        <ul>
-                            <li class="align-items-center" id="hour0" style="padding: 10px;">Heure: 10:00</li>
-                            <li class="align-items-center" id="matchcity0" style="padding: 10px;">
-                                Ville: Carquefou
-                            </li>
-                            <li class="align-items-center" id="address0" style="padding: 10px;">
-                                Adresse: Stade du Moulin Boisseau,<br> Rue du Moulin Boisseau
-                            </li>
-                        </ul>
+                <div class="row" style="margin-left: 2em; margin-right: 2em;">
+                    <div class="input-group-text lock" style="height: 50px"><i class="fa-regular fa-user" style="color:#007B0C;"></i>
+                        <p style="margin-top: 1em; margin-left: 0.5em;"> Prenom : <input type="text" id="firstname"></p>
                     </div>
-                    <div class="col-lg-3 gy-2" style="margin-left: 10em;">
-                        <ul>
-                            <li class="align-items-center" id="maxplayers0" style="padding: 10px;">Joueurs max: 10</li>
-                            <li class="align-items-center" id="matchplayers0" style="padding: 10px;">Joueurs inscrits: 1</li>
-                        </ul>
+                    <p></p>
+                    <div class="input-group-text lock" style="height: 50px"><i class="fa-regular fa-user" style="color:#007B0C;"></i>
+                        <p style="margin-top: 1em; margin-left: 0.5em;"> Nom : <input type="text" id="lastname"></p>
                     </div>
-                    <div class="col-lg-3" style="margin-left: 7em; margin-top: 6.5em;">
-                        <button class="btn" id="detailBut0" style="background: rgba(0, 123, 12, 0.65);">Voir détail</button>
+                    <p></p>
+                    <div class="input-group-text lock" style="height: 50px"><i class="fa-solid fa-at" style="color:#007B0C;"></i>
+                        <p style="margin-top: 1em; margin-left: 0.5em;"> Email : <input type="email" id="email"></p>
                     </div>
+                    <p></p>
+                    <div class="input-group-text" style="height: 50px"><i class="fa-solid fa-key" style="color:#007B0C;"></i>
+                        <p style="margin-top: 1em; margin-left: 0.5em;"> Mot de passe : <input type="password" id="password"></p>
+                    </div>
+                    <p></p>
+                    <div class="input-group-text lock" style="height: 50px"><i class="fa-solid fa-calendar-days" style="color:#007B0C;"></i>
+                        <p style="margin-top: 1em; margin-left: 0.5em;"> Age : <input type="text" id="age"></p>
+                    </div>
+                    <p></p>
+                    <div class="input-group-text" style="height: 50px"><i class="fa-solid fa-city" style="color:#007B0C;"></i>
+                        <p style="margin-top: 1em; margin-left: 0.5em;"> Ville : <input type="text" id="city"></p>
+                    </div>
+                    <p></p>
+                    <div class="input-group-text" style="height: 50px"><i class="fa-solid fa-city" style="color:#007B0C;"></i>
+                        <p style="margin-top: 1em; margin-left: 0.5em;"> Code postal : <input type="text" id="postalCode"></p>
+                    </div>
+                    <p></p>
+                    <div class="input-group-text" style="height: 50px"><i class="fa-solid fa-dumbbell" style="color:#007B0C;"></i>
+                        <p style="margin-top: 1em; margin-left: 0.5em;"> 
+                            Forme physique : 
+                            <select type="text" id="fitness">
+                            </select>
+
+                        </p>
+                    </div>
+                    <p></p>
+                    <div class="input-group-text" style="height: 50px"><i class="fa-solid fa-file-image" style="color:#007B0C;"></i>
+                        <p style="margin-top: 1em; margin-left: 0.5em;"> Image profile   : <input type="text" id="profilPicture"></p>
+                    </div>
+                    <p></p>
+                    <button id="modificationBt">Modifier</button>       
+                    <p><button id="saveBt">Sauvegarder</button>   <button id="cancelBt">Annuler</button></p>
                 </div>
             </div>
         </div>
@@ -83,36 +107,23 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-12" style="background-color: rgb(201, 201, 201); height: auto; border-radius: 10px;">
-                            <h3 id="matchTitle0">Football U8 | Vendredi 15 Septembre 2022</h3>
-                            <h6 id="matchSport0">Football</h6>
+                            <div class="input-group-text" style="height: 40px"><i class="fa-solid fa-trophy" style="color:#007B0C;"></i></div>
+                            <h3 id="matchTitle0">Statistiques de jeu</h3>
                         </div>
                     </div>
                 </div>
                 <br>
-                <div class="row" style="margin-left: 7em;">
-                    <div class="col-lg-3 gy-2">
-                        <ul>
-                            <li class="align-items-center" id="hour0" style="padding: 10px;">Heure: 10:00</li>
-                            <li class="align-items-center" id="matchcity0" style="padding: 10px;">
-                                Ville: Carquefou
-                            </li>
-                            <li class="align-items-center" id="address0" style="padding: 10px;">
-                                Adresse: Stade du Moulin Boisseau,<br> Rue du Moulin Boisseau
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col-lg-3 gy-2" style="margin-left: 10em;">
-                        <ul>
-                            <li class="align-items-center" id="maxplayers0" style="padding: 10px;">Joueurs max: 10</li>
-                            <li class="align-items-center" id="matchplayers0" style="padding: 10px;">Joueurs inscrits: 1</li>
-                        </ul>
-                    </div>
-                    <div class="col-lg-3" style="margin-left: 7em; margin-top: 6.5em;">
-                        <button class="btn" id="detailBut0" style="background: rgba(0, 123, 12, 0.65);">Voir détail</button>
+                <div class="row" style="margin-left: 2em; margin-right: 2em;">
+                    <div class="input-group-text lock" style="height: 50px"><i class="fa-solid fa-award" style="color:#007B0C;"></i>
+                        <p style="margin-top: 1em; margin-left: 0.5em;"> Nombre de matchs joués : <p id="nbMatch" style="margin-top: 1em; margin-left: 1em;"></p></p>
                     </div>
                 </div>
             </div>
+            
         </div>
     </div>
+    <br>
+    <br>
+    <br>
 </body> 
 </html>

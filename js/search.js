@@ -1,7 +1,5 @@
 import {ajaxRequest, getCookie, disconnect, dynPage, displayImage} from './tool.js';
 
-let userId
-
 $(() => {
   console.log(getCookie('sportisen'))
   let accessToken = getCookie('sportisen')

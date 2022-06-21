@@ -236,11 +236,108 @@ function cityFilter($conn, $cityId){
     }
 }
 
-
-
-
-function update_user(){
-
+function getCityById($conn, $userId){
+    try{
+        $request = 'SELECT a.city, a.postal_code FROM address a INNER JOIN users u ON u.address_id = a.id WHERE u.id = :id;';
+        $statement = $conn->prepare($request);
+        $statement->bindParam(':id', $userId);
+        $statement->execute();
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
+    catch(PDOException $e){
+        return false;
+    }
 }
+
+function getFitnessById($conn, $userId){
+    try{
+        $request = 'SELECT f.type FROM fitness f INNER JOIN users u ON u.fitness_id = f.id WHERE u.id = :id;';
+        $statement = $conn->prepare($request);
+        $statement->bindParam(':id', $userId);
+        $statement->execute();
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
+    catch(PDOException $e){
+        return false;
+    }
+}
+
+function returnFitnessId($conn, $name){
+    try{
+        $request = 'SELECT id FROM fitness WHERE type = :name';
+        $statement = $conn->prepare($request);
+        $statement->bindParam(':name', $name);
+        $statement->execute();
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+        return $result['id'];
+    }
+    catch(PDOException $e){
+        return false;
+    }
+}
+
+function getFitness($conn){
+    try{
+        $request = 'SELECT * FROM fitness';
+        $statement = $conn->prepare($request);
+        $statement->execute();
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
+    catch(PDOException $e){
+        return false;
+    }
+}
+
+function updateUser($conn, $firstname, $lastname, $email, $password,  $age, $cityId, $fitness, $accessToken, $img = NULL){
+    try{
+        $fitnessId = returnFitnessId($conn, $fitness);
+        echo $fitnessId;
+        $request = 'UPDATE users SET firstname = :firstname, lastname = :lastname, email = :email, password = :password, age = :age, address_id = :cityId, fitness_id = :fitnessId, link_image = :img WHERE access_token = :accessToken';
+
+        $statement = $conn->prepare($request);
+        $statement->bindParam(':firstname', $firstname);
+        $statement->bindParam(':lastname', $lastname);
+        $statement->bindParam(':email', $email);
+        $statement->bindParam(':password', $password);
+        $statement->bindParam(':age', $age);
+        $statement->bindParam(':cityId', $cityId);
+        $statement->bindParam(':fitnessId', $fitnessId);
+        $statement->bindParam(':img', $img);
+        $statement->bindParam(':accessToken', $accessToken);
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+        $statement->execute(); 
+        echo "wow";
+        return true;
+    }
+    catch(PDOException $e){
+        echo "test";
+        return $e;
+    }         
+}
+
+// function updateUser($conn, $firstname, $lastname, $email, $password,  $age, $cityId, $fitness, $accessToken, $img = NULL){
+//     try{
+//         $fitnessId = returnFitnessId($conn, $fitness);
+//         $request = 'UPDATE users SET firstname = :firstname, lastname = :lastname, email = :email, password = :password, age = :age, address_id = :cityId, fitness_id = fitnessId, link_image = :img WHERE access_token = :accessToken';
+
+//         $statement = $conn->prepare($request);
+//         $statement->bindParam(':firstname', $firstname);
+//         $statement->bindParam(':lastname', $lastname);
+//         $statement->bindParam(':email', $email);
+//         $statement->bindParam(':password', $password);
+//         $statement->bindParam(':age', $age);
+//         $statement->bindParam(':cityId', $cityId);
+//         $statement->bindParam(':fitnessId', $fitnessId);
+//         $statement->bindParam(':img', $img);
+//         $statement->bindParam(':accessToken', $accessToken);
+//         $statement->execute(); 
+//         return true;
+//     }
+//     catch(PDOException $e){
+//         return $e;
+//     }         
+// }
+
+
 
 ?>
