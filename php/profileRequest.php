@@ -49,23 +49,7 @@ switch($requestMethod){
       if(isset($_GET['id'])){
         $data = getFitnessById($db, $_GET['id']);
       }
-    }
-
-    // if ($requestRessource == "updateUser"){
-    //   $data = 'done';
-    //   $checkCities = checkCity($db, $_GET['city']);
-    //   if(!$checkCity['city_exist']){
-    //     addCity($db, $_GET['city']);
-    //   }
-    //   $addressIds = returnCityId($db, $_GET['city']);
-
-    //   if(isset($_GET['profilePicture'])){
-    //     updateUser($db,$_GET['firstname'],$_GET['lastname'],$_GET['email'],$_GET['password'],$_GET['age'], $addressIds['id'], $_GET['fitness'], $_GET['accessToken'], $_GET['profilePicture']);
-    //   }else{
-    //     updateUser($db,$_GET['firstname'],$_GET['lastname'],$_GET['email'],$_GET['password'],$_GET['age'], $addressIds['id'], $_GET['fitness'], $_GET['accessToken']);
-    //   }
-    //   $data = 'done!';
-  
+    }  
 
   break;
 
@@ -89,15 +73,6 @@ switch($requestMethod){
       }
       echo "end";
     }
-
-
-    // if ($requestRessource == "updateUser2"){
-    //   parse_str(file_get_contents('php://input'), $_PUT);
-    //   // echo $_PUT['age'];
-    //   $data = update_user($db, intval($_PUT['age']),  $_PUT['accessToken']);
-    //   // die();
-    // }
-
   break;
 }
 

@@ -137,6 +137,6 @@ $("#saveBt").click(function(){
       document.getElementById('cancelBt').style.display = 'none'
       inputLock();
 
-  document.getElementById("fitness").options.length = 0; // delete all the option in the select
-  ajaxRequest('GET', `../php/profileRequest.php/accessToken?accessToken=${accessToken}`, distribution)
+  // document.getElementById("fitness").options.length = 0; // delete all the option in the select
+  // ajaxRequest('GET', `../php/profileRequest.php/accessToken?accessToken=${accessToken}`, distribution)
 })
