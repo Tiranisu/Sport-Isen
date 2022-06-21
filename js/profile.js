@@ -41,7 +41,6 @@ function distribution(infos){
     data:{ id: infos[0]['id']}
     }).done((data) => {
       document.getElementById('city').value = data[0]['city']
-      document.getElementById('postalCode').value = data[0]['postal_code']
   })
 
   var fitnessSelect
@@ -125,18 +124,18 @@ $("#saveBt").click(function(){
       password: document.getElementById('password').value,
       age: document.getElementById('age').value,
       city: document.getElementById('city').value,
-      postalCode: document.getElementById('postalCode').value,
       fitness: document.getElementById('fitness').value,
       profilPicture: document.getElementById('profilePicture').value,
       accessToken: accessToken
     }
     }).done((data) => { })
-      console.log("Saved !")
+      console.log("Saved ! : ")
       document.getElementById('modificationBt').style.display = 'block'
       document.getElementById('saveBt').style.display = 'none'
       document.getElementById('cancelBt').style.display = 'none'
       inputLock();
-
-  // document.getElementById("fitness").options.length = 0; // delete all the option in the select
-  // ajaxRequest('GET', `../php/profileRequest.php/accessToken?accessToken=${accessToken}`, distribution)
+      document.getElementById("fitness").options.length = 0; // delete all the option in the select
+      ajaxRequest('GET', `../php/profileRequest.php/accessToken?accessToken=${accessToken}`, distribution)
+    
+      
 })

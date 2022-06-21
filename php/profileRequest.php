@@ -58,12 +58,14 @@ switch($requestMethod){
       parse_str(file_get_contents('php://input'), $_PUT);
       $checkCities = checkCity($db, $_PUT['city']);
       foreach($checkCities as $checkCity){
+        echo $checkCity['city_exist'];
         if(!$checkCity['city_exist']){
           addCity($db, $_PUT['city']);
         }
       }
       
       $addressIds = returnCityId($db, $_PUT['city']);
+      print_r($addressIds);
       foreach($addressIds as $addressId){
         if(isset($_PUT['profilePicture'])){
           $data = updateUser($db, $_PUT['firstname'], $_PUT['lastname'], $_PUT['email'], $_PUT['password'], intval($_PUT['age']), $addressId['id'], $_PUT['fitness'], $_PUT['accessToken'], $_PUT['profilePicture']);

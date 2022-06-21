@@ -113,8 +113,7 @@ function checkCity($conn, $city){
 
 function addCity($conn, $city){
     try{
-        $request = 'INSERT INTO address (name, street, city, postal_code) VALUES (NULL, NULL, :city, NULL)';
-
+        $request = 'INSERT INTO address (city) VALUES (:city)';
         $statement = $conn->prepare($request);
         $statement->bindParam(':city', $city);
         $statement->execute();
@@ -598,7 +597,6 @@ function getFitness($conn){
 function updateUser($conn, $firstname, $lastname, $email, $password,  $age, $cityId, $fitness, $accessToken, $img = NULL){
     try{
         $fitnessId = returnFitnessId($conn, $fitness);
-        echo $fitnessId;
         $request = 'UPDATE users SET firstname = :firstname, lastname = :lastname, email = :email, password = :password, age = :age, address_id = :cityId, fitness_id = :fitnessId, link_image = :img WHERE access_token = :accessToken';
 
         $statement = $conn->prepare($request);
@@ -613,38 +611,10 @@ function updateUser($conn, $firstname, $lastname, $email, $password,  $age, $cit
         $statement->bindParam(':accessToken', $accessToken);
         $result = $statement->fetchAll(PDO::FETCH_ASSOC);
         $statement->execute(); 
-        echo "wow";
         return true;
     }
     catch(PDOException $e){
-        echo "test";
         return $e;
     }         
 }
-
-// function updateUser($conn, $firstname, $lastname, $email, $password,  $age, $cityId, $fitness, $accessToken, $img = NULL){
-//     try{
-//         $fitnessId = returnFitnessId($conn, $fitness);
-//         $request = 'UPDATE users SET firstname = :firstname, lastname = :lastname, email = :email, password = :password, age = :age, address_id = :cityId, fitness_id = fitnessId, link_image = :img WHERE access_token = :accessToken';
-
-//         $statement = $conn->prepare($request);
-//         $statement->bindParam(':firstname', $firstname);
-//         $statement->bindParam(':lastname', $lastname);
-//         $statement->bindParam(':email', $email);
-//         $statement->bindParam(':password', $password);
-//         $statement->bindParam(':age', $age);
-//         $statement->bindParam(':cityId', $cityId);
-//         $statement->bindParam(':fitnessId', $fitnessId);
-//         $statement->bindParam(':img', $img);
-//         $statement->bindParam(':accessToken', $accessToken);
-//         $statement->execute(); 
-//         return true;
-//     }
-//     catch(PDOException $e){
-//         return $e;
-//     }         
-// }
-
-
-
 ?>
