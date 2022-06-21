@@ -18,6 +18,6 @@ Fichier <input type="file" name="fichier1"><br>
 </p>
 </form>
 <?php
-    move_uploaded_file($_FILES["fichier1"]["tmp_name"],"../resources/img_profil/image.png");
+    move_uploaded_file($_FILES["fichier1"]["tmp_name"],"../resources/img_profil/search.png");
 
 ?>

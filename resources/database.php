@@ -103,7 +103,7 @@ function checkCity($conn, $city){
         $statement = $conn->prepare($request);
         $statement->bindParam(':city', $city);
         $statement->execute();
-        return $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $statement->fetchALl(PDO::FETCH_ASSOC);
 
     }
     catch(PDOException $e){
@@ -424,6 +424,128 @@ function rateApp($conn, $userId, $rate){
     catch(PDOException $e){
         return false;
     }
+}
+
+
+
+function checkSport($conn, $sport){
+    try{
+        $request = 'SELECT EXISTS(SELECT * FROM sports WHERE name=:sport) AS sport_exists';
+
+        $statement = $conn->prepare($request);
+        $statement->bindParam(':sport', $sport);
+        $statement->execute();
+        return $statement->fetch(PDO::FETCH_ASSOC);
+    }
+    catch(PDOException $e){
+        return false;
+    }
+}
+
+function addSport($conn, $sport){
+
+    try{
+        $request = 'INSERT INTO sports(name) VALUES (:sport)';
+
+        $statement = $conn->prepare($request);
+        $statement->bindParam(':sport', $sport);
+        $statement->execute();
+        return true;
+    }
+    catch(PDOException $e){
+        return false;
+    }
+
+}
+
+function returnSportId($conn, $sport){
+    try{
+        $request = 'SELECT id FROM sports WHERE name=:sport';
+
+        $statement = $conn->prepare($request);
+        $statement->bindParam(':sport', $sport);
+        $statement->execute();
+        return $statement->fetch(PDO::FETCH_ASSOC);
+    }
+    catch(PDOException $e){
+        return false;
+    }
+}
+
+
+function checkAddress($conn, $city, $address, $postalcode){
+    try{
+        $request = 'SELECT EXISTS(SELECT * FROM address WHERE city=:city AND street=:street AND postal_code=:postalcode) AS address_exists';
+
+        $statement = $conn->prepare($request);
+        $statement->bindParam(':city', $city);
+        $statement->bindParam(':street', $address);
+        $statement->bindParam(':postalcode', $postalcode);
+        $statement->execute();
+        return $statement->fetch(PDO::FETCH_ASSOC);
+
+    }
+    catch(PDOException $e){
+        return false;
+    }
+}
+
+function addAddress($conn, $address, $city, $postalcode){
+    try{
+        $request = 'INSERT INTO address(name,street,city,postal_code) VALUES (NULL, :street, :city, :postalcode)';
+
+        $statement = $conn->prepare($request);
+        $statement->bindParam(':street', $address);
+        $statement->bindParam(':city', $city);
+        $statement->bindParam(':postalcode', $postalcode);
+        $statement->execute();
+        return true;
+    }
+    catch(PDOException $e){
+        return false;
+    }
+}
+
+function returnAddressId($conn, $address, $city, $postalcode){
+    try{
+        $request = 'SELECT id FROM address WHERE street=:street AND city=:city AND postal_code=:postalcode';
+
+        $statement = $conn->prepare($request);
+        $statement->bindParam(':street', $address);
+        $statement->bindParam(':city', $city);
+        $statement->bindParam(':postalcode', $postalcode);
+        $statement->execute();
+        return $statement->fetch(PDO::FETCH_ASSOC);
+    }
+    catch(PDOException $e){
+        return false;
+    }
+}
+
+
+function createMatch($conn, $userId, $name, $sportId, $addressId, $minplayers, $maxplayers, $date, $duration, $price){
+
+    try{
+        $request = 'INSERT INTO matchs(name, score, organization_id, sport_id, address_id, nb_player_min, nb_player_max, date_time, duration, price, best_player_id) VALUES(:name, NULL, :orgid, :sportid, :addressid, :minplayers, :maxplayers, :eventdate, :duration, :price, NULL)';
+
+        $statement = $conn->prepare($request);
+        $statement->bindParam(':name', $name);
+        $statement->bindParam(':orgid', $orgId);
+        $statement->bindParam(':sportid', $sportId);
+        $statement->bindParam(':addressid', $addressId);
+        $statement->bindParam(':minplayers', $minplayers);
+        $statement->bindParam(':maxplayers', $maxplayers);
+        $statement->bindParam(':eventdate', $date);
+        $statement->bindParam(':duration', $duration);
+        $statement->bindParam(':price', $price);
+        $statement->execute();
+        return true;
+    }
+    catch(PDOException $e){
+        return false;
+    }
+
+
 }
 
 
