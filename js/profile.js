@@ -29,8 +29,9 @@ function distribution(infos){
   // display the name in the modification section
   document.getElementById("userName").textContent = firstname + " " + lastname
 
-
+  // call the function to lock all the input
   inputLock()
+
   // initiate the value in the input and lock them
   document.getElementById('firstname').value = firstname
   document.getElementById('lastname').value = lastname
@@ -52,7 +53,6 @@ function distribution(infos){
     url: '../php/profileRequest.php/fitnessUser',
     data:{ id: infos[0]['id']}
     }).done((data) => {
-      console.log(data)
       if(data.length > 0){
         fitnessSelect = data[0]['type']
       }
@@ -60,25 +60,23 @@ function distribution(infos){
         method: 'GET',
         url: '../php/profileRequest.php/fitness',
         }).done((data) => {
-          
           data.forEach(fitness => {
-            console.log(fitness['type'] + ' vs ' + fitnessSelect)
             if(fitness['type'] == fitnessSelect){
-              console.log('selected')
               $("#fitness").append("<option value='"+fitness['type']+"' selected>"+fitness['type']+"</option>");
             }
             else{
-              console.log('no selected')
               $("#fitness").append("<option value='"+fitness['type']+"'>"+fitness['type']+"</option>");
             }
           });
       })
   })
 
-  
-
   ajaxRequest('GET', `../php/profileRequest.php/picture?id=${infos[0]['id']}`, profilPicture)
-  document.getElementById('nbMatch').innerHTML = infos[0]['nb_match']
+  if (infos[0]['nb_match'] == 0) {
+    document.getElementById('nbMatch').innerHTML = infos[0]['nb_match']
+  }else{
+    document.getElementById('nbMatch').innerHTML = 0
+  }
  }
 
 function profilPicture(infos){
@@ -116,7 +114,7 @@ $("#cancelBt").click(function(){
 }) 
 
 $("#saveBt").click(function(){
-  console.log("Saving ..." + document.getElementById('age').value)
+  console.log($('#profilPicture').val())
   $.ajax({
     method: 'PUT',
     url: '../php/profileRequest.php/updateUser',
@@ -128,12 +126,10 @@ $("#saveBt").click(function(){
       age: document.getElementById('age').value,
       city: document.getElementById('city').value,
       fitness: document.getElementById('fitness').value,
-      profilPicture: document.getElementById('profilePicture').value,
+      profilPicture: document.getElementById('profilPicture').value,
       accessToken: accessToken
     }
-    }).done((data) => {
-      console.log("Saved ! WOOWOWOWOWOWOWOWOWOWOWOWOW ")
-    })
+    }).done((data) => {})
     setTimeout(()=>{
       console.log("Saved ! : ")
       document.getElementById('modificationBt').style.display = 'block'

@@ -77,7 +77,7 @@ export function dynPage(infos){
       link.href = "../resources/img_profil/default_user.png"
     }
     else{
-        link.href = "infos[0]['link_image']"
+      link.href = "../resources/img_profil/" + infos[0]['link_image']
     }
 }
 
@@ -88,7 +88,6 @@ export function displayImage(infos){
         document.getElementById("profilePicture").src="../resources/img_profil/default_user.png"
     }
     else{
-        document.getElementById("profilePicture").src=infos[0]['link_image']
+        document.getElementById("profilePicture").src= "../resources/img_profil/" + infos[0]['link_image']
     }
-    
 }
