@@ -48,7 +48,8 @@ function modify(elem){
 
         let cancelBut = document.createElement('button')
         cancelBut.id = 'cancel' + matchId
-        cancelBut.style = 'background : rgba(0, 123, 12, 0.65)'
+        cancelBut.className = 'btn'
+        cancelBut.style = 'background : rgba(255, 174, 0, 0.65); margin-left: 2em;'
         cancelBut.setAttribute('onclick', 'cancel(this)')
         cancelBut.textContent = 'Annuler'
 
@@ -139,10 +140,17 @@ function modify(elem){
     var matchId = matches[0]
 
     let but = document.getElementById('modifBut'+matchId)
-
+    let score1 = document.getElementById('matchscore1')
+    let score2 = document.getElementById('matchscore2')
+    let span = document.getElementById('span')
+    let bestplayer = document.getElementById('bestplayer')
 
     but.textContent = 'Entrer les résultats du match'
     but.style = 'background: rgba(255, 174, 0, 0.65);'
     but.setAttribute('onclick', 'modify(this)')
+    score1.remove()
+    score2.remove()
+    span.remove()
+    bestplayer.remove()
     elem.remove()
   }
