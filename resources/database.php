@@ -11,14 +11,15 @@ function dbConnect(){
     return $conn;
 }
 
-function return_password($conn, $email){
-    $request = 'SELECT password FROM users WHERE email = :email; ';
-    $statement = $conn->prepare($request);
-    $statement->bindParam(':email', $email);
-    $statement->execute();
-    $phrase_out = $statement->fetch(PDO::FETCH_ASSOC);
-    return $phrase_out['password'];
-}
+// function return_password($conn, $email){
+//     $request = 'SELECT password FROM users WHERE email = :email; ';
+//     $statement = $conn->prepare($request);
+//     $statement->bindParam(':email', $email);
+//     $statement->execute();
+//     $phrase_out = $statement->fetch(PDO::FETCH_ASSOC);
+
+//     return $phrase_out['password'];
+// }
 
 function check_alreadyexist_user($conn, $email){
     try{
@@ -62,36 +63,40 @@ function returnCityId($conn, $city){
 }
 
 function create_user($conn, $firstname, $lastname, $city, $email, $password, $img = NULL){
-    if(!check_alreadyexist_user($conn, $email)){
-
-        if($img == NULL){
-            $request = 'INSERT INTO users (firstname, lastname, age, email, password, address_id, link_image, nb_match, fitness_id, access_token)
-            VALUES (:firstname, :lastname, NULL, :email, :passwd, :address_id,  NULL, NULL, NULL, NULL)';
-
-            $statement = $conn->prepare($request);
-            $statement->bindParam(':address_id', $city);
-            $statement->bindParam(':firstname', $firstname);
-            $statement->bindParam(':lastname', $lastname);
-            $statement->bindParam(':email', $email);
-            $statement->bindParam(':passwd', $password);
-            $statement->execute();
+    try{
+        if(!check_alreadyexist_user($conn, $email)){
+            $password_hash = password_hash($password, PASSWORD_BCRYPT);
+            if($img == NULL){
+                $request = 'INSERT INTO users (firstname, lastname, age, email, password, address_id, link_image, nb_match, fitness_id, access_token)
+                VALUES (:firstname, :lastname, NULL, :email, :passwd, :address_id,  NULL, NULL, NULL, NULL)';
+    
+                $statement = $conn->prepare($request);
+                $statement->bindParam(':address_id', $city);
+                $statement->bindParam(':firstname', $firstname);
+                $statement->bindParam(':lastname', $lastname);
+                $statement->bindParam(':email', $email);
+                $statement->bindParam(':passwd', $password_hash);
+                $statement->execute();
+            }
+            else{
+                $request = 'INSERT INTO users (firstname, lastname, age, email, password, address_id, link_image, nb_match, fitness_id, access_token)
+                VALUES (:firstname, :lastname, NULL, :email, :passwd, :address_id, :img, NULL, NULL, NULL)';
+    
+                $statement = $conn->prepare($request);
+                $statement->bindParam(':address_id', $city);
+                $statement->bindParam(':firstname', $firstname);
+                $statement->bindParam(':lastname', $lastname);
+                $statement->bindParam(':email', $email);
+                $statement->bindParam(':passwd', $password_hash);
+                $statement->bindParam(':img', $img);
+                $statement->execute();
+            }   
         }
-        else{
-            $request = 'INSERT INTO users (firstname, lastname, age, email, password, address_id, link_image, nb_match, fitness_id, access_token)
-            VALUES (:firstname, :lastname, NULL, :email, :passwd, :address_id, :img, NULL, NULL, NULL)';
-
-            $statement = $conn->prepare($request);
-            $statement->bindParam(':address_id', $city);
-            $statement->bindParam(':firstname', $firstname);
-            $statement->bindParam(':lastname', $lastname);
-            $statement->bindParam(':email', $email);
-            $statement->bindParam(':passwd', $password);
-            $statement->bindParam(':img', $img);
-            $statement->execute();
-        }
-
-        
     }
+    catch(PDOException $e){
+        return $e;
+    }
+    
     
     
 }
@@ -136,12 +141,17 @@ function getAccessToken($conn, $email){
 
 function checkConnect($conn, $email, $password){
     try{
-        $request = 'SELECT EXISTS(SELECT * FROM users WHERE email=:email AND password=:password) AS user_exist';
+        $request = 'SELECT password FROM users WHERE email=:email';
         $statement = $conn->prepare($request);
         $statement->bindParam(':email', $email);
-        $statement->bindParam(':password', $password);
         $statement->execute();
-        return $statement->fetchAll(PDO::FETCH_ASSOC);
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+        $password_hash = $result[0]['password'];
+        if(password_verify($password, $password_hash)){
+            return true;
+        }else{
+            return false;
+        }
     }
     catch(PDOException $e){
         return false;
@@ -594,22 +604,20 @@ function getFitness($conn){
     }
 }
 
-function updateUser($conn, $firstname, $lastname, $email, $password,  $age, $cityId, $fitness, $accessToken, $img = NULL){
+function updateUser($conn, $firstname, $lastname, $email, $age, $cityId, $fitness, $accessToken, $img = NULL){
     try{
         $fitnessId = returnFitnessId($conn, $fitness);
-        $request = 'UPDATE users SET firstname = :firstname, lastname = :lastname, email = :email, password = :password, age = :age, address_id = :cityId, fitness_id = :fitnessId, link_image = :img WHERE access_token = :accessToken';
+        $request = 'UPDATE users SET firstname = :firstname, lastname = :lastname, email = :email, age = :age, address_id = :cityId, fitness_id = :fitnessId, link_image = :img WHERE access_token = :accessToken';
 
         $statement = $conn->prepare($request);
         $statement->bindParam(':firstname', $firstname);
         $statement->bindParam(':lastname', $lastname);
         $statement->bindParam(':email', $email);
-        $statement->bindParam(':password', $password);
         $statement->bindParam(':age', $age);
         $statement->bindParam(':cityId', $cityId);
         $statement->bindParam(':fitnessId', $fitnessId);
         $statement->bindParam(':img', $img);
         $statement->bindParam(':accessToken', $accessToken);
-        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
         $statement->execute(); 
         return true;
     }
@@ -617,4 +625,20 @@ function updateUser($conn, $firstname, $lastname, $email, $password,  $age, $cit
         return $e;
     }         
 }
+
+function updatePass($conn, $password, $accessToken){
+    try{
+        $password_hash = password_hash($password, PASSWORD_BCRYPT);
+        $request = 'UPDATE users SET password = :password WHERE access_token = :accessToken';
+        $statement = $conn->prepare($request);
+        $statement->bindParam(':password', $password_hash);
+        $statement->bindParam(':accessToken', $accessToken);
+        $statement->execute(); 
+        return true;
+    }
+    catch(PDOException $e){
+        return $e;
+    }       
+}
+
 ?>

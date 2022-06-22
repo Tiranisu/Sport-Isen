@@ -28,10 +28,21 @@
     font-weight:bold;
 }
 
-#modificationBt:hover, #saveBt:hover, #cancelBt:hover{
+#modificationPasswdBt{
+    background-color: #F59300;
+    width: 220px;
+    height: 30px;
+    border-radius: 5px;
+    border: none;
+    color: white;
+    font-weight:bold;
+}
+
+
+#modificationBt:hover, #saveBt:hover, #cancelBt:hover, #modificationPasswdBt:hover{
     box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.349);
 }
 
-#modificationBt:active, #saveBt:active, #cancelBt:active{
+#modificationBt:active, #saveBt:active, #cancelBt:active, #modificationPasswdBt:active{
     box-shadow: inset 0px 5px 5px rgba(0, 0, 0, 0.12);
 }

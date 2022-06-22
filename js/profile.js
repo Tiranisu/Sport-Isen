@@ -1,6 +1,9 @@
 import {ajaxRequest, getCookie, dynPage, disconnect, displayImage} from './tool.js';
 
 let accessToken = getCookie('sportisen')
+var passValid = false;
+
+
 $(() => {
   console.log(accessToken)
   if(accessToken.length == 0){
@@ -35,7 +38,6 @@ function distribution(infos){
   document.getElementById('firstname').value = firstname
   document.getElementById('lastname').value = lastname
   document.getElementById('email').value = infos[0]['email']
-  document.getElementById('password').value = infos[0]['password']
   document.getElementById('age').value = infos[0]['age']
   document.getElementById('profilPicture').value = infos[0]['link_image']
 
@@ -87,12 +89,27 @@ function profilPicture(infos){
 }
 
 function inputLock(){
-  $("#firstname, #lastname, #email, #password, #age, #city, #postalCode, #fitness, #profilPicture").prop('disabled', true)
+  $("#firstname, #lastname, #email, #age, #city, #postalCode, #fitness, #profilPicture").prop('disabled', true)
 }
 
 function inputUnlock(){
-  $("#firstname, #lastname, #email, #password, #age, #city, #postalCode, #fitness, #profilPicture").prop('disabled', false)
+  $("#firstname, #lastname, #emai, #password, #age, #city, #postalCode, #fitness, #profilPicture").prop('disabled', false)
 }
+
+function passCheck(infos){
+  if(infos == false){
+      document.getElementById("passcheck").style.display = "block";
+      document.getElementById("passcheck").style.color = "red";
+      document.getElementById("passcheck").innerHTML = "Les mots de passe ne correspondent pas."
+      passValid = false;
+  }
+  else{
+      document.getElementById("passcheck").style.display = "none";
+      passValid = true;
+  }
+}
+
+
 
 $("#disconnect").click(function(){
   disconnect()
@@ -143,4 +160,28 @@ $("#saveBt").click(function(){
       ajaxRequest('GET', `../php/profileRequest.php/accessToken?accessToken=${accessToken}`, distribution)
 
     }, 50)
+})
+
+$("#rePassword").change(function(){
+  if($("#password").val() != $("#rePassword").val()){
+    document.getElementById("passError").style.display = "block";
+    document.getElementById("passError").innerHTML = "Les mots de passe ne correspondent pas !"
+    passValid = false;
+  }else{
+    document.getElementById("passError").style.display = "none";
+    passValid = true;
+  }
+})
+
+$("#modificationPasswdBt").click(function(){
+  if(passValid){
+    $.ajax({
+      method: 'PUT',
+      url: '../php/profileRequest.php/updatePass',
+      data:{ 
+        password: $("#password").val(),
+        accessToken: accessToken
+      }
+      }).done((data) => {})
+    }
 })

@@ -65,7 +65,6 @@ switch($requestMethod){
       }
       
       $addressIds = returnCityId($db, $_PUT['city']);
-      print_r($addressIds);
       foreach($addressIds as $addressId){
         if(isset($_PUT['profilPicture'])){
           $data = updateUser($db, $_PUT['firstname'], $_PUT['lastname'], $_PUT['email'], $_PUT['password'], intval($_PUT['age']), $addressId['id'], $_PUT['fitness'], $_PUT['accessToken'], $_PUT['profilPicture']);
@@ -73,7 +72,11 @@ switch($requestMethod){
           $data = updateUser($db, $_PUT['firstname'], $_PUT['lastname'], $_PUT['email'], $_PUT['password'], intval($_PUT['age']), $addressId['id'], $_PUT['fitness'], $_PUT['accessToken']);
         }
       }
-      echo "end";
+    }
+    
+    if($requestRessource == "updatePass"){
+      parse_str(file_get_contents('php://input'), $_PUT);
+      $data = updatePass($db, $_PUT['password'], $_PUT['accessToken']);
     }
   break;
 }

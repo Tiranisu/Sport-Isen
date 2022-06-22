@@ -49,12 +49,12 @@ require_once('../resources/database.php');
           
           if(isset($_POST['img'])){
             // echo 'img';
-            create_user($db, $_POST['fname'], $_POST['lname'], intval($addressId['id']), $_POST['mail'], $_POST['passwd'], $_POST['img']);
+            $data = create_user($db, $_POST['fname'], $_POST['lname'], intval($addressId['id']), $_POST['mail'], $_POST['passwd'], $_POST['img']);
             
           }
           else{
             // echo 'no img';
-            create_user($db, $_POST['fname'], $_POST['lname'], intval($addressId['id']), $_POST['mail'], $_POST['passwd']);
+            $data = create_user($db, $_POST['fname'], $_POST['lname'], intval($addressId['id']), $_POST['mail'], $_POST['passwd']);
           }
         }
  

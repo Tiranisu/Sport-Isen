@@ -44,7 +44,7 @@ CREATE TABLE users (
 	lastname     VARCHAR (50) NOT NULL,
 	age          INTEGER ,
 	email        VARCHAR (50) NOT NULL,
-	password       VARCHAR (50) NOT NULL,
+	password       VARCHAR (64) NOT NULL,
 	link_image   VARCHAR (50),
 	nb_match     INTEGER,
 	fitness_id   INTEGER,

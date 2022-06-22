@@ -55,7 +55,7 @@ function createCookie(value){
 
 function canConnect(infos){
   console.log(infos)
-  if(infos['checkUser'][0]['user_exist'] == false){
+  if(infos['checkUser'] == false){
     document.getElementById('errorConnect').style.display = 'block'
   } else{
     document.getElementById('errorConnect').style.display = 'none'

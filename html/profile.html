@@ -65,10 +65,6 @@
                         <p style="margin-top: 1em; margin-left: 0.5em;"> Email : <input type="email" id="email"></p>
                     </div>
                     <p></p>
-                    <div class="input-group-text" style="height: 50px"><i class="fa-solid fa-key" style="color:#007B0C;"></i>
-                        <p style="margin-top: 1em; margin-left: 0.5em;"> Mot de passe : <input type="password" id="password"></p>
-                    </div>
-                    <p></p>
                     <div class="input-group-text lock" style="height: 50px"><i class="fa-solid fa-calendar-days" style="color:#007B0C;"></i>
                         <p style="margin-top: 1em; margin-left: 0.5em;"> Age : <input type="text" id="age"></p>
                     </div>
@@ -82,7 +78,6 @@
                             Forme physique : 
                             <select type="text" id="fitness">
                             </select>
-
                         </p>
                     </div>
                     <p></p>
@@ -92,6 +87,18 @@
                     <p></p>
                     <button id="modificationBt">Modifier</button>       
                     <p><button id="saveBt">Sauvegarder</button>   <span><button id="cancelBt">Annuler</button></span></p>
+                    <div class="input-group-text" style="height: 50px"><i class="fa-solid fa-key" style="color:#007B0C;"></i>
+                        <p style="margin-top: 1em; margin-left: 0.5em;"> 
+                            Mot de passe : 
+                            <input type="password" id="password" minlength="6"> 
+                            &nbsp; Confirmation du mot de passe : 
+                            <input type="password" id="rePassword" minlength="6">
+                            <p style="display: none; color: red; margin-top: 1em; margin-left: 1em; font-size: small;" id="passError"></p>
+                        </p>
+                    </div>
+                    <p></p>
+                    <button id="modificationPasswdBt">Modifier le Mot de passe</button>  
+                    <p></p>
                 </div>
             </div>
         </div>
