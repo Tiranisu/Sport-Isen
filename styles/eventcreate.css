@@ -192,6 +192,28 @@ body {
   color: white;
   font-weight:bold;
 }
+
+
+#matchtype{
+    font-style: normal;
+    font-weight: bold;
+    font-size: 30px;
+    line-height: 60px;
+
+    color: #000000;
+}
+
+#match{
+    margin-top: 10px;
+    background-color: #EBEBEB;
+    border-radius: 10px;
+    padding-left: 3em;
+    padding-top: 0.5em;
+    margin-left: 2em;
+    margin-right: 2em;
+    margin-top: 1em;
+}
+
   
   /* Source rating: https://codepen.io/hesguru/pen/BaybqXv */
 

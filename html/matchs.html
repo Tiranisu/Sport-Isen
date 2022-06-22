@@ -9,9 +9,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"> -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script type="module" src="../js/matchs.js"></script>
+    <script src="../js/modifmatchsinfos.js"></script>
 </head>
   <body>
     <!-- menu bootstrap -->
@@ -37,3 +39,73 @@
             </div> 
           </div>
   </nav>
+
+
+  <div id="match">
+    <div class="row">
+      <p id="matchtype">Matchs à venir</p>
+    </div>
+  </div>
+  
+  <hr>
+
+  <div id="futurematchs"></div>
+  <section id="nofuturematch" class="container alert alert-danger" style="display: block; text-align: center; margin-top: 10em; margin-bottom: 10em;"><i class="fa-solid fa-circle-exclamation"></i> Aucun match à venir</section>
+
+
+
+  <div id="match">
+    <div class="row">
+      <p id="matchtype">Matchs passés</p>
+    </div>
+  </div>
+
+  <hr>
+
+  <div id="pastmatchs"></div>
+  <section id="nopastmatch" class="container alert alert-danger" style="display: block; text-align: center; margin-top: 10em; margin-bottom: 10em;"><i class="fa-solid fa-circle-exclamation"></i> Aucun match passé</section>
+
+
+
+
+  <footer>
+    <div class="row row-cols-5 py-5 my-5 border-top" style="background: rgba(0, 123, 12, 0.65);padding-bottom: -5px;">
+        
+        <div class="col" style="margin-left: 5em; margin-top:2em">
+            <h3>Sport'Isen</h3>
+            <div>2022</div>
+        </div>
+    
+        <div class="col" style="margin-left: 10em; margin-right: 10em;">
+            <h5>Navigation</h5>
+            <ul class="flex-column">
+            <li class="nav-item mb-2"><a href="eventcreate.html" class="nav-link p-0 text-muted">Organiser événement</a></li>
+            <li class="nav-item mb-2"><a href="search.html" class="nav-link p-0 text-muted">Rechercher</a></li>
+            <li class="nav-item mb-2"><a href="profile.html" class="nav-link p-0 text-muted">Profil</a></li>
+            <li class="nav-item mb-2"><a href="matchs.html" class="nav-link p-0 text-muted">Mes matchs</a></li>
+            <li class="nav-item mb-2"><a href="notifs.html" class="nav-link p-0 text-muted">Notifications</a></li>
+            </ul>
+        </div>
+    
+        <div class="col">
+            <h5>Noter l'application</h5>
+            <!-- Source rating: https://codepen.io/hesguru/pen/BaybqXv -->
+            <div class="rate">
+                <input type="radio" id="star5" name="rate" value="5" />
+                <label for="star5" title="text">5 stars</label>
+                <input type="radio" id="star4" name="rate" value="4" />
+                <label for="star4" title="text">4 stars</label>
+                <input type="radio" id="star3" name="rate" value="3" />
+                <label for="star3" title="text">3 stars</label>
+                <input type="radio" id="star2" name="rate" value="2" />
+                <label for="star2" title="text">2 stars</label>
+                <input type="radio" id="star1" name="rate" value="1" />
+                <label for="star1" title="text">1 star</label>
+              </div>
+        </div>
+    </div>
+</footer>
+
+
+  </body>
+</html>
