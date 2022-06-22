@@ -4,8 +4,7 @@ let accessToken = getCookie('sportisen')
 $(() => {
   console.log(accessToken)
   if(accessToken.length == 0){
-    let url = window.location.href.replace(/profile\.html.*/i, 'connexion.html')
-    window.location.href = url
+    window.location.href = 'connexion.html'
   }
   ajaxRequest('GET', `../php/profileRequest.php/accessToken?accessToken=${accessToken}`, distribution)
   document.getElementById('saveBt').style.display = 'none'

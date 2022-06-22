@@ -1,11 +1,9 @@
 import {ajaxRequest, getCookie, disconnect, dynPage, displayImage} from './tool.js';
 
 $(() => {
-//   console.log(getCookie('sportisen'))
   let accessToken = getCookie('sportisen')
   if(accessToken.length == 0){
-    let url = window.location.href.replace(/search\.html.*/i, 'connexion.html')
-    window.location.href = url
+    window.location.href = 'connexion.html'
   }
   ajaxRequest('GET', `../php/searchRequest.php/user?accessToken=${accessToken}`, distribution)
 })
