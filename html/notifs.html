@@ -13,7 +13,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script type="module" src="../js/notifs.js"></script>
 </head>
-  <body>
+<body>
     <!-- menu bootstrap -->
     <nav class="navbar navbar-expand-md navbar-dark">
       <div class="container-fluid">
@@ -36,4 +36,79 @@
               </div>
             </div> 
           </div>
+      </div>
   </nav>
+  <div class="container">
+
+    <!-- Demandes en attente -->
+    <div id="matchCard">
+      <div class="card" style="border-radius: 10px; background: #ffff;">
+          <div class="container-fluid">
+              <div class="row">
+                  <div class="col-md-12" style="background-color: rgb(201, 201, 201); height: auto; border-radius: 10px;">
+                      <h3><i class="fa-solid fa-user" style="color:#007B0C; margin-top: 0.4em;"></i> &nbsp; <span id="userName" ></span></h3>
+                  </div>
+              </div>
+          </div>
+          <div class="row" style="margin-left: 2em; margin-right: 2em;">
+              <div class="row" style="margin-top: 1em;">
+                  <div class="input-group-text lock" style="height: 50px"><i class="fa-regular fa-user" style="color:#007B0C;"></i>
+                      <p style="margin-top: 1em; margin-left: 0.5em;"> Prenom : <input type="text" id="firstname"></p>
+                  </div>
+              </div>
+              <div class="row" style="margin-top: 1em;">
+                  <div class="input-group-text lock" style="height: 50px"><i class="fa-regular fa-user" style="color:#007B0C;"></i>
+                      <p style="margin-top: 1em; margin-left: 0.5em;"> Nom : <input type="text" id="lastname"></p>
+                  </div>
+              </div>
+          </div>
+      </div>
+    </div>
+    <br>
+    <!-- Réponses d'organisateurs -->
+    <div id="matchCard">
+      <div class="card" style="border-radius: 10px; background: #ffff;">
+          <div class="container-fluid">
+              <div class="row">
+                  <div class="col-md-12" style="background-color: rgb(201, 201, 201); height: auto; border-radius: 10px;">
+                    <h3 id="matchTitle0"><i class="fa-solid fa-trophy" style="color:#007B0C; margin-top: 0.4em;"></i> Réponses d'organisateurs</h3>
+                  </div>
+              </div>
+          </div>
+          <div class="row" style="margin-left: 2em; margin-right: 2em;">
+
+            <div class="responseCard">
+            </div>
+            
+              <div class="row" style="margin-top: 1em;">
+                  <div class="input-group-text lock" style="height: 50px">
+                      <p style="margin-top: 1em; margin-left: 0.5em;"> 
+                        Match | Match 
+                        <i class="fa-solid fa-check" style="color: #007B0C; margin-left: 30em"></i>
+                        <p style="margin-top: 1em; margin-left: 0.5em; color: #007B0C;"> 
+                          Demande acceptée
+                        </p>
+                      </p>
+                  </div>
+              </div>
+              <div class="row" style="margin-top: 1em;">
+                <div class="input-group-text lock" style="height: 50px">
+                    <p style="margin-top: 1em; margin-left: 0.5em;"> 
+                      Match | Match 
+                      <i class="fa-solid fa-xmark" style="color: #cc1407; margin-left: 30em"></i>
+                      <p style="margin-top: 1em; margin-left: 0.5em; color: #cc1407;"> 
+                        Demande refusée
+                      </p>
+                    </p>
+                </div>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+  
+
+
+
+
+</body>

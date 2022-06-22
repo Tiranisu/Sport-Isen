@@ -765,6 +765,18 @@ function updateMatch($conn, $score, $bestplayer, $matchId){
     }
 }
 
+function returnResponseByUserId($conn, $userId){
+    try{
+        $request = 'SELECT match_id, status FROM participant WHERE user_id=:userid';
+        $statement = $conn->prepare($request);
+        $statement->bindParam(':userid', $userId);
+        $statement->execute();
+        return $statement->fetchAll(PDO::FETCH_ASSOC);  
+    }
+    catch(PDOException $e){
+        return $e;
+    }
+}
 
 
 ?>

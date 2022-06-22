@@ -37,8 +37,8 @@ INSERT INTO address (name, street, city, postal_code) VALUES
 -- --- Populate users table ------------
 ALTER SEQUENCE users_id_seq RESTART;
 INSERT INTO users (firstname, lastname, age, email, password, nb_match, fitness_id, address_id) VALUES
-('Mark', 'Couty', 35, 'mc@test.fr', '1234', 4, 3, 1),
-('Robert', 'Pater', 75, 'rp@test.fr', '1234', 5, 2, 2);
+('Mark', 'Couty', 35, 'mc@test.fr', '$2y$10$Ns7fLvA0z4obW3naPmnS5epzde7DCwNQ.FGWSgH5t8B0cqi0xVmXy', 4, 3, 1),
+('Robert', 'Pater', 75, 'rp@test.fr', '$2y$10$Ns7fLvA0z4obW3naPmnS5epzde7DCwNQ.FGWSgH5t8B0cqi0xVmXy', 5, 2, 2);
 
 -- --- Populate notifications table ------------
 ALTER SEQUENCE notifications_id_seq RESTART;
@@ -59,4 +59,9 @@ INSERT INTO matchs (name, score, organization_id, sport_id, address_id, nb_playe
 --- Populate participant table ------------
 INSERT INTO participant (match_id, user_id, status) VALUES
 (1 , 1 , 1),
-(1, 2 , 2);
+(1, 2 , 1),
+(1, 2 , 1),
+(1, 2 , 2),
+(1, 2 , 2),
+(1, 2 , 3),
+(1, 2 , 3);
