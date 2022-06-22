@@ -1,11 +1,9 @@
 import {ajaxRequest, getCookie, disconnect, dynPage, displayImage} from './tool.js';
 
 $(() => {
-//   console.log(getCookie('sportisen'))
   let accessToken = getCookie('sportisen')
   if(accessToken.length == 0){
-    let url = window.location.href.replace(/search\.html.*/i, 'connexion.html')
-    window.location.href = url
+    window.location.href = 'connexion.html'
   }
   ajaxRequest('GET', `../php/searchRequest.php/user?accessToken=${accessToken}`, distribution)
 })
@@ -284,5 +282,5 @@ ajaxRequest('GET', `../php/searchRequest.php/user?accessToken=${token}`, functio
  * Print Map
  */
 function printMap(street){
-  $("#map").append('<iframe width="100%" height="450" style="border:0" loading="lazy" allowfullscreen src="https://www.google.com/maps/embed/v1/place?q='+ street +'&key=AIzaSyCf4jTFkGlmjrGWUeDfARv7KUnoZvDGJyQ"></iframe>');
+  // $("#map").append('<iframe width="100%" height="450" style="border:0" loading="lazy" allowfullscreen src="https://www.google.com/maps/embed/v1/place?q='+ street +'&key=AIzaSyCf4jTFkGlmjrGWUeDfARv7KUnoZvDGJyQ"></iframe>');
 }

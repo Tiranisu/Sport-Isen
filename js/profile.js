@@ -4,8 +4,7 @@ let accessToken = getCookie('sportisen')
 $(() => {
   console.log(accessToken)
   if(accessToken.length == 0){
-    let url = window.location.href.replace(/profile\.html.*/i, 'connexion.html')
-    window.location.href = url
+    window.location.href = 'connexion.html'
   }
   ajaxRequest('GET', `../php/profileRequest.php/accessToken?accessToken=${accessToken}`, distribution)
   document.getElementById('saveBt').style.display = 'none'
@@ -29,14 +28,19 @@ function distribution(infos){
   // display the name in the modification section
   document.getElementById("userName").textContent = firstname + " " + lastname
 
-
+  // call the function to lock all the input
   inputLock()
+
   // initiate the value in the input and lock them
   document.getElementById('firstname').value = firstname
   document.getElementById('lastname').value = lastname
   document.getElementById('email').value = infos[0]['email']
   document.getElementById('password').value = infos[0]['password']
   document.getElementById('age').value = infos[0]['age']
+  document.getElementById('profilPicture').value = infos[0]['link_image']
+
+  console.log(infos[0])
+  console.log(infos[0]['link_image'])
 
   $.ajax({
     method: 'GET',
@@ -52,7 +56,6 @@ function distribution(infos){
     url: '../php/profileRequest.php/fitnessUser',
     data:{ id: infos[0]['id']}
     }).done((data) => {
-      console.log(data)
       if(data.length > 0){
         fitnessSelect = data[0]['type']
       }
@@ -60,25 +63,23 @@ function distribution(infos){
         method: 'GET',
         url: '../php/profileRequest.php/fitness',
         }).done((data) => {
-          
           data.forEach(fitness => {
-            console.log(fitness['type'] + ' vs ' + fitnessSelect)
             if(fitness['type'] == fitnessSelect){
-              console.log('selected')
               $("#fitness").append("<option value='"+fitness['type']+"' selected>"+fitness['type']+"</option>");
             }
             else{
-              console.log('no selected')
               $("#fitness").append("<option value='"+fitness['type']+"'>"+fitness['type']+"</option>");
             }
           });
       })
   })
 
-  
-
   ajaxRequest('GET', `../php/profileRequest.php/picture?id=${infos[0]['id']}`, profilPicture)
-  document.getElementById('nbMatch').innerHTML = infos[0]['nb_match']
+  if (infos[0]['nb_match'] == 0) {
+    document.getElementById('nbMatch').innerHTML = infos[0]['nb_match']
+  }else{
+    document.getElementById('nbMatch').innerHTML = 0
+  }
  }
 
 function profilPicture(infos){
@@ -116,7 +117,7 @@ $("#cancelBt").click(function(){
 }) 
 
 $("#saveBt").click(function(){
-  console.log("Saving ..." + document.getElementById('age').value)
+  console.log($('#profilPicture').val())
   $.ajax({
     method: 'PUT',
     url: '../php/profileRequest.php/updateUser',
@@ -128,10 +129,11 @@ $("#saveBt").click(function(){
       age: document.getElementById('age').value,
       city: document.getElementById('city').value,
       fitness: document.getElementById('fitness').value,
-      profilPicture: document.getElementById('profilePicture').value,
+      profilPicture: document.getElementById('profilPicture').value,
       accessToken: accessToken
     }
-    }).done((data) => { })
+    }).done((data) => {})
+    setTimeout(()=>{
       console.log("Saved ! : ")
       document.getElementById('modificationBt').style.display = 'block'
       document.getElementById('saveBt').style.display = 'none'
@@ -139,6 +141,6 @@ $("#saveBt").click(function(){
       inputLock();
       document.getElementById("fitness").options.length = 0; // delete all the option in the select
       ajaxRequest('GET', `../php/profileRequest.php/accessToken?accessToken=${accessToken}`, distribution)
-    
-      
+
+    }, 50)
 })
