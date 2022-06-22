@@ -38,6 +38,10 @@ function distribution(infos){
   document.getElementById('email').value = infos[0]['email']
   document.getElementById('password').value = infos[0]['password']
   document.getElementById('age').value = infos[0]['age']
+  document.getElementById('profilPicture').value = infos[0]['link_image']
+
+  console.log(infos[0])
+  console.log(infos[0]['link_image'])
 
   $.ajax({
     method: 'GET',
