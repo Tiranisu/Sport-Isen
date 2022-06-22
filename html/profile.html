@@ -51,54 +51,74 @@
                         </div>
                     </div>
                 </div>
-                <br>
                 <div class="row" style="margin-left: 2em; margin-right: 2em;">
-                    <div class="input-group-text lock" style="height: 50px"><i class="fa-regular fa-user" style="color:#007B0C;"></i>
-                        <p style="margin-top: 1em; margin-left: 0.5em;"> Prenom : <input type="text" id="firstname"></p>
+                    <div class="row" style="margin-top: 1em;">
+                        <div class="input-group-text lock" style="height: 50px"><i class="fa-regular fa-user" style="color:#007B0C;"></i>
+                            <p style="margin-top: 1em; margin-left: 0.5em;"> Prenom : <input type="text" id="firstname"></p>
+                        </div>
                     </div>
-                    <p></p>
-                    <div class="input-group-text lock" style="height: 50px"><i class="fa-regular fa-user" style="color:#007B0C;"></i>
-                        <p style="margin-top: 1em; margin-left: 0.5em;"> Nom : <input type="text" id="lastname"></p>
+                    <div class="row" style="margin-top: 1em;">
+                        <div class="input-group-text lock" style="height: 50px"><i class="fa-regular fa-user" style="color:#007B0C;"></i>
+                            <p style="margin-top: 1em; margin-left: 0.5em;"> Nom : <input type="text" id="lastname"></p>
+                        </div>
                     </div>
-                    <p></p>
-                    <div class="input-group-text lock" style="height: 50px"><i class="fa-solid fa-at" style="color:#007B0C;"></i>
-                        <p style="margin-top: 1em; margin-left: 0.5em;"> Email : <input type="email" id="email"></p>
+                    <div class="row" style="margin-top: 1em;">
+                        <div class="input-group-text lock" style="height: 50px"><i class="fa-solid fa-at" style="color:#007B0C;"></i>
+                            <p style="margin-top: 1em; margin-left: 0.5em;"> Email : <input type="email" id="email"></p>
+                        </div>
                     </div>
-                    <p></p>
-                    <div class="input-group-text lock" style="height: 50px"><i class="fa-solid fa-calendar-days" style="color:#007B0C;"></i>
-                        <p style="margin-top: 1em; margin-left: 0.5em;"> Age : <input type="text" id="age"></p>
+                    <div class="row" style="margin-top: 1em;">
+                        <div class="input-group-text lock" style="height: 50px"><i class="fa-solid fa-calendar-days" style="color:#007B0C;"></i>
+                            <p style="margin-top: 1em; margin-left: 0.5em;"> Age : <input type="text" id="age"></p>
+                        </div>
                     </div>
-                    <p></p>
-                    <div class="input-group-text" style="height: 50px"><i class="fa-solid fa-city" style="color:#007B0C;"></i>
-                        <p style="margin-top: 1em; margin-left: 0.5em;"> Ville : <input type="text" id="city"></p>
+                    <div class="row" style="margin-top: 1em;">
+                        <div class="input-group-text" style="height: 50px"><i class="fa-solid fa-city" style="color:#007B0C;"></i>
+                            <p style="margin-top: 1em; margin-left: 0.5em;"> Ville : <input type="text" id="city"></p>
+                        </div>
                     </div>
-                    <p></p>
-                    <div class="input-group-text" style="height: 50px"><i class="fa-solid fa-dumbbell" style="color:#007B0C;"></i>
-                        <p style="margin-top: 1em; margin-left: 0.5em;"> 
-                            Forme physique : 
-                            <select type="text" id="fitness">
-                            </select>
-                        </p>
+                    <div class="row" style="margin-top: 1em;">
+                        <div class="input-group-text" style="height: 50px"><i class="fa-solid fa-dumbbell" style="color:#007B0C;"></i>
+                            <p style="margin-top: 1em; margin-left: 0.5em;"> 
+                                Forme physique : 
+                                <select type="text" id="fitness">
+                                </select>
+                            </p>
+                        </div>
                     </div>
-                    <p></p>
-                    <div class="input-group-text" style="height: 50px"><i class="fa-solid fa-file-image" style="color:#007B0C;"></i>
-                        <p style="margin-top: 1em; margin-left: 0.5em;"> Image profile   : <input type="text" id="profilPicture"></p>
+                    <div class="row" style="margin-top: 1em;">
+                        <div class="input-group-text" style="height: 50px"><i class="fa-solid fa-file-image" style="color:#007B0C;"></i>
+                            <p style="margin-top: 1em; margin-left: 0.5em;"> 
+                                Image profile   : 
+                                <input type="text" id="profilPicture">
+                                <p style="margin-left: 1em; margin-top: 1em; color:rgb(100, 100, 100);">
+                                     (profile1.png -> profile5.png) 
+                                </p>
+                            </p>
+                        </div>
                     </div>
-                    <p></p>
-                    <button id="modificationBt">Modifier</button>       
-                    <p><button id="saveBt">Sauvegarder</button>   <span><button id="cancelBt">Annuler</button></span></p>
-                    <div class="input-group-text" style="height: 50px"><i class="fa-solid fa-key" style="color:#007B0C;"></i>
-                        <p style="margin-top: 1em; margin-left: 0.5em;"> 
-                            Mot de passe : 
-                            <input type="password" id="password" minlength="6"> 
-                            &nbsp; Confirmation du mot de passe : 
-                            <input type="password" id="rePassword" minlength="6">
-                            <p style="display: none; color: red; margin-top: 1em; margin-left: 1em; font-size: small;" id="passError"></p>
-                        </p>
+                    <div class="row" style="margin-top: 1em;">
+                        <button id="modificationBt">Modifier</button> 
+                        <i class="fa-solid fa-check" id="okModif" style="color: #007B0C; margin-left: 0.2em; display: none;"></i>
+                        <button id="saveBt">Sauvegarder</button>  
+                        &nbsp;
+                        <button id="cancelBt">Annuler</button>
                     </div>
-                    <p></p>
-                    <button id="modificationPasswdBt">Modifier le Mot de passe</button>  
-                    <p></p>
+                    <div class="row" style="margin-top: 3em;">
+                        <div class="input-group-text" style="height: 50px">
+                            <i class="fa-solid fa-key" style="color:#007B0C;"></i>
+                            <p style="margin-top: 1em; margin-left: 0.5em;"> Mot de passe : <input type="password" id="password" minlength="6"> </p>
+                        </div> 
+                    </div>
+                    <div class="row" style="margin-top: 1em;">
+                        <div class="input-group-text" style="height: 50px"><i class="fa-solid fa-key" style="color:#007B0C;"></i>
+                            <p style="margin-top: 1em; margin-left: 0.5em;">Confirmation du mot de passe : <input type="password" id="rePassword" minlength="6"></p> 
+                        </div>
+                    </div>
+                    <p style="display: none; color: red; margin-top: 1em; margin-left: 1em; font-size: small;" id="passError"></p>
+                    <div class="row" style="margin-top: 1em;">
+                        <p><button id="modificationPasswdBt">Modifier le Mot de passe</button> <i class="fa-solid fa-check" id="okPasswd" style="color: #007B0C; margin-left: 0.2em; display: none"></i></p>
+                    </div>
                 </div>
             </div>
         </div>

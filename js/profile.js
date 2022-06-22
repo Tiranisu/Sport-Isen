@@ -96,7 +96,7 @@ $(() => {
   }
   ajaxRequest('GET', `../php/profileRequest.php/accessToken?accessToken=${accessToken}`, distribution)
   document.getElementById('saveBt').style.display = 'none'
-  document.getElementById('cancelBt').style.display = 'none'
+  document.getElementById('cancelBt').style.display = 'none'  
 })
 
 $("#disconnect").click(function(){
@@ -139,15 +139,18 @@ $("#saveBt").click(function(){
     }
     }).done((data) => {})
     setTimeout(()=>{
-      console.log("Saved ! : ")
-      document.getElementById('modificationBt').style.display = 'block'
+      console.log("Saved !")
       document.getElementById('saveBt').style.display = 'none'
       document.getElementById('cancelBt').style.display = 'none'
       inputLock();
       document.getElementById("fitness").options.length = 0; // delete all the option in the select
       ajaxRequest('GET', `../php/profileRequest.php/accessToken?accessToken=${accessToken}`, distribution)
-
-    }, 50)
+      document.getElementById('okModif').style.display = 'block'
+    }, 100)
+    setTimeout(()=>{
+      document.getElementById('modificationBt').style.display = 'block'
+      document.getElementById('okModif').style.display = 'none'
+    }, 3000)
 })
 
 $("#rePassword").change(function(){
@@ -171,5 +174,11 @@ $("#modificationPasswdBt").click(function(){
         accessToken: accessToken
       }
       }).done((data) => {})
+      document.getElementById('modificationPasswdBt').style.display = 'none'
+      document.getElementById('okPasswd').style.display = 'block'
+      setTimeout(()=>{
+        document.getElementById('modificationPasswdBt').style.display = 'block'
+        document.getElementById('okPasswd').style.display = 'none'
+      }, 3000)
     }
 })
