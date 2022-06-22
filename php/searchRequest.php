@@ -90,6 +90,19 @@ require_once('../resources/database.php');
     }
   }
 
+  if($requestRessource == 'participants'){
+    $data = false;
+
+    switch($requestMethod){
+      case 'GET':
+        if(isset($_GET['matchid'])){
+          $data = getParticipants($db, $_GET['matchid']);
+        }
+        
+        break;
+    }
+  }
+
   if($requestRessource == 'orga'){
     $data = false;
     switch($requestMethod){

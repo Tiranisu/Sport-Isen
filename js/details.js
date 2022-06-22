@@ -61,7 +61,15 @@ function displayInfos(infos){
       }
 
     document.getElementById('city').innerHTML += infos[0]['city']
-    document.getElementById('address').innerHTML += infos[0]['stade_name'] + ', ' + infos[0]['street']
+
+    if(infos[0]['stade_name'] != null){
+      document.getElementById('address').innerHTML += infos[0]['stade_name'] + ',<br> ' + infos[0]['street']
+    }
+    else{
+      document.getElementById('address').innerHTML += infos[0]['street']
+    }
+
+
     document.getElementById('price').innerHTML += infos[0]['price'] + '€'
     document.getElementById('maxplayers').innerHTML += infos[0]['nb_player_max'] + ' joueur(s)'
     document.getElementById('matchplayers').innerHTML += infos[0]['nb_participants'] + ' joueur(s)'

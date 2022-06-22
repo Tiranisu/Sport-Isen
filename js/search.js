@@ -151,6 +151,8 @@ $('reset').on('click', () => {
 //display matchs card
 function displaySports(infos){
 
+  let actual_day = new Date(Date.now())
+
   if(!infos){
     document.getElementById('noresult').style.display = 'block'
   }
@@ -161,16 +163,17 @@ function displaySports(infos){
     for(let i=0; i<infos.length; i++){
       const date = new Date(infos[i]['date_time'])
 
-      // console.log(infos[i])
-      const matchId = infos[i]['id']
-      // console.log(infos[i]['id'])
+      if(date >= actual_day){
+        // console.log(infos[i])
+        const matchId = infos[i]['id']
+        // console.log(infos[i]['id'])
 
-      cardCreate(matchId)
+        cardCreate(matchId)
+        
+        // console.log(date)
+        // console.log(currentDate)
+
       
-      // console.log(date)
-      // console.log(currentDate)
-
-      if(date > Date.now()){
         document.getElementById('matchTitle'+matchId).innerHTML = infos[i]['name'] + " | " + days[0][date.getDay()] + ' ' + date.getDate() + ' ' + months[0][date.getMonth()] + ' ' + date.getFullYear()
         document.getElementById('matchSport'+matchId).innerHTML = infos[i]['sport_name']
         document.getElementById('hour'+matchId).innerHTML += date.getHours() + ':'
@@ -186,14 +189,26 @@ function displaySports(infos){
 
 
         document.getElementById('matchcity'+matchId).innerHTML += infos[i]['city']
-        document.getElementById('address'+matchId).innerHTML += infos[i]['stade_name'] + ',<br> ' + infos[i]['street']
+
+        if(infos[i]['stade_name'] != null){
+          document.getElementById('address'+matchId).innerHTML += infos[i]['stade_name'] + ',<br> ' + infos[i]['street']
+        }
+        else{
+          document.getElementById('address'+matchId).innerHTML += infos[i]['street']
+        }
+
+        
         document.getElementById('maxplayers'+matchId).innerHTML += infos[i]['nb_player_max']
-        document.getElementById('matchplayers'+matchId).innerHTML += infos[i]['nb_participants']
-      }
+
+        ajaxRequest('GET', `../php/searchRequest.php/participants?matchid=${infos[i]['id']}`, function(data){
+          document.getElementById('matchplayers'+matchId).innerHTML += data['nb_participants']
+        })
+
+        
+        }
+      
     }
   }
-
-  
 
 }
 

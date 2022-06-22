@@ -144,6 +144,21 @@ $('#create').on('click', (event)=>{
             event_postalcode: postalcode
           }
         })
+
+
+        $('#name').val("")
+        $('#sport').val("")
+        $('#date').val("")
+        $('#hour').val("")
+        $('#time').val(0)
+        $('#price').val("")
+        $('#minplayers').val(0)
+        $('#maxplayers').val(0)
+        $('#address').val("")
+        $('#city').val("")
+        $('#postalcode').val("")
+        alert('Le match a bien été créé')
+        
     }
 
       
