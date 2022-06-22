@@ -4,15 +4,6 @@ let accessToken = getCookie('sportisen')
 var passValid = false;
 
 
-$(() => {
-  console.log(accessToken)
-  if(accessToken.length == 0){
-    window.location.href = 'connexion.html'
-  }
-  ajaxRequest('GET', `../php/profileRequest.php/accessToken?accessToken=${accessToken}`, distribution)
-  document.getElementById('saveBt').style.display = 'none'
-  document.getElementById('cancelBt').style.display = 'none'
-})
 
 /**
  * Use to distribute information across function or ajaxrequest
@@ -93,23 +84,20 @@ function inputLock(){
 }
 
 function inputUnlock(){
-  $("#firstname, #lastname, #emai, #password, #age, #city, #postalCode, #fitness, #profilPicture").prop('disabled', false)
-}
-
-function passCheck(infos){
-  if(infos == false){
-      document.getElementById("passcheck").style.display = "block";
-      document.getElementById("passcheck").style.color = "red";
-      document.getElementById("passcheck").innerHTML = "Les mots de passe ne correspondent pas."
-      passValid = false;
-  }
-  else{
-      document.getElementById("passcheck").style.display = "none";
-      passValid = true;
-  }
+  $("#firstname, #lastname, #email, #password, #age, #city, #postalCode, #fitness, #profilPicture").prop('disabled', false)
 }
 
 
+
+$(() => {
+  console.log(accessToken)
+  if(accessToken.length == 0){
+    window.location.href = 'connexion.html'
+  }
+  ajaxRequest('GET', `../php/profileRequest.php/accessToken?accessToken=${accessToken}`, distribution)
+  document.getElementById('saveBt').style.display = 'none'
+  document.getElementById('cancelBt').style.display = 'none'
+})
 
 $("#disconnect").click(function(){
   disconnect()

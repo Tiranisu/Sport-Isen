@@ -67,9 +67,9 @@ switch($requestMethod){
       $addressIds = returnCityId($db, $_PUT['city']);
       foreach($addressIds as $addressId){
         if(isset($_PUT['profilPicture'])){
-          $data = updateUser($db, $_PUT['firstname'], $_PUT['lastname'], $_PUT['email'], $_PUT['password'], intval($_PUT['age']), $addressId['id'], $_PUT['fitness'], $_PUT['accessToken'], $_PUT['profilPicture']);
+          $data = updateUser($db, $_PUT['firstname'], $_PUT['lastname'], $_PUT['email'], intval($_PUT['age']), $addressId['id'], $_PUT['fitness'], $_PUT['accessToken'], $_PUT['profilPicture']);
         }else{
-          $data = updateUser($db, $_PUT['firstname'], $_PUT['lastname'], $_PUT['email'], $_PUT['password'], intval($_PUT['age']), $addressId['id'], $_PUT['fitness'], $_PUT['accessToken']);
+          $data = updateUser($db, $_PUT['firstname'], $_PUT['lastname'], $_PUT['email'], intval($_PUT['age']), $addressId['id'], $_PUT['fitness'], $_PUT['accessToken']);
         }
       }
     }
