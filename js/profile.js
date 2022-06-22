@@ -131,7 +131,10 @@ $("#saveBt").click(function(){
       profilPicture: document.getElementById('profilePicture').value,
       accessToken: accessToken
     }
-    }).done((data) => { })
+    }).done((data) => {
+      console.log("Saved ! WOOWOWOWOWOWOWOWOWOWOWOWOW ")
+    })
+    setTimeout(()=>{
       console.log("Saved ! : ")
       document.getElementById('modificationBt').style.display = 'block'
       document.getElementById('saveBt').style.display = 'none'
@@ -139,6 +142,6 @@ $("#saveBt").click(function(){
       inputLock();
       document.getElementById("fitness").options.length = 0; // delete all the option in the select
       ajaxRequest('GET', `../php/profileRequest.php/accessToken?accessToken=${accessToken}`, distribution)
-    
-      
+
+    }, 50)
 })
