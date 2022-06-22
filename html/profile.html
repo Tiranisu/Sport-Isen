@@ -19,6 +19,7 @@
             <section class="navbar-brand h1">Sport'Isen</section>
         </div>
         <div class="nav">
+            <a href="search.html" title="Rechercher"><img src="../resources/library/search.png" style="height: 23px; width:20px; margin-top: 5px;"></a>
             <a href="eventcreate.html">Créer un événement</a>
             <a href="notifs.html" title="Notifications"><img src="../resources/library/Notifsbell.png" style="height:30px; width:30px;"></a>
             <div class="drop">
@@ -27,7 +28,7 @@
               </button>
               <img id="profilePicture" src="" style="height:40px; width:40px;">
               <div class="dropcontent">
-                <a href="search.html">Recherche</a>
+                <a href="profile.html">Mon Profil</a>
                 <a href="matchs.html">Mes matchs</a>
                 <a id="disconnect" href="#" onclick="//disconnect function"><i class="fa-solid fa-right-from-bracket"></i>Déconnexion</a>
               </div>
@@ -46,7 +47,7 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-12" style="background-color: rgb(201, 201, 201); height: auto; border-radius: 10px;">
-                            <p><i class="fa-solid fa-user"></i><h3 id="userName"></h3></p>
+                            <h3><i class="fa-solid fa-user" style="color:#007B0C; margin-top: 0.4em;"></i> &nbsp; <span id="userName" ></span></h3>
                         </div>
                     </div>
                 </div>
@@ -103,8 +104,7 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-12" style="background-color: rgb(201, 201, 201); height: auto; border-radius: 10px;">
-                            <div class="input-group-text" style="height: 40px"><i class="fa-solid fa-trophy" style="color:#007B0C;"></i></div>
-                            <h3 id="matchTitle0">Statistiques de jeu</h3>
+                            <h3 id="matchTitle0"><i class="fa-solid fa-trophy" style="color:#007B0C; margin-top: 0.4em;"></i> Statistiques de jeu</h3>
                         </div>
                     </div>
                 </div>
@@ -115,11 +115,8 @@
                     </div>
                 </div>
             </div>
-            
         </div>
+        <p></p>
     </div>
-    <br>
-    <br>
-    <br>
 </body> 
 </html>

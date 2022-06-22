@@ -25,7 +25,10 @@ function distribution(infos){
 
   // display profile image in nav bar
   ajaxRequest('GET', `../php/profileRequest.php/picture?id=${infos[0]['id']}`, displayImage)
-  document.getElementById("userName").innerHTML = firstname + " " + lastname
+
+  // display the name in the modification section
+  document.getElementById("userName").textContent = firstname + " " + lastname
+
 
   inputLock()
   // initiate the value in the input and lock them
