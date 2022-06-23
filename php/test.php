@@ -10,19 +10,19 @@ $conn = dbConnect();
 //     echo 'nope';
 // }
 ?>
-<!-- 
+
 <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="post" enctype="multipart/form-data">
 <p>
 Fichier <input type="file" name="fichier1"><br>
 <input type="submit" value="Envoi"><br>
 </p>
-</form> -->
+</form>
 <?php
-    // move_uploaded_file($_FILES["fichier1"]["tmp_name"],"../resources/img_profil/search.png");
+    move_uploaded_file($_FILES["fichier1"]["tmp_name"],"../resources/library/backgroundIndex.jpg");
 
 
-    $a = '123456';
-    echo password_hash($a, PASSWORD_BCRYPT);
+    // $a = '123456';
+    // echo password_hash($a, PASSWORD_BCRYPT);
 
 ?>
 

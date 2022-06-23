@@ -39,7 +39,7 @@ function addCities(infos){
     var selCities = document.getElementById('city')
     for(let i = 0; i < infos.length; i++){
       var option = document.createElement("option")
-      option.value = infos[i]['id']
+      option.value = infos[i]['city']
       option.text = infos[i]['city'] + ' - ' + infos[i]['postal_code']
       selCities.add(option)
     }
@@ -53,6 +53,7 @@ ajaxRequest('GET', `../php/searchRequest.php/sports`, addSports)
 
 function addSports(infos){
     var selSports = document.getElementById('sport')
+    
     for(let i = 0; i < infos.length; i++){
       var option = document.createElement("option")
       option.value = infos[i]['id']
@@ -77,8 +78,8 @@ if(noFilters){
 
 //city filter active
 $("#city").change(function(){
-  
-  if(($("#city")).val() != 'default'){
+
+  if(($("#city")).id != 'default'){
     noFilters = false;
     area.innerHTML = ""
     ajaxRequest('GET',  `../php/searchRequest.php/matchs?cityid=${($("#city")).val()}`, displaySports)

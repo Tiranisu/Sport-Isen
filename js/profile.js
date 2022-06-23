@@ -185,3 +185,83 @@ $("#modificationPasswdBt").click(function(){
       }, 3000)
     }
 })
+
+
+
+
+
+//------------------------------------------------------------------------------
+//--------------------------- Rate ---------------------------------------------
+//------------------------------------------------------------------------------
+
+let star1 = document.getElementById('star1')
+let star2 = document.getElementById('star2')
+let star3 = document.getElementById('star3')
+let star4 = document.getElementById('star4')
+let star5 = document.getElementById('star5')
+
+
+ajaxRequest('GET', `../php/searchRequest.php/user?accessToken=${accessToken}`, function(infos){
+
+  let userId = infos[0]['id']
+
+  star1.onclick = function(){
+    // console.log(1)
+    $.ajax('../php/searchRequest.php/rate', {
+      method: 'PUT', data : {
+        rate: 1,
+        userid: userId
+      }
+    })
+  }
+  star2.onclick = function(){
+    // console.log(2)
+    $.ajax('../php/searchRequest.php/rate', {
+      method: 'PUT', data : {
+        rate: 2,
+        userid: userId
+      }
+    })
+  }
+  star3.onclick = function(){
+    // console.log(3)
+    $.ajax('../php/searchRequest.php/rate', {
+      method: 'PUT', data : {
+        rate: 3,
+        userid: userId
+      }
+    })
+  }
+  star4.onclick = function(){
+    // console.log(4)
+    $.ajax('../php/searchRequest.php/rate', {
+      method: 'PUT', data : {
+        rate: 4,
+        userid: userId
+      }
+    })
+  }
+  star5.onclick = function(){
+    // console.log(5)
+    $.ajax('../php/searchRequest.php/rate', {
+      method: 'PUT', data : {
+        rate: 5,
+        userid: userId
+      }
+    })
+  }
+
+  ajaxRequest('GET', `../php/searchRequest.php/rate?userid=${userId}`, function(infos){
+    // console.log(infos);
+    if(!infos){
+      // console.log('no rate')
+    }
+    else{
+      let rate = infos[0]['score']
+      let star = document.getElementById('star'+rate)
+      star.checked = true
+    }
+    
+  })
+
+})
