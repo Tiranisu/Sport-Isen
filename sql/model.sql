@@ -2,7 +2,6 @@ DROP TABLE IF EXISTS fitness CASCADE;
 DROP TABLE IF EXISTS sports CASCADE;
 DROP TABLE IF EXISTS address CASCADE;
 DROP TABLE IF EXISTS users CASCADE;
-DROP TABLE IF EXISTS notifications CASCADE;
 DROP TABLE IF EXISTS score_app CASCADE;
 DROP TABLE IF EXISTS matchs CASCADE;
 DROP TABLE IF EXISTS participant CASCADE;
@@ -54,19 +53,6 @@ CREATE TABLE users (
     FOREIGN KEY (fitness_id) REFERENCES fitness(id)
         ON UPDATE CASCADE ON DELETE CASCADE,
     FOREIGN KEY (address_id) REFERENCES address(id)
-        ON UPDATE CASCADE ON DELETE CASCADE
-);
-
-------------------------------------------------------------
--- Table: notifications
-------------------------------------------------------------
-CREATE TABLE notifications (
-    id            SERIAL PRIMARY KEY,
-    description   VARCHAR (50) NOT NULL,
-	status        BOOL NOT NULL,
-	user_id       INTEGER  NOT NULL,
-
-    FOREIGN KEY (user_id) REFERENCES users(id)
         ON UPDATE CASCADE ON DELETE CASCADE
 );
 
