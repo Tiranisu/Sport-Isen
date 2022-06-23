@@ -657,7 +657,7 @@ function updateUser($conn, $firstname, $lastname, $email, $age, $cityId, $fitnes
 function getMatchOfUser($conn, $userId){
     try{
 
-        $request = 'SELECT m.id, m.name, s.name as sport_name, a.name as stade_name, a.street, a.city, m.nb_player_min, m.nb_player_max, m.date_time, m.duration, m.price, p.user_id, m.score, m.best_player_id FROM matchs m, sports s, address a, participant p WHERE m.sport_id=s.id AND m.address_id=a.id AND p.user_id=:userid AND m.id = p.match_id';
+        $request = 'SELECT m.id, m.name, s.name as sport_name, a.name as stade_name, a.street, a.city, m.nb_player_min, m.nb_player_max, m.date_time, m.duration, m.price, p.user_id, m.score, m.best_player_id FROM matchs m, sports s, address a, participant p WHERE m.sport_id=s.id AND m.address_id=a.id AND p.user_id=:userid AND m.id = p.match_id AND p.status!=0';
     
         $statement = $conn->prepare($request);
         $statement->bindParam(':userid', $userId);
