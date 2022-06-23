@@ -1,3 +1,6 @@
+/**
+ * Main ajax request
+ */
 export function ajaxRequest(type, url, callback, data = null){
   let xhr;
 
@@ -28,6 +31,12 @@ export function ajaxRequest(type, url, callback, data = null){
 }
 
 
+/**
+ * Return the access token 
+ * 
+ * @param c_name cookie name 
+ * @returns the access token of the user
+ */
 export function getCookie(c_name) {
 	let c_start
 	let c_end
@@ -46,6 +55,11 @@ export function getCookie(c_name) {
 }
 
 
+/**
+ * Delete the cookie 
+ * 
+ * @param name name of the cookie (here sportisen) 
+ */
 export function deleteCookie(name){
     document.cookie = name + "=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC"
 }
@@ -59,12 +73,13 @@ export function disconnect(){
 
 
 /**
- * taken from https://stackoverflow.com/questions/260857/changing-website-favicon-dynamically
- * @param {*} infos 
+ * Print dynamicly the title and the favicon
+ * the dynamic icon is from : 
+ * https://stackoverflow.com/questions/260857/changing-website-favicon-dynamically
+ * 
+ * @param infos user information
  */
 export function dynPage(infos){
-    // console.log(infos)
-  
     var link = document.querySelector("link[rel~='icon']");
     if (!link) {
         link = document.createElement('link');
@@ -82,8 +97,12 @@ export function dynPage(infos){
 }
 
 
+/**
+ * Print the profil picture of the user in the navbar
+ * 
+ * @param infos 
+ */
 export function displayImage(infos){
-    // console.log(infos[0]['link_image'])
     if(infos[0]['link_image'] == null){
         document.getElementById("profilePicture").src="../resources/img_profil/default_user.png"
     }

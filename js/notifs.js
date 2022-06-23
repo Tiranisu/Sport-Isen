@@ -1,18 +1,6 @@
 import {ajaxRequest, getCookie, disconnect, dynPage, displayImage} from './tool.js';
 
-$(() => {
-  // console.log(getCookie('sportisen'))
-  let accessToken = getCookie('sportisen')
-  if(accessToken.length == 0){
-    window.location.href = '../index.html'
-  }
-  ajaxRequest('GET', `../php/searchRequest.php/user?accessToken=${accessToken}`, distribution)
-})
-
-$("#disconnect").click(function(){
-  disconnect()
-})
-
+// to convert the number un text for the date
 let months = Array({
   '0' : 'Janvier',
   '1' : 'Février',
@@ -39,6 +27,11 @@ let days = Array({
 })
 
 
+/**
+ * Create the waiting card with dynamic informations
+ * 
+ * @param infos all the information of a match
+ */
 function createCardWaiting(infos){
   $.ajax({
     method: 'GET',
@@ -90,7 +83,13 @@ function createCardWaiting(infos){
 }
 
 
+/**
+ * Create the response card with dynamic informations
+ * 
+ * @param infos match_id, status
+ */
 function createCardAccepted(infos){
+  console.log(infos)
   $.ajax({
     method: 'GET',
     url: '../php/notifsRequest.php/matchs',
@@ -98,7 +97,6 @@ function createCardAccepted(infos){
       matchId: infos['match_id'],
     }
     }).done((match) => {
-      console.log(match)
       if(match.length != 0){
         document.getElementById('noResponse').style.display = 'none'
 
@@ -117,17 +115,19 @@ function createCardAccepted(infos){
 }
 
 
-
 /**
- * Use to distribute information across function or ajaxrequest
+ * Used to distribute information across function or ajaxrequest
+ * 
  * @param infos contain all the information about the user 
  */
 function distribution(infos){
-  // display user name & profil picture
+  // display user name & profil picture in header
   dynPage(infos)
 
   //display profile image in nav bar
   ajaxRequest('GET', `../php/searchRequest.php/picture?id=${infos[0]['id']}`, displayImage)
+
+  // create the waiting card
   $.ajax({
     method: 'GET',
     url: '../php/notifsRequest.php/orga',
@@ -140,7 +140,7 @@ function distribution(infos){
       })
     })
 
-
+  // create the response card
   $.ajax({
     method: 'GET',
     url: '../php/notifsRequest.php/request',
@@ -153,6 +153,26 @@ function distribution(infos){
       });
       
     })
-
-
 }
+
+
+/**
+ * When the page is loaded, get the cookie which contain the access token and 
+ * give it to the distribution function. 
+ * If your not connected (no cookie) your are automaticly redirect to the home page
+ */
+$(() => {
+  let accessToken = getCookie('sportisen')
+  if(accessToken.length == 0){
+    window.location.href = '../index.html'
+  }
+  ajaxRequest('GET', `../php/searchRequest.php/user?accessToken=${accessToken}`, distribution)
+})
+
+
+/**
+ * When button is clicked, call the import disconnect function
+ */
+$("#disconnect").click(function(){
+  disconnect()
+})
