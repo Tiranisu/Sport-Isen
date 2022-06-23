@@ -1,3 +1,8 @@
+/**
+ * 
+ * 
+ * @param elem the id of the 
+ */
 function accetpBt(elem){
     var butid = elem.id
     var matches = butid.match(/(\d+)/)

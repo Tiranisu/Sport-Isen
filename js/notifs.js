@@ -40,7 +40,6 @@ let days = Array({
 
 
 function createCardWaiting(infos){
-  // console.log(infos)
   $.ajax({
     method: 'GET',
     url: '../php/notifsRequest.php/userWaiting',
@@ -48,6 +47,9 @@ function createCardWaiting(infos){
       matchId: infos['id'],
     }
     }).done((data) => { 
+      if(data.length != 0){
+        document.getElementById('noWaiting').style.display = 'none'
+      }
       data.forEach(userWaiting => {
         var idPart = userWaiting['id']
         const date = new Date(infos['date_time'])
@@ -96,11 +98,17 @@ function createCardAccepted(infos){
       matchId: infos['match_id'],
     }
     }).done((match) => {
+      console.log(match)
+      if(match.length != 0){
+        document.getElementById('noResponse').style.display = 'none'
+
+      }
+
       const date = new Date(match[0]['date_time'])
 
       // deny card
       if(infos['status'] == 0){
-        $("#responseCard").append("<div class='row' style='margin-top: 1em;'><div class='input-group-text lock' style='height: 50px'><p style='margin-top: 1em; margin-left: 0.5em;'>" + match[0]['name'] + " | " + days[0][date.getDay()] + ' ' + date.getDate() + ' ' + months[0][date.getMonth()] + ' ' + date.getFullYear() + "<h6 style='color: rgb(102, 102, 102); margin-top: 0.5em; margin-left: 0.5em;'>"+ match[0]['sport_name'] +"</h6><i class='fa-solid fa-check' style='color: #007B0C; margin-left: 10em'></i><p style='margin-top: 1em; margin-left: 0.5em; color: #007B0C;'> Demande acceptée</p></p></div></div>")
+        $("#responseCard").append("<div class='row' style='margin-top: 1em;'><div class='input-group-text lock' style='height: 50px'><p style='margin-top: 1em; margin-left: 0.5em;'>" + match[0]['name'] + " | " + days[0][date.getDay()] + ' ' + date.getDate() + ' ' + months[0][date.getMonth()] + ' ' + date.getFullYear() + "<h6 style='color: rgb(102, 102, 102); margin-top: 0.5em; margin-left: 0.5em;'>"+ match[0]['sport_name'] +"</h6><i class='fa-solid fa-check' style='color: #007B0C; margin-left: 10em'></i><p style='margin-top: 1em; margin-left: 0.5em; color: #007B0C;'> Demande acceptée </p></p></div></div>")
       }
       if(infos['status'] == 1){
         $("#responseCard").append("<div class='row' style='margin-top: 1em;'><div class='input-group-text lock' style='height: 50px'><p style='margin-top: 1em; margin-left: 0.5em;'> " + match[0]['name'] + " | " + days[0][date.getDay()] + ' ' + date.getDate() + ' ' + months[0][date.getMonth()] + ' ' + date.getFullYear() + "<h6 style='color: rgb(102, 102, 102); margin-top: 0.5em; margin-left: 0.5em;'>"+ match[0]['sport_name'] +"</h6><i class='fa-solid fa-xmark' style='color: #cc1407; margin-left: 10em'></i><p style='margin-top: 1em; margin-left: 0.5em; color: #cc1407;'> Demande refusée</p></p></div></div>")
