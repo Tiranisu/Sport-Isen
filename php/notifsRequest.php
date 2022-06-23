@@ -22,6 +22,12 @@ switch($requestMethod){
                 $data = returnResponseByUserId($db, $_GET['userId']);
             }
         }
+        if($requestRessource == "matchs"){
+            if(isset($_GET['matchId'])){
+                $data = getMatchsFromId($db, $_GET['matchId']);
+            }
+
+        }
     break;
 }
 

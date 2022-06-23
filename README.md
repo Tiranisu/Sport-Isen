@@ -6,6 +6,6 @@
 
 
 Participant :
-1 -> deny
-2 -> wait
-3 -> accept
+0 -> deny
+1 -> accept
+2 -> waiting
