@@ -39,6 +39,23 @@ let days = Array({
 })
 
 
+function createCardWaiting(infos){
+  // console.log(infos)
+  $.ajax({
+    method: 'GET',
+    url: '../php/notifsRequest.php/userWaiting',
+    data:{ 
+      matchId: infos['id'],
+    }
+    }).done((data) => { 
+      console.log(data)
+      data.forEach(userWaiting => {
+        // console.log(userWaiting)
+      });
+      
+    })
+}
+
 function createCardAccepted(infos){
   $.ajax({
     method: 'GET',
@@ -47,12 +64,12 @@ function createCardAccepted(infos){
       matchId: infos['match_id'],
     }
     }).done((match) => {
-      console.log(match)
+      // console.log(match)
       const date = new Date(match[0]['date_time'])
 
       // deny card
       if(infos['status'] == 0){
-        console.log("a")
+        // console.log("a")
         $("#responseCard").append("<div class='row' style='margin-top: 1em;'><div class='input-group-text lock' style='height: 50px'><p style='margin-top: 1em; margin-left: 0.5em;'>" + match[0]['name'] + " | " + days[0][date.getDay()] + ' ' + date.getDate() + ' ' + months[0][date.getMonth()] + ' ' + date.getFullYear() + "<h6 style='color: rgb(102, 102, 102); margin-top: 0.5em; margin-left: 0.5em;'>"+ match[0]['sport_name'] +"</h6><i class='fa-solid fa-check' style='color: #007B0C; margin-left: 10em'></i><p style='margin-top: 1em; margin-left: 0.5em; color: #007B0C;'> Demande acceptée</p></p></div></div>")
       }
       if(infos['status'] == 1){
@@ -60,6 +77,7 @@ function createCardAccepted(infos){
       }
     })
 }
+
 
 
 /**
@@ -72,7 +90,18 @@ function distribution(infos){
 
   //display profile image in nav bar
   ajaxRequest('GET', `../php/searchRequest.php/picture?id=${infos[0]['id']}`, displayImage)
-
+  $.ajax({
+    method: 'GET',
+    url: '../php/notifsRequest.php/orga',
+    data:{ 
+      userId: infos[0]['id'],
+    }
+    }).done((data) => {
+      data.forEach(match => {
+        console.log(match)
+        // createCardWaiting(match)
+      })
+    })
 
 
   $.ajax({
@@ -83,7 +112,7 @@ function distribution(infos){
     }
     }).done((data) => {
       data.forEach(notif => {
-        console.log(notif)
+        // console.log(notif)
         createCardAccepted(notif)
       });
       

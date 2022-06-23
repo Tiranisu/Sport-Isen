@@ -813,5 +813,34 @@ function getCapacity($conn, $matchId){
     }
 }
 
+function getMatchByOrga($conn, $orgaId){
+    try{
+        $request = 'SELECT * FROM matchs WHERE organization_id=:orgaId ';
+
+        $statement = $conn->prepare($request);
+        $statement->bindParam(':orgaId', $orgaId);
+        $statement->execute();
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
+    catch(PDOException $e){
+        return $e;
+    }
+
+}
+
+function returnUserWaiting($conn, $matchId){
+    try{
+        $request = 'SELECT * FROM participant WHERE match_id=:matchId AND status = 2';
+
+        $statement = $conn->prepare($request);
+        $statement->bindParam(':matchId', $matchId);
+        $statement->execute();
+        return $statement->fetchALL(PDO::FETCH_ASSOC);
+    }
+    catch(PDOException $e){
+        return $e;
+    }
+}
+
 
 ?>

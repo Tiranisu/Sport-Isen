@@ -54,14 +54,19 @@ INSERT INTO score_app (user_id, score) VALUES
 --- Populate match table ------------
 ALTER SEQUENCE matchs_id_seq RESTART;
 INSERT INTO matchs (name, score, organization_id, sport_id, address_id, nb_player_min, nb_player_max, date_time, duration, price, best_player_id) VALUES
-('Football U8', NULL, 1, 1, 1, 1, 10,'2022-09-15 10:00', '2022-1-1 2:00', 15, NULL);
+('Football U8', NULL, 1, 1, 1, 1, 10,'2022-09-15 10:00', '2022-1-1 2:00', 15, NULL),
+('a U8', NULL, 2, 2, 1, 1, 10,'2022-10-15 20:00', '2022-1-1 2:00', 15, NULL),
+('b U8', NULL, 2, 3, 1, 1, 10,'2022-09-15 10:00', '2022-1-1 2:00', 15, NULL),
+('c U8', NULL, 2, 1, 1, 1, 10,'2022-09-15 10:00', '2022-1-1 2:00', 15, NULL);
+
 
 --- Populate participant table ------------
 INSERT INTO participant (match_id, user_id, status) VALUES
 (1 , 1 , 1),
 (1, 2 , 1),
-(1, 2 , 1),
-(1, 2 , 0),
-(1, 2 , 0),
-(1, 2 , 2),
-(1, 2 , 2);
+(2, 1 , 1),
+(2, 2 , 0),
+(3, 1 , 0),
+(3, 2 , 0),
+(4, 1 , 2),
+(4, 2 , 2);
