@@ -1,7 +1,6 @@
 import {ajaxRequest, getCookie, disconnect, dynPage, displayImage} from './tool.js';
 
 $(() => {
-  // console.log(getCookie('sportisen'))
   let accessToken = getCookie('sportisen')
   if(accessToken.length == 0){
     window.location.href = '../index.html'
@@ -111,18 +110,6 @@ $('#create').on('click', (event)=>{
     //create event duration format 'actual day hh:mm'
     let duration = actual_day + ' ' + time
 
-    // console.log(name)
-    // console.log(sport)
-    // console.log(date_event)
-    // console.log(duration)
-    // console.log(price)
-    // console.log(minplayers)
-    // console.log(maxplayers)
-    // console.log(address)
-    // console.log(city)
-    // console.log(postalcode)
-
-
     let userId = infos[0]['id']
 
     let formValid = checkForm()
@@ -209,7 +196,6 @@ ajaxRequest('GET', `../php/searchRequest.php/user?accessToken=${token}`, functio
   let userId = infos[0]['id']
 
   star1.onclick = function(){
-    // console.log(1)
     $.ajax('../php/searchRequest.php/rate', {
       method: 'PUT', data : {
         rate: 1,
@@ -218,7 +204,6 @@ ajaxRequest('GET', `../php/searchRequest.php/user?accessToken=${token}`, functio
     })
   }
   star2.onclick = function(){
-    // console.log(2)
     $.ajax('../php/searchRequest.php/rate', {
       method: 'PUT', data : {
         rate: 2,
@@ -227,7 +212,6 @@ ajaxRequest('GET', `../php/searchRequest.php/user?accessToken=${token}`, functio
     })
   }
   star3.onclick = function(){
-    // console.log(3)
     $.ajax('../php/searchRequest.php/rate', {
       method: 'PUT', data : {
         rate: 3,
@@ -236,7 +220,6 @@ ajaxRequest('GET', `../php/searchRequest.php/user?accessToken=${token}`, functio
     })
   }
   star4.onclick = function(){
-    // console.log(4)
     $.ajax('../php/searchRequest.php/rate', {
       method: 'PUT', data : {
         rate: 4,
@@ -245,7 +228,6 @@ ajaxRequest('GET', `../php/searchRequest.php/user?accessToken=${token}`, functio
     })
   }
   star5.onclick = function(){
-    // console.log(5)
     $.ajax('../php/searchRequest.php/rate', {
       method: 'PUT', data : {
         rate: 5,
@@ -255,7 +237,6 @@ ajaxRequest('GET', `../php/searchRequest.php/user?accessToken=${token}`, functio
   }
 
   ajaxRequest('GET', `../php/searchRequest.php/rate?userid=${userId}`, function(infos){
-    // console.log(infos);
     if(!infos){
       // console.log('no rate')
     }

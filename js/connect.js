@@ -16,7 +16,6 @@ function ajaxRequest(type, url, callback, data = null)
     {
       case 200:
       case 201:
-        console.log(xhr.responseText);
         callback(JSON.parse(xhr.responseText));
         break;
       default:
@@ -54,7 +53,6 @@ function createCookie(value){
 }
 
 function canConnect(infos){
-  console.log(infos)
   if(infos['checkUser'] == false){
     document.getElementById('errorConnect').style.display = 'block'
   } else{
@@ -74,8 +72,6 @@ $("#mail").change(function(){
 $("#rform").on('submit', (event) => {
   email = document.getElementById("mail").value;
   password = document.getElementById("pass").value;
-  console.log(email);
-  console.log(password);
   ajaxRequest('GET', `../php/connectRequest.php/register?email=${email}&password=${password}`, canConnect);
   return false; // use to not reload the page when the form is submit
 });

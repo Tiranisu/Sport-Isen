@@ -15,7 +15,6 @@ function ajaxRequest(type, url, callback, data = null){
       {
         case 200:
         case 201:
-          // console.log(xhr.responseText);
           callback(JSON.parse(xhr.responseText));
           break;
         default:
@@ -109,10 +108,6 @@ function modify(elem){
     let matchscore = $('#matchscore1').val() + '-' + $('#matchscore2').val()
 
     let bestPlayer = $('#bestplayer').children(":selected").attr("id")
-
-
-    console.log(matchscore)
-    console.log(bestPlayer)
 
 
     $.ajax('../php/matchRequest.php/updatematch', {

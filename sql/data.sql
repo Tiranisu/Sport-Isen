@@ -2,7 +2,6 @@ DELETE FROM fitness;
 DELETE FROM sports;
 DELETE FROM address;
 DELETE FROM users;
-DELETE FROM notifications;
 DELETE FROM matchs;
 DELETE FROM participant;
 
@@ -10,9 +9,9 @@ DELETE FROM participant;
 -- --- Populate fitness table ------------
 ALTER SEQUENCE fitness_id_seq RESTART;
 INSERT INTO fitness (type) VALUES
-('Beginner'),
-('Intermediate'),
-('Advanced');
+('Débutant'),
+('Intermédiaire'),
+('Avancé');
 
 -- --- Populate sports table ------------
 ALTER SEQUENCE sports_id_seq RESTART;
@@ -37,18 +36,18 @@ INSERT INTO address (name, street, city, postal_code) VALUES
 ALTER SEQUENCE users_id_seq RESTART;
 INSERT INTO users (firstname, lastname, age, email, password, nb_match, fitness_id, address_id) VALUES
 ('Mark', 'Couty', 35, 'mc@test.fr', '$2y$10$Ns7fLvA0z4obW3naPmnS5epzde7DCwNQ.FGWSgH5t8B0cqi0xVmXy', 4, 3, 1),
-('Robert', 'Pater', 75, 'rp@test.fr', '$2y$10$Ns7fLvA0z4obW3naPmnS5epzde7DCwNQ.FGWSgH5t8B0cqi0xVmXy', 5, 2, 2);
-
--- --- Populate notifications table ------------
-ALTER SEQUENCE notifications_id_seq RESTART;
-INSERT INTO notifications (description, status, user_id) VALUES
-(' à refusé votre demande d incription', false , 1),
-(' à accepté votre demande d incription', true, 2);
+('Robert', 'Pater', 75, 'rp@test.fr', '$2y$10$Ns7fLvA0z4obW3naPmnS5epzde7DCwNQ.FGWSgH5t8B0cqi0xVmXy', 5, 2, 2),
+('Samuel', 'Dubois', NULL, 'sd@test.fr', '$2y$10$Ns7fLvA0z4obW3naPmnS5epzde7DCwNQ.FGWSgH5t8B0cqi0xVmXy', 2, 1, 5),
+('Colin', 'Martin', 22, 'cm@test.fr', '$2y$10$Ns7fLvA0z4obW3naPmnS5epzde7DCwNQ.FGWSgH5t8B0cqi0xVmXy', 0, 2, 4),
+('Remy', 'Conos', 34, 'rc@test.fr', '$2y$10$Ns7fLvA0z4obW3naPmnS5epzde7DCwNQ.FGWSgH5t8B0cqi0xVmXy', 1, 2, 2);
 
 -- --- Populate score_app table ------------
 INSERT INTO score_app (user_id, score) VALUES
 (1, 3),
-(2, 2);
+(2, 2),
+(3,4),
+(4,3),
+(5,5);
 
 --- Populate match table ------------
 ALTER SEQUENCE matchs_id_seq RESTART;

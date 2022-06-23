@@ -44,7 +44,6 @@ ajaxRequest('GET', `../php/searchRequest.php/capacity?matchid=${matchId}`, funct
 })
 
 ajaxRequest('GET', `../php/searchRequest.php/user?accessToken=${token}`, function(infos){
-  // console.log(infos)
   let userId = infos[0]['id']
   ajaxRequest('GET', `../php/searchRequest.php/isregister?userid=${userId}&matchid=${matchId}`, function(response){
     
@@ -59,7 +58,6 @@ ajaxRequest('GET', `../php/searchRequest.php/user?accessToken=${token}`, functio
 ajaxRequest('GET', `../php/searchRequest.php/matchs?matchid=${matchId}`, displayInfos)
 
 function displayInfos(infos){
-    // console.log(infos)
     const date = new Date(infos[0]['date_time'])
     document.getElementById('matchname').innerHTML = infos[0]['name'] + " | " + days[0][date.getDay()] + ' ' + date.getDate() + ' ' + months[0][date.getMonth()] + ' ' + date.getFullYear()
     document.getElementById('hour').innerHTML += date.getHours() + ':'
@@ -115,7 +113,6 @@ ajaxRequest('GET', `../php/searchRequest.php/players?matchid=${matchId}`, displa
 
 
 function displayPlayers(infos){
-    console.log(infos)
     for(let i=0; i<infos.length; i++){
 
       let playerId = infos[i]['id']
@@ -265,7 +262,6 @@ ajaxRequest('GET', `../php/searchRequest.php/user?accessToken=${token}`, functio
   let userId = infos[0]['id']
 
   star1.onclick = function(){
-    // console.log(1)
     $.ajax('../php/searchRequest.php/rate', {
       method: 'PUT', data : {
         rate: 1,
@@ -274,7 +270,6 @@ ajaxRequest('GET', `../php/searchRequest.php/user?accessToken=${token}`, functio
     })
   }
   star2.onclick = function(){
-    // console.log(2)
     $.ajax('../php/searchRequest.php/rate', {
       method: 'PUT', data : {
         rate: 2,
@@ -283,7 +278,6 @@ ajaxRequest('GET', `../php/searchRequest.php/user?accessToken=${token}`, functio
     })
   }
   star3.onclick = function(){
-    // console.log(3)
     $.ajax('../php/searchRequest.php/rate', {
       method: 'PUT', data : {
         rate: 3,
@@ -292,7 +286,6 @@ ajaxRequest('GET', `../php/searchRequest.php/user?accessToken=${token}`, functio
     })
   }
   star4.onclick = function(){
-    // console.log(4)
     $.ajax('../php/searchRequest.php/rate', {
       method: 'PUT', data : {
         rate: 4,
@@ -301,7 +294,6 @@ ajaxRequest('GET', `../php/searchRequest.php/user?accessToken=${token}`, functio
     })
   }
   star5.onclick = function(){
-    // console.log(5)
     $.ajax('../php/searchRequest.php/rate', {
       method: 'PUT', data : {
         rate: 5,
@@ -311,7 +303,7 @@ ajaxRequest('GET', `../php/searchRequest.php/user?accessToken=${token}`, functio
   }
 
   ajaxRequest('GET', `../php/searchRequest.php/rate?userid=${userId}`, function(infos){
-    // console.log(infos);
+
     if(!infos){
       // console.log('no rate')
     }

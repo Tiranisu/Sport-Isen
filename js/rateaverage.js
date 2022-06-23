@@ -14,7 +14,6 @@ let star5 = document.getElementById('star5')
 
 ajaxRequest('GET', `php/indexRequest.php/rating`, function(infos){
     
-    console.log(infos)
     let sum = 0
 
     for(let i=0; i<infos.length; i++){
@@ -22,7 +21,6 @@ ajaxRequest('GET', `php/indexRequest.php/rating`, function(infos){
     }
 
     let moy = sum/infos.length
-    console.log(moy)
 
     for(let i=0.5; i<=moy; i+=0.5){
         let star = document.getElementById(i)
