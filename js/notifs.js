@@ -33,6 +33,7 @@ let days = Array({
  * @param infos all the information of a match
  */
 function createCardWaiting(infos){
+  console.log(infos)
   $.ajax({
     method: 'GET',
     url: '../php/notifsRequest.php/userWaiting',
@@ -70,7 +71,13 @@ function createCardWaiting(infos){
                     }
                     }).done((data) =>{
                       data.forEach(sport => {
-                        $("#waitingCard").append("<div class=\"col-md-12\" style=\"background-color: rgb(233, 233, 233); height: 90px; border-radius: 10px;margin-top: 1em;\"><div class=\"row\"><div style=\"margin-top: 1em; margin-left: 0.5em;\"> " + infos['name'] + " | " + days[0][date.getDay()] + ' ' + date.getDate() + ' ' + months[0][date.getMonth()] + ' ' + date.getFullYear() + " | "+ sport['name'] +" <button class=\"btInput\" id=\"btCkeck"+ idPart +"\" style=\"margin-left: 25em; background: rgba(0,0,0,0)\" onclick='accetpBt(this)'> <i class=\"fa-solid fa-circle-check\" style=\"color: #007B0C; font-size: x-large;\"></i> </button><button class=\"btInput\" id=\"btCross"+ idPart +"\" style=\"margin-left: 1em; background: rgba(0,0,0,0)\" onclick='denyBt(this)'> <i class=\"fa-solid fa-circle-xmark\" style=\"color: #cc1407; font-size: x-large;\"></i> </button></div></div><h6 style=\"color: rgb(102, 102, 102); margin-top: 0.5em; margin-left: 0.5em;\">"+infoUser['firstname'] + ' ' + infoUser ["lastname"]  + " | age : " + infoUser["age"] + " | Forme physique : "+ fitness['type'] +"</h6></div>")
+                        if(infoUser["age"] == null){
+                          var age = 'Pas definit'
+                        }
+                        else{
+                          var age = infoUser["age"]
+                        }
+                        $("#waitingCard").append("<div class=\"col-md-12\" style=\"background-color: rgb(233, 233, 233); height: 90px; border-radius: 10px;margin-top: 1em;\"><div class=\"row\"><div style=\"margin-top: 1em; margin-left: 0.5em;\"> " + infos['name'] + " | " + days[0][date.getDay()] + ' ' + date.getDate() + ' ' + months[0][date.getMonth()] + ' ' + date.getFullYear() + " | "+ sport['name'] +" <button class=\"btInput\" id=\"btCkeck"+ idPart +"\" style=\"margin-left: 25em; background: rgba(0,0,0,0)\" onclick='accetpBt(this)'> <i class=\"fa-solid fa-circle-check\" style=\"color: #007B0C; font-size: x-large;\"></i> </button><button class=\"btInput\" id=\"btCross"+ idPart +"\" style=\"margin-left: 1em; background: rgba(0,0,0,0)\" onclick='denyBt(this)'> <i class=\"fa-solid fa-circle-xmark\" style=\"color: #cc1407; font-size: x-large;\"></i> </button></div></div><h6 style=\"color: rgb(102, 102, 102); margin-top: 0.5em; margin-left: 0.5em;\">"+infoUser['firstname'] + ' ' + infoUser ["lastname"]  + " | age : " + age + " | Forme physique : "+ fitness['type'] +"</h6></div>")
                       });
                     })
                   });
@@ -89,7 +96,6 @@ function createCardWaiting(infos){
  * @param infos match_id, status
  */
 function createCardAccepted(infos){
-  console.log(infos)
   $.ajax({
     method: 'GET',
     url: '../php/notifsRequest.php/matchs',
@@ -97,6 +103,7 @@ function createCardAccepted(infos){
       matchId: infos['match_id'],
     }
     }).done((match) => {
+      console.log(match)
       if(match.length != 0){
         document.getElementById('noResponse').style.display = 'none'
 
@@ -105,10 +112,10 @@ function createCardAccepted(infos){
       const date = new Date(match[0]['date_time'])
 
       // deny card
-      if(infos['status'] == 0){
+      if(infos['status'] == 1){
         $("#responseCard").append("<div class='row' style='margin-top: 1em;'><div class='input-group-text lock' style='height: 50px'><p style='margin-top: 1em; margin-left: 0.5em;'>" + match[0]['name'] + " | " + days[0][date.getDay()] + ' ' + date.getDate() + ' ' + months[0][date.getMonth()] + ' ' + date.getFullYear() + "<h6 style='color: rgb(102, 102, 102); margin-top: 0.5em; margin-left: 0.5em;'>"+ match[0]['sport_name'] +"</h6><i class='fa-solid fa-check' style='color: #007B0C; margin-left: 10em'></i><p style='margin-top: 1em; margin-left: 0.5em; color: #007B0C;'> Demande acceptée </p></p></div></div>")
       }
-      if(infos['status'] == 1){
+      if(infos['status'] == 0){
         $("#responseCard").append("<div class='row' style='margin-top: 1em;'><div class='input-group-text lock' style='height: 50px'><p style='margin-top: 1em; margin-left: 0.5em;'> " + match[0]['name'] + " | " + days[0][date.getDay()] + ' ' + date.getDate() + ' ' + months[0][date.getMonth()] + ' ' + date.getFullYear() + "<h6 style='color: rgb(102, 102, 102); margin-top: 0.5em; margin-left: 0.5em;'>"+ match[0]['sport_name'] +"</h6><i class='fa-solid fa-xmark' style='color: #cc1407; margin-left: 10em'></i><p style='margin-top: 1em; margin-left: 0.5em; color: #cc1407;'> Demande refusée</p></p></div></div>")
       }
     })
@@ -148,6 +155,7 @@ function distribution(infos){
       userId: infos[0]['id'],
     }
     }).done((data) => {
+      console.log(data)
       data.forEach(notif => {
         createCardAccepted(notif)
       });

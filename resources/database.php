@@ -67,7 +67,7 @@ function create_user($conn, $firstname, $lastname, $city, $email, $password, $im
             $password_hash = password_hash($password, PASSWORD_BCRYPT);
             if($img == NULL){
                 $request = 'INSERT INTO users (firstname, lastname, age, email, password, address_id, link_image, nb_match, fitness_id, access_token)
-                VALUES (:firstname, :lastname, NULL, :email, :passwd, :address_id,  NULL, NULL, NULL, NULL)';
+                VALUES (:firstname, :lastname, NULL, :email, :passwd, :address_id,  NULL, NULL, 1, NULL)';
     
                 $statement = $conn->prepare($request);
                 $statement->bindParam(':address_id', $city);
@@ -79,7 +79,7 @@ function create_user($conn, $firstname, $lastname, $city, $email, $password, $im
             }
             else{
                 $request = 'INSERT INTO users (firstname, lastname, age, email, password, address_id, link_image, nb_match, fitness_id, access_token)
-                VALUES (:firstname, :lastname, NULL, :email, :passwd, :address_id, :img, NULL, NULL, NULL)';
+                VALUES (:firstname, :lastname, NULL, :email, :passwd, :address_id, :img, NULL, 1, NULL)';
     
                 $statement = $conn->prepare($request);
                 $statement->bindParam(':address_id', $city);
@@ -766,7 +766,7 @@ function updateMatch($conn, $score, $bestplayer, $matchId){
 
 function returnResponseByUserId($conn, $userId){
     try{
-        $request = 'SELECT match_id, status FROM participant WHERE user_id=:userid';
+        $request = 'SELECT match_id, status FROM participant WHERE user_id=:userid AND status != 2';
         $statement = $conn->prepare($request);
         $statement->bindParam(':userid', $userId);
         $statement->execute();

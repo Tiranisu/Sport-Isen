@@ -68,7 +68,8 @@ function distribution(infos){
   })
 
   ajaxRequest('GET', `../php/profileRequest.php/picture?id=${infos[0]['id']}`, profilPicture)
-  if (infos[0]['nb_match'] != 0) {
+  console.log(infos[0]['nb_match'])
+  if (infos[0]['nb_match'] != null) {
     document.getElementById('nbMatch').innerHTML = infos[0]['nb_match']
   }else{
     document.getElementById('nbMatch').innerHTML = 0
