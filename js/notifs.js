@@ -1,7 +1,6 @@
 import {ajaxRequest, getCookie, disconnect, dynPage, displayImage} from './tool.js';
 
 $(() => {
-  // console.log(getCookie('sportisen'))
   let accessToken = getCookie('sportisen')
   if(accessToken.length == 0){
     window.location.href = '../index.html'
@@ -98,7 +97,6 @@ function createCardAccepted(infos){
       matchId: infos['match_id'],
     }
     }).done((match) => {
-      console.log(match)
       if(match.length != 0){
         document.getElementById('noResponse').style.display = 'none'
 

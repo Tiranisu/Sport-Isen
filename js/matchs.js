@@ -1,7 +1,7 @@
 import {ajaxRequest, getCookie, disconnect, dynPage, displayImage} from './tool.js';
 
 $(() => {
-  // console.log(getCookie('sportisen'))
+  
   let accessToken = getCookie('sportisen')
   if(accessToken.length == 0){
     window.location.href = '../index.html'
@@ -60,15 +60,15 @@ ajaxRequest('GET', `../php/searchRequest.php/user?accessToken=${token}`, functio
 
           if(date > actual_day){
               document.getElementById('nofuturematch').style.display = 'none'
-              // console.log(infos[i])
+              
               const matchId = infos[i]['id']
-              // console.log(infos[i]['id'])
+              
         
               futureCardCreate(zone, matchId)
 
               ajaxRequest('GET', `../php/matchRequest.php/status?userid=${userId}&matchid=${infos[i]['id']}`, function(data){
 
-                // console.log(data)
+                
 
                 if(data['isOrga']){
                   document.getElementById('isorgaorplayer'+matchId).innerHTML += 'Organisateur' 
@@ -156,15 +156,15 @@ ajaxRequest('GET', `../php/searchRequest.php/user?accessToken=${token}`, functio
 
           if(date < actual_day){
               document.getElementById('nopastmatch').style.display = 'none'
-              // console.log(infos[i])
+              
               const matchId = infos[i]['id']
-              // console.log(infos[i]['id'])
+              
         
               pastCardCreate(zone, matchId)
 
               ajaxRequest('GET', `../php/matchRequest.php/status?userid=${userId}&matchid=${infos[i]['id']}`, function(data){
 
-                // console.log(data)
+                
 
                 if(data['isOrga']){
                   document.getElementById('isorgaorplayer'+matchId).innerHTML += 'Organisateur' 
@@ -261,7 +261,7 @@ ajaxRequest('GET', `../php/searchRequest.php/user?accessToken=${token}`, functio
   let userId = infos[0]['id']
 
   star1.onclick = function(){
-    // console.log(1)
+    
     $.ajax('../php/searchRequest.php/rate', {
       method: 'PUT', data : {
         rate: 1,
@@ -270,7 +270,7 @@ ajaxRequest('GET', `../php/searchRequest.php/user?accessToken=${token}`, functio
     })
   }
   star2.onclick = function(){
-    // console.log(2)
+   
     $.ajax('../php/searchRequest.php/rate', {
       method: 'PUT', data : {
         rate: 2,
@@ -279,7 +279,7 @@ ajaxRequest('GET', `../php/searchRequest.php/user?accessToken=${token}`, functio
     })
   }
   star3.onclick = function(){
-    // console.log(3)
+    
     $.ajax('../php/searchRequest.php/rate', {
       method: 'PUT', data : {
         rate: 3,
@@ -288,7 +288,7 @@ ajaxRequest('GET', `../php/searchRequest.php/user?accessToken=${token}`, functio
     })
   }
   star4.onclick = function(){
-    // console.log(4)
+   
     $.ajax('../php/searchRequest.php/rate', {
       method: 'PUT', data : {
         rate: 4,
@@ -297,7 +297,7 @@ ajaxRequest('GET', `../php/searchRequest.php/user?accessToken=${token}`, functio
     })
   }
   star5.onclick = function(){
-    // console.log(5)
+    
     $.ajax('../php/searchRequest.php/rate', {
       method: 'PUT', data : {
         rate: 5,
@@ -307,9 +307,9 @@ ajaxRequest('GET', `../php/searchRequest.php/user?accessToken=${token}`, functio
   }
 
   ajaxRequest('GET', `../php/searchRequest.php/rate?userid=${userId}`, function(infos){
-    // console.log(infos);
+    
     if(!infos){
-      // console.log('no rate')
+      
     }
     else{
       let rate = infos[0]['score']

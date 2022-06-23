@@ -1,7 +1,6 @@
 import {ajaxRequest, getCookie, disconnect, dynPage, displayImage} from './tool.js';
 
 $(() => {
-  // console.log(getCookie('sportisen'))
   let accessToken = getCookie('sportisen')
   if(accessToken.length == 0){
     window.location.href = '../index.html'
@@ -165,14 +164,11 @@ function displaySports(infos){
       const date = new Date(infos[i]['date_time'])
 
       if(date >= actual_day){
-        // console.log(infos[i])
+
         const matchId = infos[i]['id']
-        // console.log(infos[i]['id'])
 
         cardCreate(matchId)
-        
-        // console.log(date)
-        // console.log(currentDate)
+
 
         ajaxRequest('GET', `../php/searchRequest.php/capacity?matchid=${matchId}`, function(result){
           if(result['capacity'] == 0){
@@ -181,7 +177,6 @@ function displaySports(infos){
         })
 
         ajaxRequest('GET', `../php/searchRequest.php/user?accessToken=${token}`, function(infos){
-          // console.log(infos)
           let userId = infos[0]['id']
           ajaxRequest('GET', `../php/searchRequest.php/isregister?userid=${userId}&matchid=${matchId}`, function(response){
             
@@ -244,7 +239,6 @@ function displaySports(infos){
     let userId = infos[0]['id']
 
     star1.onclick = function(){
-      // console.log(1)
       $.ajax('../php/searchRequest.php/rate', {
         method: 'PUT', data : {
           rate: 1,
@@ -253,7 +247,6 @@ function displaySports(infos){
       })
     }
     star2.onclick = function(){
-      // console.log(2)
       $.ajax('../php/searchRequest.php/rate', {
         method: 'PUT', data : {
           rate: 2,
@@ -262,7 +255,6 @@ function displaySports(infos){
       })
     }
     star3.onclick = function(){
-      // console.log(3)
       $.ajax('../php/searchRequest.php/rate', {
         method: 'PUT', data : {
           rate: 3,
@@ -271,7 +263,6 @@ function displaySports(infos){
       })
     }
     star4.onclick = function(){
-      // console.log(4)
       $.ajax('../php/searchRequest.php/rate', {
         method: 'PUT', data : {
           rate: 4,
@@ -280,7 +271,6 @@ function displaySports(infos){
       })
     }
     star5.onclick = function(){
-      // console.log(5)
       $.ajax('../php/searchRequest.php/rate', {
         method: 'PUT', data : {
           rate: 5,
@@ -290,7 +280,7 @@ function displaySports(infos){
     }
 
     ajaxRequest('GET', `../php/searchRequest.php/rate?userid=${userId}`, function(infos){
-      // console.log(infos);
+
       if(!infos){
         // console.log('no rate')
       }

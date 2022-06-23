@@ -18,7 +18,6 @@ function ajaxRequest(type, url, callback, data = null)
     {
       case 200:
       case 201:
-        console.log(xhr.responseText);
         callback(JSON.parse(xhr.responseText));
         break;
       default:
@@ -63,15 +62,10 @@ function passCheck(infos){
     }
 }
 
-function registerCheck(infos){
-  console.log(infos);
-}
-
 //check if mails already exists
 $( "#mail" ).change(function()
 {
     mail = document.getElementById('mail').value;
-    console.log(mail);
     ajaxRequest('GET', `../php/authRequest.php/register?mail=${mail}`, mailCheck);
 });
 
@@ -111,13 +105,6 @@ $('#form').on('submit', (event) =>
         }
       })
     }
-    // $('#fname').val('');
-    // $('#lname').val('');
-    // $('#city').val('');
-    // $('#mail').val('');
-    // $('#pass').val('');
-    // $('#confpass').val('');
-    // $('#selectedFile').val('');
 
     document.location.href="connexion.html";
     }
