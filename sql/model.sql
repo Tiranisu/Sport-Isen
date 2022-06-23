@@ -1,3 +1,10 @@
+/*******************************************************************************
+Create Date:    2022-06-24
+Author:         Enzo Peigne <enzo.peigne@isen-ouest.yncrea.fr>
+Author:         Maël Grellier Neau <mael.grellier-neau@isen-ouest.yncrea.fr>
+Description:    Creates the database tables and relations.
+*******************************************************************************/
+
 DROP TABLE IF EXISTS fitness CASCADE;
 DROP TABLE IF EXISTS sports CASCADE;
 DROP TABLE IF EXISTS address CASCADE;

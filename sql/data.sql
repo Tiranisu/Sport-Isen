@@ -1,3 +1,10 @@
+/*******************************************************************************
+Create Date:    2022-06-24
+Author:         Enzo Peigne <enzo.peigne@isen-ouest.yncrea.fr>
+Author:         Maël Grellier Neau <mael.grellier-neau@isen-ouest.yncrea.fr>
+Description:    Populates the tables of the database.
+*******************************************************************************/
+
 DELETE FROM fitness;
 DELETE FROM sports;
 DELETE FROM address;

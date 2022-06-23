@@ -11,16 +11,6 @@ function dbConnect(){
     return $conn;
 }
 
-// function return_password($conn, $email){
-//     $request = 'SELECT password FROM users WHERE email = :email; ';
-//     $statement = $conn->prepare($request);
-//     $statement->bindParam(':email', $email);
-//     $statement->execute();
-//     $phrase_out = $statement->fetch(PDO::FETCH_ASSOC);
-
-//     return $phrase_out['password'];
-// }
-
 function check_alreadyexist_user($conn, $email){
     try{
         $request = 'SELECT * FROM users WHERE email = :email';
