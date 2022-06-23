@@ -103,6 +103,33 @@ require_once('../resources/database.php');
     }
   }
 
+  if($requestRessource == 'capacity'){
+    $data = false;
+
+    switch($requestMethod){
+      case 'GET':
+        if(isset($_GET['matchid'])){
+          $data = getCapacity($db, $_GET['matchid']);
+        }
+        
+        break;
+    }
+  }
+
+  if($requestRessource == 'isregister'){
+    $data = false;
+
+    switch($requestMethod){
+      case 'GET':
+        if(isset($_GET['matchid']) && isset($_GET['userid'])){
+          $data = checkUserRegister($db, $_GET['userid'], $_GET['matchid']);
+        }
+        
+        break;
+    }
+  }
+
+
   if($requestRessource == 'orga'){
     $data = false;
     switch($requestMethod){
