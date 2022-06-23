@@ -120,7 +120,9 @@ function displayPlayers(infos){
         createTable(playerId);
 
         if(infos[i]['link_image'] != null){
-            document.getElementById('picture').src = infos[i]['link_image']
+          console.log(infos[i]['link_image'])
+            
+            document.getElementById('picture'+playerId).src = '../resources/img_profil/' + infos[i]['link_image']
             
         }
         else{
