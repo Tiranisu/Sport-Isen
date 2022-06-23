@@ -29,6 +29,7 @@ function distribution(infos){
 //---------------------------Ajax Search Requests ------------------------------
 //------------------------------------------------------------------------------
 
+let token = getCookie('sportisen')
 
 //add cities with matches into select
 
@@ -172,6 +173,24 @@ function displaySports(infos){
         // console.log(date)
         // console.log(currentDate)
 
+        ajaxRequest('GET', `../php/searchRequest.php/capacity?matchid=${matchId}`, function(result){
+          if(result['capacity'] == 0){
+            document.getElementById('registerBut'+matchId).disabled = true
+          }
+        })
+
+        ajaxRequest('GET', `../php/searchRequest.php/user?accessToken=${token}`, function(infos){
+          // console.log(infos)
+          let userId = infos[0]['id']
+          ajaxRequest('GET', `../php/searchRequest.php/isregister?userid=${userId}&matchid=${matchId}`, function(response){
+            
+            if(response['already_register']){
+              document.getElementById('registerBut'+matchId).disabled = true
+            }
+            
+          })
+        })
+
       
         document.getElementById('matchTitle'+matchId).innerHTML = infos[i]['name'] + " | " + days[0][date.getDay()] + ' ' + date.getDate() + ' ' + months[0][date.getMonth()] + ' ' + date.getFullYear()
         document.getElementById('matchSport'+matchId).innerHTML = infos[i]['sport_name']
@@ -197,18 +216,15 @@ function displaySports(infos){
         }
 
         
-        document.getElementById('maxplayers'+matchId).innerHTML += infos[i]['nb_player_max']
+        document.getElementById('maxplayers'+matchId).innerHTML += infos[i]['nb_player_max'] + ' joueur(s)'
 
         ajaxRequest('GET', `../php/searchRequest.php/participants?matchid=${infos[i]['id']}`, function(data){
-          document.getElementById('matchplayers'+matchId).innerHTML += data['nb_participants']
+          document.getElementById('matchplayers'+matchId).innerHTML += data['nb_participants'] + ' joueur(s)'
         })
 
-        
         }
-      
     }
   }
-
 }
 
 //------------------------------------------------------------------------------
@@ -221,7 +237,7 @@ function displaySports(infos){
   let star4 = document.getElementById('star4')
   let star5 = document.getElementById('star5')
 
-  let token = getCookie('sportisen')
+  
   ajaxRequest('GET', `../php/searchRequest.php/user?accessToken=${token}`, function(infos){
 
     let userId = infos[0]['id']

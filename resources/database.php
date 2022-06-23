@@ -779,4 +779,39 @@ function returnResponseByUserId($conn, $userId){
 }
 
 
+function checkUserRegister($conn, $userId, $matchId){
+
+    try{
+        $request = 'SELECT EXISTS(SELECT * FROM participant WHERE match_id=:matchid AND user_id=:userid) AS already_register';
+
+        $statement = $conn->prepare($request);
+        $statement->bindParam(':matchid', $matchId);
+        $statement->bindParam(':userid', $userId);
+        $statement->execute();
+        return $statement->fetch(PDO::FETCH_ASSOC);
+    }
+    catch(PDOException $e){
+        return false;
+    }
+
+
+
+}
+
+
+function getCapacity($conn, $matchId){
+    try{
+        $request = 'SELECT nb_player_max-(SELECT count(*) as nb_participants FROM participant WHERE match_id=:matchid AND status=1) as capacity FROM matchs WHERE id=:matchid';
+
+        $statement = $conn->prepare($request);
+        $statement->bindParam(':matchid', $matchId);
+        $statement->execute();
+        return $statement->fetch(PDO::FETCH_ASSOC);
+    }
+    catch(PDOException $e){
+        return false;
+    }
+}
+
+
 ?>
