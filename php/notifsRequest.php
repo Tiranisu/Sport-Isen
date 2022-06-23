@@ -28,6 +28,16 @@ switch($requestMethod){
             }
 
         }
+        if($requestRessource == "orga"){
+            if(isset($_GET['userId'])){
+                $data = getMatchByOrga($db, $_GET['userId']);
+            }
+        }
+        if($requestRessource == "userWaiting"){
+            if(isset($_GET['matchId'])){
+                $data = returnUserWaiting($db, $_GET['matchId']);
+            }
+        }
     break;
 }
 
