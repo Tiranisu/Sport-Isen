@@ -53,7 +53,7 @@ export function deleteCookie(name){
 
 export function disconnect(){
     deleteCookie('sportisen')
-    let url = window.location.href.replace(/search\.html.*/i, 'connexion.html')
+    let url = window.location.href.replace(/search\.html.*/i, '../index.html')
     window.location.href = url
 }
 

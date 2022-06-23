@@ -814,4 +814,16 @@ function getCapacity($conn, $matchId){
 }
 
 
+function getRates($conn){
+    try{
+        $request = 'SELECT * FROM score_app';
+
+        $statement = $conn->query($request);
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
+    catch(PDOException $e){
+        return false;
+    }
+}
+
 ?>
