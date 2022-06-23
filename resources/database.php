@@ -202,7 +202,7 @@ function getSports($conn){
 
 function getCities($conn){
     try{
-        $request = 'SELECT a.id, a.postal_code, a.city FROM address a, matchs m WHERE m.address_id = a.id';
+        $request = 'SELECT DISTINCT ON (a.postal_code) a.id, a.postal_code, a.city FROM address a, matchs m WHERE m.address_id=a.id';
         $statement = $conn->prepare($request);
         $statement->execute();
         return $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -283,10 +283,10 @@ function getBestplayer($conn, $matchId){
 
 function cityFilter($conn, $cityId){
     try{
-        $request = 'SELECT m.id, m.name, s.name as sport_name, a.name as stade_name, a.street, a.city, m.nb_player_min, m.nb_player_max, m.date_time, m.duration, m.price, (SELECT count(*) as nb_participants FROM participant WHERE status=1 ) FROM matchs m, sports s, address a WHERE m.sport_id=s.id AND m.address_id=a.id AND address_id = :id';
+        $request = 'SELECT m.id, m.name, s.name as sport_name, a.name as stade_name, a.street, a.city, m.nb_player_min, m.nb_player_max, m.date_time, m.duration, m.price, (SELECT count(*) as nb_participants FROM participant WHERE status=1 ) FROM matchs m, sports s, address a WHERE m.sport_id=s.id AND m.address_id=a.id AND a.city = :cityname';
 
         $statement = $conn->prepare($request);
-        $statement->bindParam(':id', $cityId);
+        $statement->bindParam(':cityname', $cityId);
         $statement->execute();
         $result = $statement->fetchAll(PDO::FETCH_ASSOC);
         if($result){

@@ -19,6 +19,8 @@ ALTER SEQUENCE sports_id_seq RESTART;
 INSERT INTO sports (name) VALUES
 ('Football'),
 ('Tennis'),
+('Basketball'),
+('Handball'),
 ('Golf');
 
 -- --- Populate address table for match ------------
@@ -26,13 +28,10 @@ ALTER SEQUENCE address_id_seq RESTART;
 INSERT INTO address (name, street, city, postal_code) VALUES
 ('Stade du Moulin Boisseau', 'Rue du Moulin Boisseau','Carquefou' , 44470),
 ('Stade de la Beaujoire', 'Route de Saint-Joseph','Nantes' , 44300),
+('UrbanSoccer', '18 Rue Marie Curie', 'Saint-Sébastien-sur-Loire', 44230),
+('Complexe Sportif Jean Gauvrit', '6 Rue Louis Armand', 'Carquefou', 44470),
 ('Stade municipal', '31bis Rue du Stade','Sainte-Luce-sur-Loire' , 44980);
 
-
--- --- Populate address table for users ------------
--- INSERT INTO address (city, postal_code) VALUES
--- ('Sainte-Luce-sur-Loire', 44980),
--- ('Carquefou', 44470);
 
 -- --- Populate users table ------------
 ALTER SEQUENCE users_id_seq RESTART;
@@ -55,9 +54,9 @@ INSERT INTO score_app (user_id, score) VALUES
 ALTER SEQUENCE matchs_id_seq RESTART;
 INSERT INTO matchs (name, score, organization_id, sport_id, address_id, nb_player_min, nb_player_max, date_time, duration, price, best_player_id) VALUES
 ('Football U8', NULL, 1, 1, 1, 1, 10,'2022-09-15 10:00', '2022-1-1 2:00', 15, NULL),
-('a U8', NULL, 2, 2, 1, 1, 10,'2022-10-15 20:00', '2022-1-1 2:00', 15, NULL),
-('b U8', NULL, 2, 3, 1, 1, 10,'2022-09-15 10:00', '2022-1-1 2:00', 15, NULL),
-('c U8', NULL, 2, 1, 1, 1, 10,'2022-09-15 10:00', '2022-1-1 2:00', 15, NULL);
+('Tournoi Tennis', NULL, 2, 2, 4, 1, 10,'2022-6-28 20:00', '2022-1-1 2:00', 15, NULL),
+('Concours de Golf', NULL, 2, 3, 1, 1, 10,'2022-07-8 10:00', '2022-1-1 2:00', 15, NULL),
+('Futsal', NULL, 2, 1, 3, 1, 10,'2022-07-9 10:00', '2022-1-1 2:00', 15, NULL);
 
 
 --- Populate participant table ------------
@@ -66,7 +65,5 @@ INSERT INTO participant (match_id, user_id, status) VALUES
 (1, 2 , 1),
 (2, 1 , 1),
 (2, 2 , 0),
-(3, 1 , 0),
 (3, 2 , 0),
-(4, 1 , 2),
 (4, 2 , 2);
