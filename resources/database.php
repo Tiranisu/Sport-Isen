@@ -1,4 +1,13 @@
 <?php
+
+/**
+ * PHP version 7.4.0
+ * 
+ * @author Enzo Peigne <enzo.peigne@isen-ouest.yncrea.fr>
+ * @author Maël Grellier Neau <mael.grelneau@gmail.com>
+ * 
+ */
+
 include 'constants.php';
 
 function dbConnect(){
