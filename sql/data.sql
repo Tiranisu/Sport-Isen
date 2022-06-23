@@ -61,7 +61,7 @@ ALTER SEQUENCE matchs_id_seq RESTART;
 INSERT INTO matchs (name, score, organization_id, sport_id, address_id, nb_player_min, nb_player_max, date_time, duration, price, best_player_id) VALUES
 ('Football U8', NULL, 1, 1, 1, 1, 10,'2022-09-15 10:00', '2022-1-1 2:00', 15, NULL),
 ('Tournoi Tennis', NULL, 2, 2, 4, 1, 10,'2022-6-28 20:00', '2022-1-1 2:00', 15, NULL),
-('Concours de Golf', NULL, 2, 3, 1, 1, 10,'2022-07-8 10:00', '2022-1-1 2:00', 15, NULL),
+('Concours de Golf', NULL, 2, 5, 1, 1, 10,'2022-07-8 10:00', '2022-1-1 2:00', 15, NULL),
 ('Futsal', NULL, 2, 1, 3, 1, 10,'2022-07-9 10:00', '2022-1-1 2:00', 15, NULL);
 
 
