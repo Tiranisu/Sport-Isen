@@ -38,6 +38,27 @@ switch($requestMethod){
                 $data = returnUserWaiting($db, $_GET['matchId']);
             }
         }
+        if($requestRessource == "infoUser"){
+            if(isset($_GET['userId'])){
+                $data = getUserById($db, $_GET['userId']);
+            }
+        }
+        if($requestRessource == "fitness"){
+            if(isset($_GET['userId'])){
+                $data = getFitnessById($db, $_GET['userId']);
+            }
+        }
+        if($requestRessource == "sport"){
+            if(isset($_GET['sportId'])){
+                $data = getSportById($db, $_GET['sportId']);
+            }
+        }
+    break;
+    case 'PUT':
+        if ($requestRessource == "updateStatus"){
+          parse_str(file_get_contents('php://input'), $_PUT);
+          $data = updatePart($db, $_PUT['id'], $_PUT['newStatus']);
+        }
     break;
 }
 

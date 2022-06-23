@@ -7,8 +7,11 @@ var passValid = false;
 
 /**
  * Use to distribute information across function or ajaxrequest
+ * 
  * @param infos contain all the information about the user 
+ * @return 
  */
+
 function distribution(infos){
   let firstname = infos[0]['firstname']
   let lastname = infos[0]['lastname']

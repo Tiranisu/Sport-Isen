@@ -793,9 +793,6 @@ function checkUserRegister($conn, $userId, $matchId){
     catch(PDOException $e){
         return false;
     }
-
-
-
 }
 
 
@@ -853,6 +850,48 @@ function getRates($conn){
     catch(PDOException $e){
         return false;
     }
+}
+
+function getUserById($conn, $userId){
+    try{
+        $request = 'SELECT * FROM users WHERE id = :id';
+        $statement = $conn->prepare($request);
+        $statement->bindParam(':id', $userId);
+        $statement->execute();
+        return $statement->fetchALL(PDO::FETCH_ASSOC);
+    }
+    catch(PDOException $e){
+        return false;
+    }
+}
+
+function getSportById($conn, $sportId){
+    try{
+        $request = 'SELECT * FROM sports WHERE id = :id';
+        $statement = $conn->prepare($request);
+        $statement->bindParam(':id', $sportId);
+        $statement->execute();
+        return $statement->fetchALL(PDO::FETCH_ASSOC);
+    }
+    catch(PDOException $e){
+        return false;
+    }
+}
+
+function updatePart($conn, $id, $newStatus){
+    try{
+        echo $newStatus;
+        echo $id;
+        $request = 'UPDATE participant SET status = :newStatus WHERE id = :id';
+        $statement = $conn->prepare($request);
+        $statement->bindParam(':newStatus', $newStatus);
+        $statement->bindParam(':id', $id);
+        $statement->execute(); 
+        return true;
+    }
+    catch(PDOException $e){
+        return $e;
+    }       
 }
 
 ?>

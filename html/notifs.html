@@ -13,6 +13,7 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script type="module" src="../js/notifs.js"></script>
+    <script src="../js/infosbutaction.js"></script>
 </head>
 <body>
     <!-- menu bootstrap -->
@@ -52,15 +53,45 @@
               </div>
           </div>
           <div class="row" style="margin-left: 2em; margin-right: 2em;">
-            <div class="row" style="margin-top: 1em;">
-              <div class="input-group-text lock" style="height: 50px">
+
+            <div id="waitingCard">
+            </div>
+
+
+
+              <!-- <div class="col-md-12" style="background-color: rgb(233, 233, 233); height: auto; border-radius: 10px;margin-top: 1em;">
+                <div class="row">
+                  <div style="margin-top: 1em; margin-left: 0.5em;"> 
+                    Match | Match 
+                    <button class="btInput" id="btCkeck" style="margin-left: 25em"> <i class="fa-solid fa-circle-check" style="color: #007B0C; font-size: x-large;"></i> </button>
+                    <button class="btInput" id="btCross" style="margin-left: 1em"> <i class="fa-solid fa-circle-xmark" style="color: #cc1407; font-size: x-large;"></i> </button>
+                  </div>
+                </div>
+                <h6 style="color: rgb(102, 102, 102); margin-top: 0.5em; margin-left: 0.5em;">prenom nom | age : | condition sportive : </h6>
+              </div>
+                <div class="col-md-12" style="background-color: rgb(201, 201, 201); height: auto; border-radius: 10px; margin-top: 1em;">
+                  <div class="row">
+                    <div style="margin-top: 1em; margin-left: 0.5em;"> 
+                      Match | Match 
+                      <button class="btInput" id="btCkeck" style="margin-left: 25em"> <i class="fa-solid fa-circle-check" style="color: #007B0C; font-size: x-large;"></i> </button>
+                      <button class="btInput" id="btCross" style="margin-left: 1em"> <i class="fa-solid fa-circle-xmark" style="color: #cc1407; font-size: x-large;"></i> </button>
+                    </div>
+                  </div>
+                  <h6 style="color: rgb(102, 102, 102); margin-top: 0.5em; margin-left: 0.5em;">prenom nom | age : | condition sportive : </h6>
+                </div> -->
+
+
+                <!-- </div> -->
+              <!-- <div class="input-group-text lock" style="height: 50px">
                 <p style="margin-top: 1em; margin-left: 0.5em;"> 
                   Match | Match 
                   <h6 style="color: rgb(102, 102, 102); margin-top: 0.5em; margin-left: 0.5em;">Football</h6>
-                  <button class="btInput" id="btCkeck"> <i class="fa-solid fa-circle-check" style="color: #007B0C"></i> </button>
-                  <button class="btInput" id="btCross"> <i class="fa-solid fa-circle-xmark" style="color: #cc1407"></i> </button>
+                  <button class="btInput" id="btCkeck" style="margin-left: 25em"> <i class="fa-solid fa-circle-check" style="color: #007B0C; font-size: x-large;"></i> </button>
+                  <button class="btInput" id="btCross" style="margin-left: 1em"> <i class="fa-solid fa-circle-xmark" style="color: #cc1407; font-size: x-large;"></i> </button>
                 </p>
-              </div>
+                <br>
+                <p>testetsettt</p>
+              </div> -->
             </div>
           </div>
         
@@ -68,53 +99,56 @@
     </div>
     <br>
     <!-- Réponses d'organisateurs -->
-    <div id="matchCard">
-      <div class="card" style="border-radius: 10px; background: #ffff;">
-          <div class="container-fluid">
-              <div class="row">
-                  <div class="col-md-12" style="background-color: rgb(201, 201, 201); height: auto; border-radius: 10px;">
-                    <h3 id="matchTitle0">Réponses d'organisateurs</h3>
-                  </div>
-              </div>
-          </div>
-          <div class="row" style="margin-left: 2em; margin-right: 2em; margin-bottom: 1em;">
-
-            <div id="responseCard">
+    <div class="container">
+      <div id="matchCard">
+        <div class="card" style="border-radius: 10px; background: #ffff;">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12" style="background-color: rgb(201, 201, 201); height: auto; border-radius: 10px;">
+                      <h3 id="matchTitle0">Réponses d'organisateurs</h3>
+                    </div>
+                </div>
             </div>
-              <!-- <div class="row" style="margin-top: 1em;">
-                  <div class="input-group-text lock" style="height: 50px">
-                    <div class="row">
-                      <p style="margin-top: 1em; margin-left: 0.5em;"> Match | Match </p>
-                      <i class="fa-solid fa-check" style="color: #007B0C; margin-left: 30em"></i>
-                      <p style="margin-top: 1em; margin-left: 0.5em; color: #007B0C;"> Demande acceptée </p>
-                    </div> -->
-
-                      <!-- <p style="margin-top: 1em; margin-left: 0.5em;"> 
-                        Match | Match 
+            <div class="row" style="margin-left: 2em; margin-right: 2em; margin-bottom: 1em;">
+  
+              <div id="responseCard">
+              </div>
+                <!-- <div class="row" style="margin-top: 1em;">
+                    <div class="input-group-text lock" style="height: 50px">
+                      <div class="row">
+                        <p style="margin-top: 1em; margin-left: 0.5em;"> Match | Match </p>
                         <i class="fa-solid fa-check" style="color: #007B0C; margin-left: 30em"></i>
-                        <p style="margin-top: 1em; margin-left: 0.5em; color: #007B0C;"> 
-                          Demande acceptée
+                        <p style="margin-top: 1em; margin-left: 0.5em; color: #007B0C;"> Demande acceptée </p>
+                      </div> -->
+  
+                        <!-- <p style="margin-top: 1em; margin-left: 0.5em;"> 
+                          Match | Match 
+                          <i class="fa-solid fa-check" style="color: #007B0C; margin-left: 30em"></i>
+                          <p style="margin-top: 1em; margin-left: 0.5em; color: #007B0C;"> 
+                            Demande acceptée
+                          </p>
+                        </p>
+                        <h6 id="matchSport1">Football</h6> -->
+                    <!-- </div> -->
+                <!-- </div> -->
+                <!-- <div class="row" style="margin-top: 1em;">
+                    <div class="input-group-text lock" style="height: 50px">
+                      <p style="margin-top: 1em; margin-left: 0.5em;"> 
+                        Match | Match 
+                        <h6 style="color: rgb(102, 102, 102); margin-top: 0.5em; margin-left: 0.5em;">Football</h6>
+                        <i class="fa-solid fa-xmark" style="color: #cc1407; margin-left: 30em"></i>
+                        <p style="margin-top: 1em; margin-left: 0.5em; color: #cc1407;"> 
+                          Demande refusée
                         </p>
                       </p>
-                      <h6 id="matchSport1">Football</h6> -->
-                  <!-- </div> -->
-              <!-- </div> -->
-              <!-- <div class="row" style="margin-top: 1em;">
-                  <div class="input-group-text lock" style="height: 50px">
-                    <p style="margin-top: 1em; margin-left: 0.5em;"> 
-                      Match | Match 
-                      <h6 style="color: rgb(102, 102, 102); margin-top: 0.5em; margin-left: 0.5em;">Football</h6>
-                      <i class="fa-solid fa-xmark" style="color: #cc1407; margin-left: 30em"></i>
-                      <p style="margin-top: 1em; margin-left: 0.5em; color: #cc1407;"> 
-                        Demande refusée
-                      </p>
-                    </p>
-                </div> -->
+                  </div> -->
+              </div>
             </div>
-          </div>
+        </div>
       </div>
     </div>
-  </div>
+    </div>
+    
   
 
 

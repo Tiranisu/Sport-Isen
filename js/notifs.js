@@ -48,13 +48,45 @@ function createCardWaiting(infos){
       matchId: infos['id'],
     }
     }).done((data) => { 
-      console.log(data)
       data.forEach(userWaiting => {
-        // console.log(userWaiting)
+        var idPart = userWaiting['id']
+        const date = new Date(infos['date_time'])
+        $.ajax({
+          method: 'GET',
+          url: '../php/notifsRequest.php/infoUser',
+          data:{ 
+            userId: userWaiting['user_id'],
+          }
+          }).done((data) => {
+            data.forEach(infoUser => {
+              $.ajax({
+                method: 'GET',
+                url: '../php/notifsRequest.php/fitness',
+                data:{ 
+                  userId: infoUser['id'],
+                }
+                }).done((data) =>{
+                  data.forEach(fitness => {
+                  $.ajax({
+                    method: 'GET',
+                    url: '../php/notifsRequest.php/sport',
+                    data:{ 
+                      sportId: infos['sport_id'],
+                    }
+                    }).done((data) =>{
+                      data.forEach(sport => {
+                        $("#waitingCard").append("<div class=\"col-md-12\" style=\"background-color: rgb(233, 233, 233); height: 90px; border-radius: 10px;margin-top: 1em;\"><div class=\"row\"><div style=\"margin-top: 1em; margin-left: 0.5em;\"> " + infos['name'] + " | " + days[0][date.getDay()] + ' ' + date.getDate() + ' ' + months[0][date.getMonth()] + ' ' + date.getFullYear() + " | "+ sport['name'] +" <button class=\"btInput\" id=\"btCkeck"+ idPart +"\" style=\"margin-left: 25em; background: rgba(0,0,0,0)\" onclick='accetpBt(this)'> <i class=\"fa-solid fa-circle-check\" style=\"color: #007B0C; font-size: x-large;\"></i> </button><button class=\"btInput\" id=\"btCross"+ idPart +"\" style=\"margin-left: 1em; background: rgba(0,0,0,0)\" onclick='denyBt(this)'> <i class=\"fa-solid fa-circle-xmark\" style=\"color: #cc1407; font-size: x-large;\"></i> </button></div></div><h6 style=\"color: rgb(102, 102, 102); margin-top: 0.5em; margin-left: 0.5em;\">"+infoUser['firstname'] + ' ' + infoUser ["lastname"]  + " | age : " + infoUser["age"] + " | Forme physique : "+ fitness['type'] +"</h6></div>")
+                      });
+                    })
+                  });
+                  
+                })
+            });
+          })
       });
-      
     })
 }
+
 
 function createCardAccepted(infos){
   $.ajax({
@@ -64,12 +96,10 @@ function createCardAccepted(infos){
       matchId: infos['match_id'],
     }
     }).done((match) => {
-      // console.log(match)
       const date = new Date(match[0]['date_time'])
 
       // deny card
       if(infos['status'] == 0){
-        // console.log("a")
         $("#responseCard").append("<div class='row' style='margin-top: 1em;'><div class='input-group-text lock' style='height: 50px'><p style='margin-top: 1em; margin-left: 0.5em;'>" + match[0]['name'] + " | " + days[0][date.getDay()] + ' ' + date.getDate() + ' ' + months[0][date.getMonth()] + ' ' + date.getFullYear() + "<h6 style='color: rgb(102, 102, 102); margin-top: 0.5em; margin-left: 0.5em;'>"+ match[0]['sport_name'] +"</h6><i class='fa-solid fa-check' style='color: #007B0C; margin-left: 10em'></i><p style='margin-top: 1em; margin-left: 0.5em; color: #007B0C;'> Demande acceptée</p></p></div></div>")
       }
       if(infos['status'] == 1){
@@ -98,8 +128,7 @@ function distribution(infos){
     }
     }).done((data) => {
       data.forEach(match => {
-        console.log(match)
-        // createCardWaiting(match)
+        createCardWaiting(match)
       })
     })
 
@@ -112,7 +141,6 @@ function distribution(infos){
     }
     }).done((data) => {
       data.forEach(notif => {
-        // console.log(notif)
         createCardAccepted(notif)
       });
       
