@@ -12,7 +12,7 @@ function accetpBt(elem){
         url: '../php/notifsRequest.php/updateStatus',
         data:{ 
           id: notifId,
-          newStatus: 0
+          newStatus: 1
         }
         }).done((data) => {})   
         console.log("Updated !")
@@ -28,7 +28,7 @@ function denyBt(elem){
         url: '../php/notifsRequest.php/updateStatus',
         data:{ 
           id: notifId,
-          newStatus: 1
+          newStatus: 0
         }
         }).done((data) => {})   
         console.log("Updated !")
