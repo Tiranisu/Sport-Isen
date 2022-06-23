@@ -4,7 +4,7 @@ $(() => {
   // console.log(getCookie('sportisen'))
   let accessToken = getCookie('sportisen')
   if(accessToken.length == 0){
-    window.location.href = 'connexion.html'
+    window.location.href = '../index.html'
   }
   ajaxRequest('GET', `../php/searchRequest.php/user?accessToken=${accessToken}`, distribution)
 })

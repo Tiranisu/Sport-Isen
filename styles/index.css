@@ -1,3 +1,83 @@
+html, body {height: 100%}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  nav{
+    background-color: #007B0C;
+  }
+
+
+  .nav {
+    overflow: hidden;
+    background-color: #007B0C;
+    font-weight: 500;
+  }
+  
+  .nav a {
+    float: left;
+    font-size: 16px;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+  
+  .drop {
+    float: left;
+    overflow: hidden;
+  }
+  
+  .drop .dropbtn {
+    font-size: 16px;  
+    border: none;
+    outline: none;
+    color: white;
+    padding: 14px 16px;
+    font-weight: 500;
+    background-color: inherit;
+    font-family: inherit;
+    margin: 0;
+    
+  }
+  
+  .nav a:hover, .drop:hover .dropbtn {
+    color: white;
+  }
+  
+  .dropcontent {
+    display: none;
+    position: absolute;
+    background: rgba(0, 123, 12, 0.3);
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  
+  .dropcontent a {
+    float: none;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: center;
+    
+    border-style: solid;
+    border-top-style: none;
+    border-width: 0.5px;
+    
+  }
+  
+  .dropcontent a:hover {
+    background: rgba(0, 123, 12, 0.6);
+    color: black;
+  }
+  
+  .drop:hover .dropcontent {
+    display: block;
+  }
+
+
 .carousel {
     position: relative;
   }
@@ -39,4 +119,6 @@
   .carousel__button--selected {
     background: rgba(255, 255, 255, 0.5);
   }
+
+
   

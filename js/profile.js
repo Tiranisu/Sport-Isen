@@ -92,7 +92,7 @@ function inputUnlock(){
 $(() => {
   console.log(accessToken)
   if(accessToken.length == 0){
-    window.location.href = 'connexion.html'
+    window.location.href = '../index.html'
   }
   ajaxRequest('GET', `../php/profileRequest.php/accessToken?accessToken=${accessToken}`, distribution)
   document.getElementById('saveBt').style.display = 'none'
