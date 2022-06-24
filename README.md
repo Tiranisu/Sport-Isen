@@ -23,19 +23,19 @@ Comptes :
  - Robert Pater, email : rp@test.fr, mdp : 123456
 
 Pour se connecter :
- Entrer l'adresse ip 10.10.51.54, vous allez être redirigé (si il y a une problème avec la redirection, vous pouvez cliquer sur le lien proposé) sur la page d'acceuil. Vous pouvez voir en bas de la page un carrousel contenant la note moyenne du site ainsi que des tips et des actualités (coming soon).
- Cliquez sur le bouton se connecter en haut a droite, qui vous ammenera sur la page de connection. Si vous n'avez pas de compte, vous pouvez en créer un en cliquant sur le bouton inscription et en remplissant le formulaire.
- Pour les image de profile, il faut entrer profile1.png jusqu'a profile5.png.
+ - Entrer l'adresse ip 10.10.51.54, vous allez être redirigé (s'il y a un problème avec la redirection, vous pouvez cliquer sur le lien proposé) sur la page d'accueil. Vous pouvez voir en bas de la page un carrousel contenant la note moyenne du site ainsi que des tips et des actualités (coming soon).
+ Cliquez sur le bouton se connecter en haut à droite, qui vous ammènera sur la page de connexion. Si vous n'avez pas de compte, vous pouvez en créer un en cliquant sur le bouton inscription et en remplissant le formulaire.
+ Pour les images de profil, il faut entrer profile1.png jusqu'a profile5.png.
  
 Feature :
   - mot de passe en hash
   - création d'un access token pour obtenir les informations,
   - utilisation de cookie pour stocker l'access token,
   - utilisation de l'API maps,
-  - bloquage de l'inscription a un match si le match est complet / joueur deja inscrit / refusé,
-  - affichage de la note moyenne sur la page d'acceuil
+  - blocage de l'inscription a un match si le match est complet / joueur déjà inscrit / refusé,
+  - affichage de la note moyenne sur la page d'accueil
 
-Pour la table participant, le status correspond a :
+Pour la table participant, le statut correspond a :
  - 0 -> deny
  - 1 -> accept
  - 2 -> waiting
