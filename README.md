@@ -27,9 +27,14 @@ Pour se connecter :
  Cliquez sur le bouton se connecter en haut a droite, qui vous ammenera sur la page de connection, si
  
 Feature :
- n
+  - mot de passe en hash
+  - création d'un access token pour obtenir les informations,
+  - utilisation de cookie pour stocker l'access token,
+  - utilisation de l'API maps,
+  - bloquage de l'inscription a un match si le match est complet / joueur deja inscrit / refusé,
+  - affichage de la note moyenne sur la page d'acceuil
 
-Participant :
-0 -> deny
-1 -> accept
-2 -> waiting
+Pour la table participant, le status correspond a :
+ - 0 -> deny
+ - 1 -> accept
+ - 2 -> waiting
