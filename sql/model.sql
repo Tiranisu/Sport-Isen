@@ -67,7 +67,7 @@ CREATE TABLE users (
 -- Table: score_app
 ------------------------------------------------------------
 CREATE TABLE score_app(
-    user_id  SERIAL PRIMARY KEY,
+    user_id  INTEGER PRIMARY KEY,
     score    INTEGER NOT NULL,
 
     FOREIGN KEY (user_id) REFERENCES users(id)
