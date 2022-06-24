@@ -11,6 +11,13 @@ _____                  _   _ _____
 
 #Projet-web-groupe4 (Enzo | Mael)
 
+Connexion VM:
+ - user1 / mdp: groupe4
+ - user2 / mdp: groupe4
+
+Connexion BDD:
+ - login: projetweb / mdp: groupe4
+
 Comptes :
  - Mark Couty, email : mc@test.fr, mdp : 123456
  - Robert Pater, email : rp@test.fr, mdp : 123456
