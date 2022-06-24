@@ -39,3 +39,6 @@ Pour la table participant, le statut correspond a :
  - 0 -> deny
  - 1 -> accept
  - 2 -> waiting
+
+
+Pour les icons : https://fontawesome.com/icons/
