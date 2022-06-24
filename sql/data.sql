@@ -36,7 +36,8 @@ INSERT INTO address (name, street, city, postal_code) VALUES
 ('Stade de la Beaujoire', 'Route de Saint-Joseph','Nantes' , 44300),
 ('UrbanSoccer', '18 Rue Marie Curie', 'Saint-Sébastien-sur-Loire', 44230),
 ('Complexe Sportif Jean Gauvrit', '6 Rue Louis Armand', 'Carquefou', 44470),
-('Stade municipal', '31bis Rue du Stade','Sainte-Luce-sur-Loire' , 44980);
+('Stade municipal', '31bis Rue du Stade','Sainte-Luce-sur-Loire' , 44980),
+('Stade de Nuuk', '57J9+744', 'Nuuk (Groenland)', 3900);
 
 
 -- --- Populate users table ------------
@@ -62,7 +63,8 @@ INSERT INTO matchs (name, score, organization_id, sport_id, address_id, nb_playe
 ('Football U8', NULL, 1, 1, 1, 1, 10,'2022-09-15 10:00', '2022-1-1 2:00', 15, NULL),
 ('Tournoi Tennis', NULL, 2, 2, 4, 1, 10,'2022-6-28 20:00', '2022-1-1 2:00', 15, NULL),
 ('Concours de Golf', NULL, 2, 5, 1, 1, 10,'2022-07-8 10:00', '2022-1-1 2:00', 15, NULL),
-('Futsal', NULL, 2, 1, 3, 1, 10,'2022-07-9 10:00', '2022-1-1 2:00', 15, NULL);
+('Futsal', NULL, 2, 1, 3, 1, 10,'2022-07-9 10:00', '2022-1-1 2:00', 15, NULL),
+('Match Football', '3-0', 2, 1, 6, 10, 25, '2022-05-12 14:00', '2022-1-1 3:00', 10, 2);
 
 
 --- Populate participant table ------------
@@ -72,4 +74,8 @@ INSERT INTO participant (match_id, user_id, status) VALUES
 (2, 1 , 1),
 (2, 2 , 0),
 (3, 2 , 0),
-(4, 2 , 2);
+(4, 2 , 2),
+(5, 2, 1),
+(5, 3, 1),
+(5, 1, 1),
+(5, 5, 1);
